@@ -25,6 +25,7 @@ module RailsTemplate
       g.stylesheets false
       g.javascripts false
       g.helper false
+      g.orm :active_record, primary_key_type: :uuid # add uuids for primary keys
     end
 
     config.action_controller.default_protect_from_forgery = false
