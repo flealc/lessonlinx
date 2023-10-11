@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :lessons
   resources :contacts
   resources :students
   resources :calendars

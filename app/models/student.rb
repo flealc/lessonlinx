@@ -23,4 +23,5 @@
 class Student < ApplicationRecord
   belongs_to :teacher, class_name: "User"
   has_many :contacts
+  has_many :lessons
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_11_153424) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_11_154924) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pgcrypto"
@@ -37,6 +37,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_11_153424) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["student_id"], name: "index_contacts_on_student_id"
+  end
+
+  create_table "lessons", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "calendar_id", null: false
+    t.uuid "teacher_id", null: false
+    t.uuid "student_id", null: false
+    t.date "date", null: false
+    t.time "start_time", null: false
+    t.integer "duration", null: false
+    t.string "status", default: "scheduled", null: false
+    t.text "lesson_notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["calendar_id"], name: "index_lessons_on_calendar_id"
+    t.index ["student_id"], name: "index_lessons_on_student_id"
+    t.index ["teacher_id"], name: "index_lessons_on_teacher_id"
   end
 
   create_table "students", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -70,5 +86,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_11_153424) do
 
   add_foreign_key "calendars", "users", column: "owner_id"
   add_foreign_key "contacts", "students"
+  add_foreign_key "lessons", "calendars"
+  add_foreign_key "lessons", "students"
+  add_foreign_key "lessons", "users", column: "teacher_id"
   add_foreign_key "students", "users", column: "teacher_id"
 end

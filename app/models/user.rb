@@ -29,4 +29,5 @@ class User < ApplicationRecord
 
   has_many :calendars, foreign_key: :owner_id
   has_many :students, foreign_key: :teacher_id
+  has_many :lessons
 end
