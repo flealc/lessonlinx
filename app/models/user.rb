@@ -28,4 +28,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :calendars, foreign_key: :owner_id
+  has_many :students, foreign_key: :teacher_id
 end
