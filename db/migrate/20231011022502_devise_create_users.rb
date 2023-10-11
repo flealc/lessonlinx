@@ -1,10 +1,9 @@
-# frozen_string_literal: true
-
 class DeviseCreateUsers < ActiveRecord::Migration[7.0]
   def change
     create_table :users, id: :uuid do |t|
+      enable_extension("citext")
       ## Database authenticatable
-      t.string :email,              null: false, default: ""
+      t.citext :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
 
       ## Recoverable
@@ -32,11 +31,11 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
 
-      t.string :first_name
-      t.string :last_name
-      t.integer :calendars_count
-      t.integer :students_count
-      t.integer :lessons_count
+      t.string :first_name, null: false
+      t.string :last_name, null: false
+      t.integer :calendars_count, default: 0
+      t.integer :students_count, default: 0
+      t.integer :lessons_count, default: 0
 
       t.timestamps null: false
     end
