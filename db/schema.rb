@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_11_030423) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_11_153424) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pgcrypto"
@@ -22,6 +22,33 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_11_030423) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["owner_id"], name: "index_calendars_on_owner_id"
+  end
+
+  create_table "contacts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.uuid "student_id", null: false
+    t.string "phone"
+    t.string "email"
+    t.text "address"
+    t.string "relationship", default: "self"
+    t.string "preferred_communication_method"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["student_id"], name: "index_contacts_on_student_id"
+  end
+
+  create_table "students", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.integer "age"
+    t.boolean "adult", default: false
+    t.uuid "teacher_id", null: false
+    t.integer "lessons_count", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["teacher_id"], name: "index_students_on_teacher_id"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -42,4 +69,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_11_030423) do
   end
 
   add_foreign_key "calendars", "users", column: "owner_id"
+  add_foreign_key "contacts", "students"
+  add_foreign_key "students", "users", column: "teacher_id"
 end
