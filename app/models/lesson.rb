@@ -28,6 +28,11 @@
 #
 class Lesson < ApplicationRecord
   belongs_to :calendar
-  belongs_to :teacher, class_name: "User"
+  belongs_to :teacher, class_name: "User", counter_cache: true
   belongs_to :student
+
+  enum status: { scheduled: "scheduled", taught: "taught", canceled: "canceled" } 
+
+  scope :future, -> { where('date > ? AND starting_time > ?', Date.current, Time.current) }
+  scope :past, -> { where('date < ? OR starting_time < ?', Date.current, Time.current) }
 end

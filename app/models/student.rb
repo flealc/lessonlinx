@@ -23,5 +23,14 @@
 class Student < ApplicationRecord
   belongs_to :teacher, class_name: "User"
   has_many :contacts
-  has_many :lessons
+  has_many :lessons, counter_cache: true
+
+  has_many :scheduled_lessons, -> { scheduled }, class_name: "Lesson"
+  has_many :canceled_lessons, -> { canceled }, class_name: "Lesson"
+  has_many :taught_lessons, -> { taught }, class_name: "Lesson"
+
+  has_many :past_lessons, -> { past }, class_name: "Lesson"
+  has_many :future_lessons, -> { future }, class_name: "Lesson"
+
+
 end
