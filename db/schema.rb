@@ -43,8 +43,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_11_154924) do
     t.uuid "calendar_id", null: false
     t.uuid "teacher_id", null: false
     t.uuid "student_id", null: false
-    t.date "date", null: false
-    t.time "start_time", null: false
+    t.datetime "started_at", null: false
     t.integer "duration", null: false
     t.string "status", default: "scheduled", null: false
     t.text "lesson_notes"

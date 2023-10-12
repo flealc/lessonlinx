@@ -3,10 +3,9 @@
 # Table name: lessons
 #
 #  id           :uuid             not null, primary key
-#  date         :date             not null
 #  duration     :integer          not null
 #  lesson_notes :text
-#  start_time   :time             not null
+#  started_at   :datetime         not null
 #  status       :string           default("scheduled"), not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
@@ -33,6 +32,6 @@ class Lesson < ApplicationRecord
 
   enum status: { scheduled: "scheduled", taught: "taught", canceled: "canceled" } 
 
-  scope :future, -> { where('date > ? AND starting_time > ?', Date.current, Time.current) }
-  scope :past, -> { where('date < ? OR starting_time < ?', Date.current, Time.current) }
+  scope :future, -> { where(:started_at) > Time.current }
+  scope :past, -> { where(:started_at) < Time.current }
 end

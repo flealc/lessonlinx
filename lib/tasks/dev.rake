@@ -22,8 +22,20 @@ task({ :sample_data => :environment }) do
     )
   end
 
+  User.create(
+      email: "alice@example.com",
+      password: "password",
+      first_name: "Alice",
+      last_name: Faker::Name.last_name,
+    )
+  User.create(
+    email: "bob@example.com",
+    password: "password",
+    first_name: "Bob",
+    last_name: Faker::Name.last_name,
+  )
   p "There are now #{User.count} users"
-
+  
   users = User.all
 
   users.each do |user|
@@ -57,10 +69,9 @@ task({ :sample_data => :environment }) do
   students.each do |student|
     5.times do
       student.lessons.create(
-        date: Faker::Date.between(from: '2023-07-01', to: '2023-12-01'),
         duration: [30, 45, 60].sample,    
         lesson_notes: Faker::Lorem.paragraph(sentence_count: 5),
-        start_time: Faker::Time.between_dates(from: Date.today - 60, to: Date.today + 60, period: :afternoon),
+        started_at: Faker::Time.between_dates(from: Date.today - 60, to: Date.today + 60, period: :afternoon),
         status: %w[scheduled taught canceled].sample,  
         teacher_id: User.all.sample.id,     
         calendar_id: student.teacher.calendars.sample.id

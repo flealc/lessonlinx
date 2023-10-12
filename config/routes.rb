@@ -8,4 +8,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
    root "users#dashboard"
+
+   get "dashboard", to: "users#dashboard", as: "dashboard"
 end
