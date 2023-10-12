@@ -29,7 +29,7 @@
 class Lesson < ApplicationRecord
   belongs_to :calendar
   belongs_to :teacher, class_name: "User", counter_cache: true
-  belongs_to :student
+  belongs_to :student, counter_cache: true
 
   enum status: { scheduled: "scheduled", taught: "taught", canceled: "canceled" } 
 

@@ -21,9 +21,9 @@
 #  fk_rails_...  (teacher_id => users.id)
 #
 class Student < ApplicationRecord
-  belongs_to :teacher, class_name: "User"
+  belongs_to :teacher, class_name: "User",  counter_cache: true
   has_many :contacts
-  has_many :lessons, counter_cache: true
+  has_many :lessons
 
   has_many :scheduled_lessons, -> { scheduled }, class_name: "Lesson"
   has_many :canceled_lessons, -> { canceled }, class_name: "Lesson"
