@@ -32,6 +32,7 @@ class Lesson < ApplicationRecord
 
   enum status: { scheduled: "scheduled", taught: "taught", canceled: "canceled" } 
 
-  scope :future, -> { where(:started_at) > Time.current }
-  scope :past, -> { where(:started_at) < Time.current }
+  scope :future, -> { where("started_at > ?", Time.current).order(started_at: :asc) }
+  scope :past, -> { where("started_at < ?", Time.current).order(started_at: :desc) }
+  scope :this_week, -> { where(started_at: Date.today.beginning_of_week..Date.today.end_of_week)}
 end

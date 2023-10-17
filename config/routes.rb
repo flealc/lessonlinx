@@ -10,4 +10,5 @@ Rails.application.routes.draw do
    root "users#dashboard"
 
    get "dashboard", to: "users#dashboard", as: "dashboard"
+   get "student_lessons/:id", to: "students#student_lessons", as: "student_lessons"
 end

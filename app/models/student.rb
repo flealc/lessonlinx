@@ -31,6 +31,10 @@ class Student < ApplicationRecord
 
   has_many :past_lessons, -> { past }, class_name: "Lesson"
   has_many :future_lessons, -> { future }, class_name: "Lesson"
+  
 
+  def full_name
+    first_name + " " + last_name
+  end
 
 end

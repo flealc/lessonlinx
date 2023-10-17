@@ -67,7 +67,7 @@ task({ :sample_data => :environment }) do
   students = Student.all
 
   students.each do |student|
-    5.times do
+    10.times do
       student.lessons.create(
         duration: [30, 45, 60].sample,    
         lesson_notes: Faker::Lorem.paragraph(sentence_count: 5),
