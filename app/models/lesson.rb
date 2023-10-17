@@ -3,9 +3,9 @@
 # Table name: lessons
 #
 #  id           :uuid             not null, primary key
-#  duration     :integer          not null
+#  ends_at      :datetime         not null
 #  lesson_notes :text
-#  started_at   :datetime         not null
+#  starts_at    :datetime         not null
 #  status       :string           default("scheduled"), not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
@@ -32,7 +32,7 @@ class Lesson < ApplicationRecord
 
   enum status: { scheduled: "scheduled", taught: "taught", canceled: "canceled" } 
 
-  scope :future, -> { where("started_at > ?", Time.current).order(started_at: :asc) }
-  scope :past, -> { where("started_at < ?", Time.current).order(started_at: :desc) }
-  scope :this_week, -> { where(started_at: Date.today.beginning_of_week..Date.today.end_of_week)}
+  scope :future, -> { where("starts_at > ?", Time.current).order(starts_at: :asc) }
+  scope :past, -> { where("starts_at < ?", Time.current).order(starts_at: :desc) }
+  scope :this_week, -> { where(starts_at: Date.today.beginning_of_week..Date.today.end_of_week)}
 end

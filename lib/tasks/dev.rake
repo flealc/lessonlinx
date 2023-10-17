@@ -50,13 +50,14 @@ task({ :sample_data => :environment }) do
 
 
   users.each do |user|
-   
-    5.times do
-      Student.create(
+    n = user.first_name == "Alice" ? 10 : 5
+    n.times do
+      
+      s = Student.create!(
         adult: [true, false].sample,                    
         first_name: Faker::Name.first_name,   
         last_name: Faker::Name.last_name,
-        teacher_id: user.id   
+        teacher_id: user.id
       )
     end
   end
@@ -68,10 +69,12 @@ task({ :sample_data => :environment }) do
 
   students.each do |student|
     10.times do
+      starting_date = Faker::Time.between_dates(from: Date.today - 60, to: Date.today + 60, period: :afternoon)
+
       student.lessons.create(
-        duration: [30, 45, 60].sample,    
         lesson_notes: Faker::Lorem.paragraph(sentence_count: 5),
-        started_at: Faker::Time.between_dates(from: Date.today - 60, to: Date.today + 60, period: :afternoon),
+        starts_at: starting_date,
+        ends_at: starting_date + [30, 45, 60].sample.minutes,
         status: %w[scheduled taught canceled].sample,  
         teacher_id: User.all.sample.id,     
         calendar_id: student.teacher.calendars.sample.id
@@ -92,6 +95,8 @@ task({ :sample_data => :environment }) do
         relationship: %w[ mother father self ].sample
       )
     end
+
+    student.default_contact_id = student.contacts.sample.id
   end
   p "There are now #{Lesson.count} lessons"
   p "There are now #{Contact.count} contacts"

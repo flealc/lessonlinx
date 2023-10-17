@@ -20,7 +20,7 @@
 <% current_user.lessons.taught.limit(10).each do |lesson| %>
   <div>
     <%= link_to lesson.student.full_name, student_path(lesson.student) %> 
-    <%= link_to "Message student", lesson.student.contacts.first.preferred_communication_method %>
+    <%= link_to "Message student", lesson.student.preferred_communication_method == "phone" ? "sms:#{lesson.student.preferred_contact_info}" : "mailto:#{lesson.student.preferred_contact_info}" %>
   </div>
 <% end %>
 </div>
