@@ -13,6 +13,7 @@
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
 #  students_count         :integer          default(0)
+#  timezone               :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
