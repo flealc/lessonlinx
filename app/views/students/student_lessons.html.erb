@@ -23,7 +23,7 @@
     <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-root-margin="0px 0px -40%" smooth-scroll="true" class="scrollspy-example bg-body-tertiary p-3 rounded-2 overflow-auto" style="max-height: 600px;" tabindex="0">
       <% @student.lessons.past.each do |lesson| %>
         <h4 id="<%= dom_id(lesson) %>">
-          <%= lesson.starts_at %>
+          <%= lesson.starts_at.in_time_zone(current_user.timezone).strftime("%b %d, %Y, %-l:%M %p") %>
           <% if lesson.canceled? %>
             <h6><span class="badge rounded-pill text-bg-danger">Canceled</span></h6>
           <% end %>
