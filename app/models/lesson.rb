@@ -35,4 +35,5 @@ class Lesson < ApplicationRecord
   scope :future, -> { where("starts_at > ?", Time.current).order(starts_at: :asc) }
   scope :past, -> { where("starts_at < ?", Time.current).order(starts_at: :desc) }
   scope :this_week, -> { where(starts_at: Date.today.beginning_of_week..Date.today.end_of_week)}
+
 end

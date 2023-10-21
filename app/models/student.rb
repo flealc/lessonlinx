@@ -35,7 +35,8 @@ class Student < ApplicationRecord
 
   has_many :past_lessons, -> { past }, class_name: "Lesson"
   has_many :future_lessons, -> { future }, class_name: "Lesson"
-
+  has_one :upcoming_lesson, -> { future }, class_name: "Lesson"
+  
   delegate :preferred_communication_method, :preferred_contact_info, to: :default_contact, allow_nil: true
   
 
