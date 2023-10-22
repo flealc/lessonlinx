@@ -34,7 +34,7 @@ class User < ApplicationRecord
 
   has_many :scheduled_lessons, -> { scheduled }, foreign_key: :teacher_id, class_name: "Lesson"
   has_many :canceled_lessons, -> { canceled }, foreign_key: :teacher_id, class_name: "Lesson"
-  has_many :taught_lessons, -> { taught }, foreign_key: :teacher_id, class_name: "Lesson"
+  has_many :taught_lessons, -> { taught.order(starts_at: :desc) }, foreign_key: :teacher_id, class_name: "Lesson"
 
   has_many :past_lessons, -> { past }, foreign_key: :teacher_id, class_name: "Lesson"
   has_many :future_lessons, -> { future }, foreign_key: :teacher_id, class_name: "Lesson"

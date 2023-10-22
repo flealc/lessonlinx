@@ -75,7 +75,7 @@ task({ :sample_data => :environment }) do
         lesson_notes: Faker::Lorem.paragraph(sentence_count: 5),
         starts_at: starting_date,
         ends_at: starting_date + [30, 45, 60].sample.minutes,
-        status: %w[scheduled taught canceled].sample,  
+        status: starting_date < Date.current ? %w[taught canceled].sample : "scheduled",
         teacher_id: student.teacher_id,     
         calendar_id: student.teacher.calendars.sample.id
       )
