@@ -21,7 +21,7 @@
 
   <div>
     <%= form.label :date, style: "display: block" %>
-    <%= form.date_field :date%>
+    <%= form.date_field :date, value: lesson.starts_at.strftime("%Y-%m-%d")  %>
   </div>
 
   <div>

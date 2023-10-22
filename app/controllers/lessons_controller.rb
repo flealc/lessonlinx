@@ -38,7 +38,7 @@ class LessonsController < ApplicationController
   # PATCH/PUT /lessons/1 or /lessons/1.json
   def update
     respond_to do |format|
-      if @lesson.update(lesson_params)
+      if @lesson.update(build_datetimes(lesson_params))
         format.html { redirect_to lesson_url(@lesson), notice: "Lesson was successfully updated." }
         format.json { render :show, status: :ok, location: @lesson }
       else
