@@ -68,17 +68,19 @@ task({ :sample_data => :environment }) do
   students = Student.all
 
   students.each do |student|
+    starting_date = Faker::Time.backward(days: 20, period: [:afternoon, :morning].sample)
     10.times do
-      starting_date = Faker::Time.between_dates(from: Date.today - 60, to: Date.today + 60, period: :afternoon)
-
+      
       student.lessons.create(
         lesson_notes: Faker::Lorem.paragraph(sentence_count: 5),
         starts_at: starting_date,
         ends_at: starting_date + [30, 45, 60].sample.minutes,
         status: %w[scheduled taught canceled].sample,  
-        teacher_id: User.all.sample.id,     
+        teacher_id: student.teacher_id,     
         calendar_id: student.teacher.calendars.sample.id
       )
+
+      starting_date = starting_date + [7, 6, 8].sample.days
     end
     
   

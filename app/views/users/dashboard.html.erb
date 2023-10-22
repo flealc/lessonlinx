@@ -1,5 +1,13 @@
 <h1><%= "Dashboard" %></h1>
 
+<% current_user.lessons.this_week.each do |lesson| %>
+    <div>
+      <%= lesson.starts_at  %>
+      <%= lesson.ends_at  %>
+      <%= lesson.student.full_name  %>
+    </div>
+<% end %>
+
 <h3>This week's lessons</h3>
 
 <div class="row">
