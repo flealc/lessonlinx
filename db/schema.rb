@@ -61,6 +61,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_18_214539) do
     t.boolean "adult", default: false
     t.uuid "teacher_id", null: false
     t.integer "lessons_count", default: 0
+    t.text "student_notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "default_contact_id"

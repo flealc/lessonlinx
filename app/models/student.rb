@@ -8,6 +8,7 @@
 #  first_name         :string           not null
 #  last_name          :string           not null
 #  lessons_count      :integer          default(0)
+#  student_notes      :text
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  default_contact_id :uuid
