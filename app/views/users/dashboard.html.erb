@@ -17,10 +17,21 @@
 </div>
 
 <div class="container">
+<div class="h5">Recent students</div>
 <% current_user.taught_lessons.limit(10).each do |lesson| %>
   <div>
     <%= link_to lesson.student.full_name, student_path(lesson.student) %> 
     <%= link_to "Message student", lesson.student.preferred_communication_method == "phone" ? "sms:#{lesson.student.preferred_contact_info}" : "mailto:#{lesson.student.preferred_contact_info}" %>
+  </div>
+<% end %>
+</div>
+
+<div class="container">
+  <div class="h5">Lessons to log</div>
+<% current_user.past_lessons.scheduled.each do |lesson| %>
+  <div>
+    <%= link_to lesson.student.full_name, student_path(lesson.student) %> 
+    <%= link_to "Log lesson", edit_lesson_path(lesson, { status: "taught" }) %>
   </div>
 <% end %>
 </div>
