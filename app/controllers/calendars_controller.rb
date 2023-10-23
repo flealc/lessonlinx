@@ -61,18 +61,8 @@ class CalendarsController < ApplicationController
   end
 
   def serve
-    @lessons = User.find(params[:id]).lessons
-    calendar = Icalendar::Calendar.new
-
-    @lessons.each do |lesson|
-
-      calendar.event do |e|
-        e.dtstart = lesson.starts_at
-        e.dtend = lesson.ends_at
-        e.summary = lesson.student.full_name
-        e.description = lesson.student.last_lesson.lesson_notes
-      end
-    end
+    
+    calendar = User.find(params[:id]).generate_calendar
 
     send_data calendar.to_ical, type: "text/calendar", disposition: "inline", filename: "teaching_calendar.ics"
   end
