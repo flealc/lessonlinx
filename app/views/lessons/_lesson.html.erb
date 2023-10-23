@@ -1,0 +1,33 @@
+<div id="<%= dom_id lesson %>">
+
+  <p>
+    <strong>Student:</strong>
+    <%= lesson.student.full_name %>
+  </p>
+
+  <p>
+    <strong>Date:</strong>
+    <%= lesson.starts_at.in_time_zone(current_user.timezone).strftime("%Y-%m-%d") %>
+  </p>
+
+  <p>
+    <strong>Starts at:</strong>
+    <%= lesson.starts_at.in_time_zone(current_user.timezone).strftime("%-l:%M %p") %>
+  </p>
+
+  <p>
+    <strong>Ends at:</strong>
+    <%= lesson.ends_at.in_time_zone(current_user.timezone).strftime("%-l:%M %p") %>
+  </p>
+
+  <p>
+    <strong>Status:</strong>
+    <%= lesson.status %>
+  </p>
+
+  <p>
+    <strong>Lesson notes:</strong>
+    <%= lesson.lesson_notes %>
+  </p>
+
+</div>

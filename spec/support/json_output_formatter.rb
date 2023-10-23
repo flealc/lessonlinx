@@ -19,7 +19,7 @@ class JsonOutputFormatter < RSpec::Core::Formatters::JsonFormatter
     score = 0 if score.nan?
     
     @output_hash[:summary] = {
-      duration: summary.duration,
+      ends_at: summary.ends_at,
       example_count: summary.example_count,
       errors_outside_of_examples_count: summary.errors_outside_of_examples_count,
       failure_count: summary.failure_count,

@@ -1,0 +1,51 @@
+<%= form_with(model: lesson) do |form| %>
+  <% if lesson.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(lesson.errors.count, "error") %> prohibited this lesson from being saved:</h2>
+
+      <ul>
+        <% lesson.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :calendar_id, style: "display: block" %>
+    <%= form.collection_select :calendar_id, current_user.calendars, :id, :id %>
+  <div>
+    <%= form.label :student_id, style: "display: block" %>
+   <%= form.collection_select :student_id, current_user.students, :id, :full_name %>
+  </div>
+
+  <div>
+    <%= form.label :date, style: "display: block" %>
+    <%= form.date_field :date, value: lesson.starts_at&.strftime("%Y-%m-%d")  %>
+  </div>
+
+  <div>
+    <%= form.label :starts_at, style: "display: block" %>
+    <%= form.time_field :starts_at %>
+  </div>
+
+  <div>
+    <%= form.label :ends_at, style: "display: block" %>
+    <%= form.time_field :ends_at %>
+  </div>
+
+
+  <div>
+    <%= form.label :status, style: "display: block" %>
+    <%= form.text_field :status %>
+  </div>
+
+  <div>
+    <%= form.label :lesson_notes, style: "display: block" %>
+    <%= form.text_area :lesson_notes %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

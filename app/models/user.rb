@@ -13,6 +13,7 @@
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
 #  students_count         :integer          default(0)
+#  timezone               :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
@@ -28,4 +29,19 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :calendars, foreign_key: :owner_id
+  has_many :students, -> { order(first_name: :asc) }, foreign_key: :teacher_id
+  has_many :lessons, foreign_key: :teacher_id
+
+  has_many :scheduled_lessons, -> { scheduled }, foreign_key: :teacher_id, class_name: "Lesson"
+  has_many :canceled_lessons, -> { canceled }, foreign_key: :teacher_id, class_name: "Lesson"
+  has_many :taught_lessons, -> { taught.order(starts_at: :desc) }, foreign_key: :teacher_id, class_name: "Lesson"
+
+  has_many :past_lessons, -> { past }, foreign_key: :teacher_id, class_name: "Lesson"
+  has_many :future_lessons, -> { future }, foreign_key: :teacher_id, class_name: "Lesson"
+
+
+  def full_name
+    first_name + " " + last_name
+  end
+  
 end
