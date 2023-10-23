@@ -11,4 +11,5 @@ Rails.application.routes.draw do
 
    get "dashboard", to: "users#dashboard", as: "dashboard"
    get "student_lessons/:id", to: "students#student_lessons", as: "student_lessons"
+   get "subscribe/:id", to: "calendars#serve", as: "subscription"
 end
