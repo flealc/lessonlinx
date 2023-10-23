@@ -44,4 +44,21 @@ class User < ApplicationRecord
     first_name + " " + last_name
   end
   
+
+  def generate_calendar 
+    calendar = Icalendar::Calendar.new
+
+    self.lessons.each do |lesson|
+
+      calendar.event do |e|
+        e.dtstart = lesson.starts_at
+        e.dtend = lesson.ends_at
+        e.summary = lesson.canceled? ? "#{lesson.student.full_name} [CANCELED]" : lesson.student.full_name
+        e.description = lesson.student.last_lesson.present? ? lesson.student.last_lesson.lesson_notes : "No previous lesson notes for this student"
+      end
+      
+    end
+
+    calendar
+  end
 end
