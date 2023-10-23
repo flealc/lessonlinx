@@ -64,11 +64,13 @@ task({ :sample_data => :environment }) do
   students.each do |student|
     starting_date = Faker::Time.backward(days: 20, period: [:afternoon, :morning].sample)
     10.times do
+      duration = [30, 45, 60].sample
       
       student.lessons.create(
         lesson_notes: Faker::Lorem.paragraph(sentence_count: 10),
         starts_at: starting_date,
-        ends_at: starting_date + [30, 45, 60].sample.minutes,
+        ends_at: starting_date + duration.minutes,
+        duration: duration,
         status: starting_date < Date.current ? %w[taught canceled].sample : "scheduled",
         teacher_id: student.teacher_id,     
       )
@@ -87,7 +89,7 @@ task({ :sample_data => :environment }) do
         notes: Faker::Lorem.paragraph(sentence_count: 2..3),
         phone: Faker::PhoneNumber.cell_phone,
         preferred_communication_method: %w[ phone email ].sample,
-        relationship: %w[ mother father self ].sample
+        relationship: student.adult ? "self" : %w[ mother father ].sample
       )
     end
 
