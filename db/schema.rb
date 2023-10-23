@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_11_154924) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_18_214539) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pgcrypto"
@@ -43,9 +43,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_11_154924) do
     t.uuid "calendar_id", null: false
     t.uuid "teacher_id", null: false
     t.uuid "student_id", null: false
-    t.date "date", null: false
-    t.time "start_time", null: false
-    t.integer "duration", null: false
+    t.datetime "starts_at", null: false
+    t.datetime "ends_at", null: false
     t.string "status", default: "scheduled", null: false
     t.text "lesson_notes"
     t.datetime "created_at", null: false
@@ -62,8 +61,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_11_154924) do
     t.boolean "adult", default: false
     t.uuid "teacher_id", null: false
     t.integer "lessons_count", default: 0
+    t.text "student_notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "default_contact_id"
+    t.index ["default_contact_id"], name: "index_students_on_default_contact_id"
     t.index ["teacher_id"], name: "index_students_on_teacher_id"
   end
 
@@ -80,6 +82,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_11_154924) do
     t.integer "lessons_count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "timezone"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -89,5 +92,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_11_154924) do
   add_foreign_key "lessons", "calendars"
   add_foreign_key "lessons", "students"
   add_foreign_key "lessons", "users", column: "teacher_id"
+  add_foreign_key "students", "contacts", column: "default_contact_id"
   add_foreign_key "students", "users", column: "teacher_id"
 end

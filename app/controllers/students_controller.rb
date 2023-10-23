@@ -1,5 +1,5 @@
 class StudentsController < ApplicationController
-  before_action :set_student, only: %i[ show edit update destroy ]
+  before_action :set_student, only: %i[ show edit update destroy student_lessons]
 
   # GET /students or /students.json
   def index
@@ -22,6 +22,7 @@ class StudentsController < ApplicationController
   # POST /students or /students.json
   def create
     @student = Student.new(student_params)
+    @student.teacher_id = current_user.id
 
     respond_to do |format|
       if @student.save
@@ -57,6 +58,8 @@ class StudentsController < ApplicationController
     end
   end
 
+  def student_lessons
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_student
@@ -65,6 +68,6 @@ class StudentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def student_params
-      params.require(:student).permit(:first_name, :last_name, :age, :adult, :teacher_id, :lessons_count)
+      params.require(:student).permit(:first_name, :last_name, :age, :adult, :lessons_count)
     end
 end

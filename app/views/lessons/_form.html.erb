@@ -13,33 +13,27 @@
 
   <div>
     <%= form.label :calendar_id, style: "display: block" %>
-    <%= form.text_field :calendar_id %>
-  </div>
-
-  <div>
-    <%= form.label :teacher_id, style: "display: block" %>
-    <%= form.text_field :teacher_id %>
-  </div>
-
+    <%= form.collection_select :calendar_id, current_user.calendars, :id, :id %>
   <div>
     <%= form.label :student_id, style: "display: block" %>
-    <%= form.text_field :student_id %>
+   <%= form.collection_select :student_id, current_user.students, :id, :full_name %>
   </div>
 
   <div>
     <%= form.label :date, style: "display: block" %>
-    <%= form.date_field :date %>
+    <%= form.date_field :date, value: lesson.starts_at&.strftime("%Y-%m-%d")  %>
   </div>
 
   <div>
-    <%= form.label :start_time, style: "display: block" %>
-    <%= form.time_field :start_time %>
+    <%= form.label :starts_at, style: "display: block" %>
+    <%= form.time_field :starts_at %>
   </div>
 
   <div>
-    <%= form.label :duration, style: "display: block" %>
-    <%= form.number_field :duration %>
+    <%= form.label :ends_at, style: "display: block" %>
+    <%= form.time_field :ends_at %>
   </div>
+
 
   <div>
     <%= form.label :status, style: "display: block" %>

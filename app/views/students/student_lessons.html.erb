@@ -1,0 +1,57 @@
+<% if @student.lessons.past.any? %>
+  <turbo-frame id="lesson-content">
+    <nav id="navbar-example2" class="navbar bg-body-tertiary px-3 mb-3">
+      <%= link_to @student.full_name, student_path(@student), class: "navbar-brand", data: { turbo: false } %>
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <%= link_to "Last lesson", "##{dom_id(@student.lessons.past.first)}", data: { turbo: false }, class: "nav-link" %>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Previous lessons</a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <% @student.lessons.past.each do |lesson| %>
+              <% unless lesson ==  @student.lessons.past.first %>
+                <li>
+                  <%= link_to lesson.starts_at, "##{dom_id(lesson)}", data: { turbo: false }, class: "dropdown-item" %>
+                </li>
+              <% end %>
+            <% end %>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-root-margin="0px 0px -40%" smooth-scroll="true" class="scrollspy-example bg-body-tertiary p-3 rounded-2 overflow-auto" style="max-height: 600px;" tabindex="0">
+
+      <div class="h4">Next lesson <%= @student.upcoming_lesson.starts_at.in_time_zone(current_user.timezone).strftime("%b %d, %Y, %-l:%M %p") %></div>
+      <div class="d-flex">
+        <%= button_to "Log lesson", edit_lesson_path(@student.upcoming_lesson), class: "btn btn-small btn-outline-success", data: { turbo: false }, method: :get %>
+        <%= button_to "Cancel lesson", lesson_path(@student.upcoming_lesson, lesson: { status: "canceled" }), class: "btn btn-small btn-outline-danger", data: { turbo: false }, method: :patch %>
+        <%= button_to @student.preferred_communication_method == "phone" ? "sms:#{@student.preferred_contact_info}" : "mailto:#{@student.preferred_contact_info}", class: "btn btn-small btn-outline-primary", method: :get, data: { turbo: false } do %>
+          Contact student
+          <% if @student.preferred_communication_method == "phone" %>
+            <i class="fa-solid fa-envelope"></i>
+          <% else %>
+            <i class="fa-solid fa-comment-sms"></i>
+          <% end %>
+        <% end %>
+      </div>
+      <% @student.lessons.past.each do |lesson| %>
+        <h4 id="<%= dom_id(lesson) %>">
+          <%= lesson.starts_at.in_time_zone(current_user.timezone).strftime("%b %d, %Y, %-l:%M %p") %>
+          <% if lesson.canceled? %>
+            <h6><span class="badge rounded-pill text-bg-danger">Canceled</span></h6>
+          <% end %>
+        </h4>
+
+        <p><%= lesson.lesson_notes %></p>
+      <% end %>
+    </div>
+  </turbo-frame>
+<% else %>
+  <turbo-frame id="lesson-content">
+    <nav id="navbar-example2" class="navbar bg-body-tertiary px-3 mb-3">
+      <a class="navbar-brand" href="#"> <%= @student.full_name %> </a>
+      <div class="navbar-brand">No lessons to display</div>
+    </nav>
+  </turbo-frame>
+<% end %>

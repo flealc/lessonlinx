@@ -22,8 +22,22 @@ task({ :sample_data => :environment }) do
     )
   end
 
+  User.create(
+      email: "alice@example.com",
+      password: "password",
+      first_name: "Alice",
+      last_name: Faker::Name.last_name,
+      timezone: "Central Time (US & Canada)"
+    )
+  User.create(
+    email: "bob@example.com",
+    password: "password",
+    first_name: "Bob",
+    last_name: Faker::Name.last_name,
+    timezone: ActiveSupport::TimeZone.us_zones.sample
+  )
   p "There are now #{User.count} users"
-
+  
   users = User.all
 
   users.each do |user|
@@ -38,13 +52,16 @@ task({ :sample_data => :environment }) do
 
 
   users.each do |user|
-   
-    5.times do
-      Student.create(
-        adult: [true, false].sample,                    
+    n = user.first_name == "Alice" ? 10 : 5
+    n.times do
+    age_range = (4..65).to_a.sample
+      s = Student.create!(                
         first_name: Faker::Name.first_name,   
         last_name: Faker::Name.last_name,
-        teacher_id: user.id   
+        teacher_id: user.id,
+        student_notes: Faker::Lorem.paragraph(sentence_count: 3),
+        age: age_range,
+        adult: age_range > 17 ? true : false
       )
     end
   end
@@ -55,16 +72,19 @@ task({ :sample_data => :environment }) do
   students = Student.all
 
   students.each do |student|
-    5.times do
+    starting_date = Faker::Time.backward(days: 20, period: [:afternoon, :morning].sample)
+    10.times do
+      
       student.lessons.create(
-        date: Faker::Date.between(from: '2023-07-01', to: '2023-12-01'),
-        duration: [30, 45, 60].sample,    
-        lesson_notes: Faker::Lorem.paragraph(sentence_count: 5),
-        start_time: Faker::Time.between_dates(from: Date.today - 60, to: Date.today + 60, period: :afternoon),
-        status: %w[scheduled taught canceled].sample,  
-        teacher_id: User.all.sample.id,     
+        lesson_notes: Faker::Lorem.paragraph(sentence_count: 10),
+        starts_at: starting_date,
+        ends_at: starting_date + [30, 45, 60].sample.minutes,
+        status: starting_date < Date.current ? %w[taught canceled].sample : "scheduled",
+        teacher_id: student.teacher_id,     
         calendar_id: student.teacher.calendars.sample.id
       )
+
+      starting_date = starting_date + [7, 6, 8].sample.days
     end
     
   
@@ -81,6 +101,8 @@ task({ :sample_data => :environment }) do
         relationship: %w[ mother father self ].sample
       )
     end
+
+    student.default_contact_id = student.contacts.sample.id
   end
   p "There are now #{Lesson.count} lessons"
   p "There are now #{Contact.count} contacts"

@@ -27,4 +27,14 @@ class Contact < ApplicationRecord
   belongs_to :student
 
   enum preferred_communication_method: { phone: "phone", email: "email" }
+
+  
+  def preferred_contact_info
+    case preferred_communication_method
+    when "phone"
+      self.phone
+    when "email"
+      self.email
+    end
+  end
 end
