@@ -1,28 +1,23 @@
 <div id="<%= dom_id lesson %>">
-  <p>
-    <strong>Calendar:</strong>
-    <%= lesson.calendar_id %>
-  </p>
-
-  <p>
-    <strong>Teacher:</strong>
-    <%= lesson.teacher_id %>
-  </p>
 
   <p>
     <strong>Student:</strong>
-    <%= lesson.student_id %>
-  </p>
-
-
-  <p>
-    <strong>Started at:</strong>
-    <%= lesson.starts_at %>
+    <%= lesson.student.full_name %>
   </p>
 
   <p>
-    <strong>ends_at:</strong>
-    <%= lesson.ends_at %>
+    <strong>Date:</strong>
+    <%= lesson.starts_at.in_time_zone(current_user.timezone).strftime("%Y-%m-%d") %>
+  </p>
+
+  <p>
+    <strong>Starts at:</strong>
+    <%= lesson.starts_at.in_time_zone(current_user.timezone).strftime("%-l:%M %p") %>
+  </p>
+
+  <p>
+    <strong>Ends at:</strong>
+    <%= lesson.ends_at.in_time_zone(current_user.timezone).strftime("%-l:%M %p") %>
   </p>
 
   <p>

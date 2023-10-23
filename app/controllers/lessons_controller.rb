@@ -1,9 +1,9 @@
 class LessonsController < ApplicationController
   before_action :set_lesson, only: %i[ show edit update destroy ]
-
+  
   # GET /lessons or /lessons.json
   def index
-    @lessons = Lesson.all
+    @lessons = Lesson.all.order(starts_at: :asc)
   end
 
   # GET /lessons/1 or /lessons/1.json
@@ -21,7 +21,8 @@ class LessonsController < ApplicationController
 
   # POST /lessons or /lessons.json
   def create
-    @lesson = Lesson.new(lesson_params)
+    @lesson = Lesson.new(build_datetimes(lesson_params))
+    
 
     respond_to do |format|
       if @lesson.save
@@ -37,7 +38,7 @@ class LessonsController < ApplicationController
   # PATCH/PUT /lessons/1 or /lessons/1.json
   def update
     respond_to do |format|
-      if @lesson.update(lesson_params)
+      if @lesson.update(build_datetimes(lesson_params))
         format.html { redirect_to lesson_url(@lesson), notice: "Lesson was successfully updated." }
         format.json { render :show, status: :ok, location: @lesson }
       else
@@ -65,6 +66,26 @@ class LessonsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def lesson_params
-      params.require(:lesson).permit(:calendar_id, :teacher_id, :student_id, :date, :start_time, :ends_at, :status, :lesson_notes)
+      params.require(:lesson).permit(:calendar_id, :student_id, :date, :starts_at, :ends_at, :status, :lesson_notes)
     end
+
+    def build_datetimes(lesson_params)
+      
+      date = Date.parse(lesson_params[:date].to_s)
+      starts = Time.parse(lesson_params[:starts_at].to_s)
+      ends = Time.parse(lesson_params[:ends_at].to_s)
+      calendar = Calendar.find(lesson_params[:calendar_id])
+      student = Student.find(lesson_params[:student_id])
+
+      Time.zone = current_user.timezone
+
+      lesson_params[:starts_at] = Time.zone.local(date.year, date.month, date.day, starts.hour, starts.min, 0)
+      lesson_params[:ends_at] = Time.zone.local(date.year, date.month, date.day, ends.hour, ends.min, 0)
+      lesson_params[:teacher_id] = current_user.id
+      lesson_params[:calendar] = calendar
+      lesson_params[:student] = student
+
+      lesson_params.except(:date) 
+    end
+  
 end

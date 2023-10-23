@@ -1,5 +1,8 @@
+require "icalendar"
+
 class CalendarsController < ApplicationController
   before_action :set_calendar, only: %i[ show edit update destroy ]
+  skip_before_action :authenticate_user!, only: :serve
 
   # GET /calendars or /calendars.json
   def index
@@ -57,6 +60,24 @@ class CalendarsController < ApplicationController
     end
   end
 
+  def serve
+    @lessons = User.find(params[:id]).lessons
+    calendar = Icalendar::Calendar.new
+
+    @lessons.each do |lesson|
+
+      calendar.event do |e|
+        e.dtstart = lesson.starts_at
+        e.dtend = lesson.ends_at
+        e.summary = lesson.student.full_name
+        e.description = lesson.student.last_lesson.lesson_notes
+      end
+    end
+
+    send_data calendar.to_ical, type: "text/calendar", disposition: "inline", filename: "teaching_calendar.ics"
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_calendar
@@ -67,4 +88,5 @@ class CalendarsController < ApplicationController
     def calendar_params
       params.require(:calendar).permit(:name, :owner_id)
     end
+
 end

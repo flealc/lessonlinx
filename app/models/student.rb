@@ -8,6 +8,7 @@
 #  first_name         :string           not null
 #  last_name          :string           not null
 #  lessons_count      :integer          default(0)
+#  student_notes      :text
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  default_contact_id :uuid
@@ -35,7 +36,9 @@ class Student < ApplicationRecord
 
   has_many :past_lessons, -> { past }, class_name: "Lesson"
   has_many :future_lessons, -> { future }, class_name: "Lesson"
-
+  has_one :upcoming_lesson, -> { future.scheduled }, class_name: "Lesson"
+  has_one :last_lesson, -> { past.taught }, class_name: "Lesson"
+  
   delegate :preferred_communication_method, :preferred_contact_info, to: :default_contact, allow_nil: true
   
 
