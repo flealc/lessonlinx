@@ -7,7 +7,6 @@ task({ :sample_data => :environment }) do
     Lesson.destroy_all
     Contact.destroy_all
     Student.destroy_all
-    Calendar.destroy_all
     User.destroy_all
     p "Wiped database"
   end

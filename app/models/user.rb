@@ -3,7 +3,6 @@
 # Table name: users
 #
 #  id                     :uuid             not null, primary key
-#  calendars_count        :integer          default(0)
 #  email                  :citext           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  first_name             :string           not null

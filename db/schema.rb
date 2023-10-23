@@ -10,19 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_18_214539) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_17_201909) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
-
-  create_table "calendars", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name"
-    t.uuid "owner_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["owner_id"], name: "index_calendars_on_owner_id"
-  end
 
   create_table "contacts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "first_name"
@@ -40,16 +32,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_18_214539) do
   end
 
   create_table "lessons", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "calendar_id", null: false
     t.uuid "teacher_id", null: false
     t.uuid "student_id", null: false
     t.datetime "starts_at", null: false
     t.datetime "ends_at", null: false
+    t.integer "duration", null: false
     t.string "status", default: "scheduled", null: false
     t.text "lesson_notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["calendar_id"], name: "index_lessons_on_calendar_id"
     t.index ["student_id"], name: "index_lessons_on_student_id"
     t.index ["teacher_id"], name: "index_lessons_on_teacher_id"
   end
@@ -77,19 +68,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_18_214539) do
     t.datetime "remember_created_at"
     t.string "first_name", null: false
     t.string "last_name", null: false
-    t.integer "calendars_count", default: 0
+    t.string "timezone"
     t.integer "students_count", default: 0
     t.integer "lessons_count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "timezone"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "calendars", "users", column: "owner_id"
   add_foreign_key "contacts", "students"
-  add_foreign_key "lessons", "calendars"
   add_foreign_key "lessons", "students"
   add_foreign_key "lessons", "users", column: "teacher_id"
   add_foreign_key "students", "contacts", column: "default_contact_id"

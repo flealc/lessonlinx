@@ -11,9 +11,7 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :calendar_id, style: "display: block" %>
-    <%= form.collection_select :calendar_id, current_user.calendars, :id, :id %>
+
   <div>
     <%= form.label :student_id, style: "display: block" %>
    <%= form.collection_select :student_id, current_user.students, :id, :full_name %>
