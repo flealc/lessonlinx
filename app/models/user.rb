@@ -28,7 +28,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :calendars, foreign_key: :owner_id
   has_many :students, -> { order(first_name: :asc) }, foreign_key: :teacher_id
   has_many :lessons, foreign_key: :teacher_id
 

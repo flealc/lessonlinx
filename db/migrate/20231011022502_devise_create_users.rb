@@ -33,7 +33,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
 
       t.string :first_name, null: false
       t.string :last_name, null: false
-      t.integer :calendars_count, default: 0
+      t.string :timezone
       t.integer :students_count, default: 0
       t.integer :lessons_count, default: 0
 

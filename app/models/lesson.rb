@@ -26,7 +26,6 @@
 #  fk_rails_...  (teacher_id => users.id)
 #
 class Lesson < ApplicationRecord
-  belongs_to :calendar
   belongs_to :teacher, class_name: "User", counter_cache: true
   belongs_to :student, counter_cache: true
 

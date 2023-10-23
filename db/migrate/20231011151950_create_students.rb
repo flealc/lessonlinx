@@ -8,6 +8,8 @@ class CreateStudents < ActiveRecord::Migration[7.0]
       t.references :teacher, null: false, foreign_key: { to_table: :users }, type: :uuid
       t.integer :lessons_count, default: 0
       t.text :student_notes
+      t.references :default_contact, null: true, foreign_key: {to_table: :contacts}, type: :uuid
+
       t.timestamps
     end
   end

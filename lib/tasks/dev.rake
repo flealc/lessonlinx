@@ -40,16 +40,6 @@ task({ :sample_data => :environment }) do
   
   users = User.all
 
-  users.each do |user|
-   
-    user.calendars.create(
-      name: "Fall 2023"
-    )
-    
-  end
-
-  p "There are now #{Calendar.count} calendars"
-
 
   users.each do |user|
     n = user.first_name == "Alice" ? 10 : 5
@@ -81,7 +71,6 @@ task({ :sample_data => :environment }) do
         ends_at: starting_date + [30, 45, 60].sample.minutes,
         status: starting_date < Date.current ? %w[taught canceled].sample : "scheduled",
         teacher_id: student.teacher_id,     
-        calendar_id: student.teacher.calendars.sample.id
       )
 
       starting_date = starting_date + [7, 6, 8].sample.days
