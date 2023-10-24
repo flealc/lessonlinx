@@ -12,6 +12,11 @@
   </div>
   <div class="col-8">
     <turbo-frame id="lesson-content">
+      <nav id="navbar-example2" class="navbar bg-body-tertiary px-3 mb-3">
+        <a class="navbar-brand" href="#"> Welcome! </a>
+        <div class="navbar-brand">No lessons to display</div>
+      </nav>
+      <div>DIGEST PLACEHOLDER</div>
     </turbo-frame>
   </div>
 </div>
@@ -26,12 +31,6 @@
   <% end %>
 </div>
 
-<div class="container">
-  <div class="h5">Lessons to log</div>
-  <% current_user.past_lessons.scheduled.each do |lesson| %>
-    <div>
-      <%= link_to lesson.student.full_name, student_path(lesson.student) %>
-      <%= link_to "Log lesson", edit_lesson_path(lesson, { status: "taught" }) %>
-    </div>
-  <% end %>
-</div>
+<% if current_user.past_lessons.scheduled.any? %>
+  <%= render "users/lessons_to_log" %>
+<% end %>

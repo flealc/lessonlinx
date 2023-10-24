@@ -7,7 +7,6 @@ task({ :sample_data => :environment }) do
     Lesson.destroy_all
     Contact.destroy_all
     Student.destroy_all
-    Calendar.destroy_all
     User.destroy_all
     p "Wiped database"
   end
@@ -40,16 +39,6 @@ task({ :sample_data => :environment }) do
   
   users = User.all
 
-  users.each do |user|
-   
-    user.calendars.create(
-      name: "Fall 2023"
-    )
-    
-  end
-
-  p "There are now #{Calendar.count} calendars"
-
 
   users.each do |user|
     n = user.first_name == "Alice" ? 10 : 5
@@ -74,14 +63,15 @@ task({ :sample_data => :environment }) do
   students.each do |student|
     starting_date = Faker::Time.backward(days: 20, period: [:afternoon, :morning].sample)
     10.times do
+      duration = [30, 45, 60].sample
       
       student.lessons.create(
         lesson_notes: Faker::Lorem.paragraph(sentence_count: 10),
         starts_at: starting_date,
-        ends_at: starting_date + [30, 45, 60].sample.minutes,
+        ends_at: starting_date + duration.minutes,
+        duration: duration,
         status: starting_date < Date.current ? %w[taught canceled].sample : "scheduled",
         teacher_id: student.teacher_id,     
-        calendar_id: student.teacher.calendars.sample.id
       )
 
       starting_date = starting_date + [7, 6, 8].sample.days
@@ -98,7 +88,7 @@ task({ :sample_data => :environment }) do
         notes: Faker::Lorem.paragraph(sentence_count: 2..3),
         phone: Faker::PhoneNumber.cell_phone,
         preferred_communication_method: %w[ phone email ].sample,
-        relationship: %w[ mother father self ].sample
+        relationship: student.adult ? "self" : %w[ mother father ].sample
       )
     end
 

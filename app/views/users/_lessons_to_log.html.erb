@@ -1,0 +1,10 @@
+<div class="container">
+  <div class="h5">Lessons to log</div>
+  <% current_user.past_lessons.scheduled.each do |lesson| %>
+    <div>
+      <%= link_to lesson.student.full_name, student_path(lesson.student) %> | 
+      <%= lesson.starts_at.in_time_zone(current_user.timezone).strftime("%b %d, %Y, %-l:%M %p") %>
+      <%= link_to "Log lesson", edit_lesson_path(lesson, lesson: { status: "taught" }) %>
+    </div>
+  <% end %>
+</div>

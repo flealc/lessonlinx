@@ -3,7 +3,6 @@
 # Table name: users
 #
 #  id                     :uuid             not null, primary key
-#  calendars_count        :integer          default(0)
 #  email                  :citext           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  first_name             :string           not null
@@ -28,7 +27,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :calendars, foreign_key: :owner_id
   has_many :students, -> { order(first_name: :asc) }, foreign_key: :teacher_id
   has_many :lessons, foreign_key: :teacher_id
 
