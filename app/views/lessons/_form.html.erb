@@ -18,18 +18,13 @@
   </div>
 
   <div>
-    <%= form.label :date, style: "display: block" %>
-    <%= form.date_field :date, value: lesson.starts_at&.strftime("%Y-%m-%d")  %>
-  </div>
-
-  <div>
     <%= form.label :starts_at, style: "display: block" %>
-    <%= form.time_field :starts_at %>
+    <%= form.datetime_field :starts_at %>
   </div>
 
   <div>
-    <%= form.label :ends_at, style: "display: block" %>
-    <%= form.time_field :ends_at %>
+    <%= form.label :duration, style: "display: block" %>
+    <%= form.number_field :duration %>
   </div>
 
 

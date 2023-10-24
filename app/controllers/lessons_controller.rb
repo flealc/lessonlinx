@@ -66,23 +66,20 @@ class LessonsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def lesson_params
-      params.require(:lesson).permit(:student_id, :date, :starts_at, :ends_at, :status, :lesson_notes)
+      params.require(:lesson).permit(:student_id, :starts_at, :duration, :status, :lesson_notes)
     end
 
     def build_datetimes(lesson_params)
       
-      date = Date.parse(lesson_params[:date].to_s)
-      starts = Time.parse(lesson_params[:starts_at].to_s)
-      ends = Time.parse(lesson_params[:ends_at].to_s)
      
+      starts = DateTime.parse(lesson_params[:starts_at].to_s)
       student = Student.find(lesson_params[:student_id])
 
       Time.zone = current_user.timezone
 
-      lesson_params[:starts_at] = Time.zone.local(date.year, date.month, date.day, starts.hour, starts.min, 0)
-      lesson_params[:ends_at] = Time.zone.local(date.year, date.month, date.day, ends.hour, ends.min, 0)
+      lesson_params[:starts_at] = Time.zone.local(starts.year, starts.month, starts.day, starts.hour, starts.sec, 0)
+      lesson_params[:ends_at] = lesson_params[:starts_at] + (lesson_params[:duration].to_i * 60)
       lesson_params[:teacher_id] = current_user.id
-      lesson_params[:duration] = lesson_params[:ends_at] - lesson_params[:starts_at]
       lesson_params[:student] = student
 
       lesson_params.except(:date) 
