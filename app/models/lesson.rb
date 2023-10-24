@@ -24,6 +24,8 @@
 #  fk_rails_...  (teacher_id => users.id)
 #
 class Lesson < ApplicationRecord
+  before_create :set_datetime, :set_teacher
+  
   belongs_to :teacher, class_name: "User", counter_cache: true
   belongs_to :student, counter_cache: true
 
@@ -33,4 +35,15 @@ class Lesson < ApplicationRecord
   scope :past, -> { where("starts_at < ?", Time.current).order(starts_at: :desc) }
   scope :this_week, -> { where(starts_at: Date.today.beginning_of_week..Date.today.end_of_week)}
 
+
+  private
+  def set_datetime
+    self.starts_at = self.starts_at.in_time_zone
+    self.ends_at = self.starts_at + duration.minutes
+  end
+
+  def set_teacher 
+    self.teacher_id ||= current_user.id
+  end
+  
 end

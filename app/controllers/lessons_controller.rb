@@ -1,6 +1,7 @@
 class LessonsController < ApplicationController
   before_action :set_lesson, only: %i[ show edit update destroy ]
-  
+  before_action :set_timezone
+ 
   # GET /lessons or /lessons.json
   def index
     @lessons = Lesson.all.order(starts_at: :asc)
@@ -17,13 +18,13 @@ class LessonsController < ApplicationController
 
   # GET /lessons/1/edit
   def edit
+    @lesson.status = lesson_params[:status] if lesson_params[:status]
   end
 
   # POST /lessons or /lessons.json
   def create
     @lesson = Lesson.new(build_datetimes(lesson_params))
     
-
     respond_to do |format|
       if @lesson.save
         format.html { redirect_to lesson_url(@lesson), notice: "Lesson was successfully created." }
@@ -37,6 +38,7 @@ class LessonsController < ApplicationController
 
   # PATCH/PUT /lessons/1 or /lessons/1.json
   def update
+    
     respond_to do |format|
       if @lesson.update(build_datetimes(lesson_params))
         format.html { redirect_to lesson_url(@lesson), notice: "Lesson was successfully updated." }
@@ -69,20 +71,18 @@ class LessonsController < ApplicationController
       params.require(:lesson).permit(:student_id, :starts_at, :duration, :status, :lesson_notes)
     end
 
-    def build_datetimes(lesson_params)
-      
-     
-      starts = DateTime.parse(lesson_params[:starts_at].to_s)
-      student = Student.find(lesson_params[:student_id])
-
+    def set_timezone
       Time.zone = current_user.timezone
+    end
 
-      lesson_params[:starts_at] = Time.zone.local(starts.year, starts.month, starts.day, starts.hour, starts.sec, 0)
-      lesson_params[:ends_at] = lesson_params[:starts_at] + (lesson_params[:duration].to_i * 60)
+    def build_datetimes(lesson_params)
+      if lesson_params[:starts_at] && lesson_params[:duration]
+        lesson_params[:starts_at] = Time.zone.local_to_utc(DateTime.parse(lesson_params[:starts_at].to_s))
+        lesson_params[:ends_at] = lesson_params[:starts_at] + (lesson_params[:duration].to_i.minutes)
+      end
+
       lesson_params[:teacher_id] = current_user.id
-      lesson_params[:student] = student
-
-      lesson_params.except(:date) 
+      lesson_params
     end
   
 end
