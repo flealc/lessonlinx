@@ -1,14 +1,18 @@
 <p style="color: green"><%= notice %></p>
 
 <h1>Students</h1>
+<%= button_to "Add a student", new_student_path, data: { turbo_frame: "student-details"}, method: :get, class: "btn btn-outline-primary" %>
+<div class="row">
 
-<div id="students">
-  <% @students.each do |student| %>
-    <%= render student %>
-    <p>
-      <%= link_to "Show this student", student %>
-    </p>
-  <% end %>
+  <div class="col-4">
+   
+      <%= render "students_list" %>
+    
+  </div>
+
+  <div class="col-8">
+
+    <%= turbo_frame_tag "student-details", src: student_path(current_user.students.first), data: { turbo_action: :advance }, class: "student-details" do %>
+    <% end %>
+  </div>
 </div>
-
-<%= link_to "New student", new_student_path %>

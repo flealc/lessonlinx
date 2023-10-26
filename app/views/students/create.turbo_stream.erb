@@ -1,0 +1,12 @@
+
+<%= turbo_stream.update "students-list" do %>
+  <%= render partial: "students/students_list" %>
+<% end %>
+
+<%= turbo_stream.update "student-details" do %>
+  <%= render partial: "students/student", locals: {student: @student } %>
+  <script>
+      document.getElementById("student-details").src = "<%= student_path(@student) %>";
+  </script>
+
+<% end %>

@@ -1,0 +1,9 @@
+
+    <div id="students-list" class="list-group students-list">
+      
+        <% current_user.students.each do |student| %>
+          <%= link_to student.full_name, student_path(student), data: { turbo_frame: "student-details" } %>
+        <% end %>
+      
+    </div>
+    
