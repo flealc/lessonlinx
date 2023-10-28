@@ -8,16 +8,11 @@ class StudentsController < ApplicationController
 
   # GET /students/1 or /students/1.json
   def show
-    respond_to do |format|
-      format.turbo_stream
-      format.html
-    end
   end
 
   # GET /students/new
   def new
     @student = Student.new
-    render "students/new"
   end
 
   
@@ -34,19 +29,7 @@ class StudentsController < ApplicationController
       if @student.save
         format.html { redirect_to student_url(@student), notice: "Student was successfully created." }
         format.json { render :show, status: :created, location: @student }
-        format.turbo_stream #do
-        #   render turbo_stream: [
-        #            turbo_stream.update(
-        #              "students-list",
-        #              partial: "students/students_list",
-        #            ),
-        #            turbo_stream.update(
-        #              "student-details",
-        #              partial: "students/student",
-        #              locals: { student: @student },
-        #            ),
-        #          ]
-        # end
+        format.turbo_stream 
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @student.errors, status: :unprocessable_entity }
@@ -74,6 +57,7 @@ class StudentsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to students_url, notice: "Student was successfully destroyed." }
       format.json { head :no_content }
+      format.turbo_stream
     end
   end
 

@@ -1,9 +1,11 @@
-<h1>New contact</h1>
-
-<%= render "form", contact: @contact %>
-
-<br>
-
-<div>
-  <%= link_to "Back to contacts", contacts_path %>
-</div>
+<turbo-frame id="contacts-list">
+  <h1>New contact</h1>
+  
+  <%= render "form", contact: @contact %>
+  
+  <br>
+  
+  <div>
+    <%= link_to "Back to contacts", contacts_path, data: {turbo_frame: "contacts-list"} %>
+  </div>
+</turbo-frame>

@@ -37,4 +37,9 @@ class Contact < ApplicationRecord
       self.email
     end
   end
+
+  def full_name
+    first_name + " " + last_name
+  end
+
 end

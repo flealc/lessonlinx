@@ -8,11 +8,20 @@ class ContactsController < ApplicationController
 
   # GET /contacts/1 or /contacts/1.json
   def show
+    if params[:inline]
+      render @contact
+    end
   end
 
   # GET /contacts/new
   def new
+    pp params
     @contact = Contact.new
+    if params[:inline]
+      pp "it was inline"
+      @contact.student_id = params[:student_id]
+    
+    end
   end
 
   # GET /contacts/1/edit
@@ -27,6 +36,7 @@ class ContactsController < ApplicationController
       if @contact.save
         format.html { redirect_to contact_url(@contact), notice: "Contact was successfully created." }
         format.json { render :show, status: :created, location: @contact }
+        format.turbo_stream
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @contact.errors, status: :unprocessable_entity }
@@ -38,7 +48,7 @@ class ContactsController < ApplicationController
   def update
     respond_to do |format|
       if @contact.update(contact_params)
-        format.html { redirect_to contact_url(@contact), notice: "Contact was successfully updated." }
+        format.html { render @contact, inline: true }#{ redirect_to contact_url(@contact), notice: "Contact was successfully updated." }
         format.json { render :show, status: :ok, location: @contact }
       else
         format.html { render :edit, status: :unprocessable_entity }

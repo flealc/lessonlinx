@@ -1,29 +1,26 @@
-<div id="<%= dom_id contact %>">
+
+<%= turbo_frame_tag(dom_id contact) do %>
   <p>
-    <strong>First name:</strong>
-    <%= contact.first_name %>
+    <strong>Name:</strong>
+    <%= contact.full_name %>
   </p>
 
-  <p>
-    <strong>Last name:</strong>
-    <%= contact.last_name %>
-  </p>
-
-  <p>
-    <strong>Student:</strong>
-    <%= contact.student_id %>
-  </p>
-
-  <p>
+  <% if contact.phone.present? %>
+    <p>
     <strong>Phone:</strong>
     <%= contact.phone %>
   </p>
+  <% end %>
+  
 
-  <p>
+  <% if contact.email.present? %>
+    <p>
     <strong>Email:</strong>
     <%= contact.email %>
   </p>
-
+  <% end %>
+  
+<!--
   <p>
     <strong>Address:</strong>
     <%= contact.address %>
@@ -44,4 +41,6 @@
     <%= contact.notes %>
   </p>
 
-</div>
+-->
+<%= link_to "edit", edit_contact_path(contact) %>
+<% end %>

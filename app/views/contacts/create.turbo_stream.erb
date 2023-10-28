@@ -1,0 +1,12 @@
+<%= turbo_stream.update "contacts-list" do %>
+  
+    <%= link_to "Add contact", new_contact_path(inline: true, student_id: @contact.student.id) %>
+      <% @contact.student.contacts.each do |contact| %>
+        <%= turbo_frame_tag(dom_id(contact)) do %>
+          <%= render contact %>
+        <% end %>
+        <hr>
+      <% end %>
+  
+
+<% end %>

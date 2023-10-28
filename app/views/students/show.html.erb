@@ -5,11 +5,59 @@
   <div>
     <%= link_to "Edit this student", edit_student_path(@student), data: { turbo_frame: "student-details" } %> |
     <%= link_to "Back to students", students_path %>
-  
+
     <%= button_to "Destroy this student", @student, method: :delete %>
   </div>
 
   <%= render @student %>
-  
-  
+
+  <hr>
+
+  <div class="h3">Contacts</div>
+
+  <turbo-frame id="contacts-list">
+
+    <%= link_to "Add contact", new_contact_path(inline: true, student_id: @student.id) %>
+
+    <% @student.contacts.each do |contact| %>
+      <%= turbo_frame_tag(dom_id(contact)) do %>
+        <%= render contact %>
+
+      <% end %>
+      <hr>
+    <% end %>
+
+  </turbo-frame>
+
 </turbo-frame>
+
+<!--
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Relationship</th>
+        <th>Preferred</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+  <tbody>
+    <% @student.contacts.each do |contact| %>
+      <tr>
+        <td><%= contact.full_name %></td>
+        <td><%= contact.phone %></td>
+        <td><%= contact.email %></td>
+        <td><%= contact.address %></td>
+        <td><%= contact.relationship %></td>
+        <td><%= contact.preferred_communication_method %></td>
+        <td><%= contact.notes %></td>
+      </tr>
+    
+    <% end  %>
+  </tbody>
+  
+  </table>
+  -->
