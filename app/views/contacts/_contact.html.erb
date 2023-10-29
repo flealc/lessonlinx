@@ -1,4 +1,22 @@
-<div id="<%= dom_id contact %>">
+<div id="<%= dom_id contact %>" data-controller="students-index">
+  <div class="card" style="">
+    <div class="card-header pb-1">
+      <h6 class="card-title d-flex justify-content-between">
+        <%= contact.full_name %> 
+        <i class="fa-solid fa-angle-down" data-students-index-target="expandCardArrow" data-action="click->students-index#expandCard"></i>
+      </h6>
+      <h6 class="card-subtitle mb-2 text-body-secondary"><%= contact.relationship %></h6>
+
+    </div>
+    <div class="card-body collapse" data-students-index-target="contactCardBody">
+      <p class="card-text"><%= contact.address %></p>
+      <a href="#" class="card-link">Card link</a>
+      <a href="#" class="card-link">Another link</a>
+    </div>
+
+  </div>
+
+  <!--
   <p>
     <strong>First name:</strong>
     <%= contact.first_name %>
@@ -43,5 +61,6 @@
     <strong>Notes:</strong>
     <%= contact.notes %>
   </p>
+  -->
 
 </div>

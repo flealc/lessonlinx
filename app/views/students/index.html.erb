@@ -2,13 +2,23 @@
 
 <h1>Students</h1>
 
-<div id="students">
-  <% @students.each do |student| %>
-    <%= render student %>
-    <p>
-      <%= link_to "Show this student", student %>
-    </p>
-  <% end %>
-</div>
+<div class="row">
+  <div class="col-3 col-sm-2">
+    <div class="list-group list-group-flush pb-2 fw-normal small" id="list-example">
 
-<%= link_to "New student", new_student_path %>
+      <% current_user.students.each do |student| %>
+        <%= link_to "#{ student.full_name }", student_path(student.id), data: { turbo_frame: "student-details", action: "advance" }, class: "list-group-item list-group-item-action" %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="col-9 col-sm-10">
+    <%= turbo_frame_tag "student-details" do %>
+
+    <% end %>
+
+   
+  </div>
+
+  <%= link_to "New student", new_student_path %>
+</div>
