@@ -1,0 +1,26 @@
+
+
+<% if contact.phone.present? %>
+  <div class="d-flex align-items-center mb-2">
+    <i class="fa-solid fa-square-phone"></i>
+    <p class="card-text ms-2 mb-0 fs-6"><%= contact.phone %></p>
+    <% if contact.preferred_communication_method == "phone" %>
+      <i class="fa-solid fa-star fa-2xs ms-2"></i>
+    <% end %>
+  </div>
+<% end %>
+<% if contact.email.present? %>
+  <div class="d-flex align-items-center mb-2">
+    <i class="fa-solid fa-square-envelope"></i>
+    <p class="card-text ms-2 mb-0 fs-6"><%= contact.email %></p>
+    <% if contact.preferred_communication_method == "email" %>
+      <i class="fa-solid fa-star fa-2xs ms-2"></i>
+    <% end %>
+  </div>
+<% end %>
+<% if contact.address.present? %>
+  <div class="d-flex align-items-center mb-2">
+    <i class="fa-solid fa-location-dot"></i>
+    <p class="card-text ms-2 mb-0 fs-6"><%= contact.address %></p>
+  </div>
+<% end %>

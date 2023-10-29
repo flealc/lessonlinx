@@ -2,14 +2,21 @@
   <div class="card" style="">
     <div class="card-header pb-1">
       <h6 class="card-title d-flex justify-content-between">
-        <%= contact.full_name %> 
+        <span>
+          <%= contact.full_name %>
+          <% if contact.default? %>
+            <i class="fa-solid fa-square-check"></i>
+          <% end %>
+        </span>
         <i class="fa-solid fa-angle-down" data-students-index-target="expandCardArrow" data-action="click->students-index#expandCard"></i>
       </h6>
-      <h6 class="card-subtitle mb-2 text-body-secondary"><%= contact.relationship %></h6>
+      <h6 class="card-subtitle mb-2 text-body-secondary">
+        <%= contact.relationship %>
+      </h6>
 
     </div>
     <div class="card-body collapse" data-students-index-target="contactCardBody">
-      <p class="card-text"><%= contact.address %></p>
+      <%= render "contacts/contact_details", contact: contact %>
       <a href="#" class="card-link">Card link</a>
       <a href="#" class="card-link">Another link</a>
     </div>

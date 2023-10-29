@@ -41,4 +41,8 @@ class Contact < ApplicationRecord
       self.email
     end
   end
+
+  def default?
+    self.student.default_contact == self
+  end
 end
