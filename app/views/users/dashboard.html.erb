@@ -1,21 +1,20 @@
-<h1>Dashboard</h1>
 
 <h3>This week's lessons</h3>
 
 <div class="row" data-controller="resize-list">
-  <div data-bs-toggle="collapse" data-bs-target="#lessons-list" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </div>
 
-  <div class="col-3 col-sm-3 collapse-horizontal collapse" id="lessons-list" data-controller>
-    <div id="list-example">
+  <%= link_to "Hide students", false, 
+    data: { action: "click->resize-list#toggle", "resize-list-target": "listToggle" }, href: "#" %>
+
+  <div data-resize-list-target="lessonsList" class="col-3 col-sm-3 collapse-horizontal" id="lessons-list" > <!--collapse class to hide-->
+    <div class="list-group list-group-flush pb-2 fw-normal small" id="list-example">
       <% current_user.lessons.this_week.each do |lesson| %>
         <%= link_to "#{ lesson.student.full_name }", student_lessons_path(lesson.student.id), data: { turbo_frame: "lesson-content" }, class: "list-group-item list-group-item-action" %>
       <% end %>
     </div>
   </div>
 
-  <div class="col-9 col-sm-7">
+  <div class="col-9 col-sm-7" data-resize-list-target="lessonDetails">
     <turbo-frame id="lesson-content">
       <nav id="navbar-example2" class="navbar bg-body-tertiary px-3 mb-3">
         <a class="navbar-brand"> Welcome! </a>
@@ -26,7 +25,7 @@
   </div>
 
   <div class="col-12 col-sm-2">
-    <div class="h5">Recent students</div>
+    <div class="h5" >Recent students</div>
     <% current_user.taught_lessons.limit(10).each do |lesson| %>
       <div>
         <%= link_to lesson.student.full_name, student_path(lesson.student) %>
