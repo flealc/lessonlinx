@@ -17,11 +17,11 @@ export default class extends Controller {
 
     if (this.lessonsListTarget.hidden) {
       this.lessonDetailsTarget.classList.replace("col-9", "col-12")
-      this.lessonDetailsTarget.classList.replace("col-sm-7", "col-sm-10")
+      this.lessonDetailsTarget.classList.replace("col-sm-7", "col-sm-9")
       this.listToggleTarget.innerText = "Show lessons"
     } else {
       this.lessonDetailsTarget.classList.replace("col-12", "col-9")
-      this.lessonDetailsTarget.classList.replace("col-sm-10", "col-sm-7")
+      this.lessonDetailsTarget.classList.replace("col-sm-9", "col-sm-7")
       this.listToggleTarget.innerText = "Hide lessons"
     }
     
