@@ -24,3 +24,9 @@
     <p class="card-text ms-2 mb-0 fs-6"><%= contact.address %></p>
   </div>
 <% end %>
+<% if contact.notes.present? %>
+  <div class="d-flex align-items-center mb-2">
+    <i class="fa-solid fa-book-open"></i>
+    <p class="card-text ms-2 mb-0 fs-6"><%= contact.notes %></p>
+  </div>
+<% end %>

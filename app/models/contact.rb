@@ -43,6 +43,6 @@ class Contact < ApplicationRecord
   end
 
   def default?
-    self.student.default_contact == self
+    self.student.default_contact_id == self.id
   end
 end

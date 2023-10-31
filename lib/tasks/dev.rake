@@ -5,7 +5,11 @@ task({ :sample_data => :environment }) do
   if Rails.env.development?  
     pp "Wiping database..."
     Lesson.destroy_all
-    Contact.destroy_all
+    Contact.all.each do |contact|
+      contact.student.default_contact_id = nil if contact.default?
+      contact.student.save 
+      contact.destroy
+    end
     Student.destroy_all
     User.destroy_all
     p "Wiped database"
@@ -91,8 +95,9 @@ task({ :sample_data => :environment }) do
         relationship: student.adult ? "self" : %w[ mother father ].sample
       )
     end
+    student.default_contact_id = student.adult ? student.contacts.find_by(relationship: "self").id : student.contacts.sample.id
+    student.save
 
-    student.default_contact_id = student.contacts.sample.id
   end
   p "There are now #{Lesson.count} lessons"
   p "There are now #{Contact.count} contacts"

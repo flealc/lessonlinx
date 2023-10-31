@@ -1,10 +1,10 @@
 <div id="<%= dom_id contact %>" data-controller="students-index">
-  <div class="card" style="">
+  <div class="card">
     <div class="card-header pb-1">
       <h6 class="card-title d-flex justify-content-between">
         <span>
           <%= contact.full_name %>
-          <% if contact.default? %>
+          <% if contact.default? == true %>
             <i class="fa-solid fa-square-check"></i>
           <% end %>
         </span>
@@ -17,69 +17,12 @@
     </div>
     <div class="card-body collapse" data-students-index-target="contactCardBody">
       <%= render "contacts/contact_details", contact: contact %>
+      
       <a href="<%= edit_contact_path(contact)%>" class="card-link" data-turbo-frame="student-details">Edit contact</a>
-      <%=link_to "Delete contact", contact_path(contact), method: :delete, data: { "turbo-method": :delete, turbo_confirm: "Are you sure?" }, class: "card-link" %>
+      <%=link_to "Delete contact", contact_path(contact), data: { "turbo-method": :delete, turbo_confirm: "Are you sure?" }, class: "card-link" %>
     </div>
 
-    
-
-    <dialog data-students-index-target="modal" data-action="turbo:frame-load->students-index#open turbo:submit-end->students-index#close">
-      
-
-        <%= turbo_frame_tag "modal"%>
-        
-          
-      </dialog>
-    
 
   </div>
-
-  <!--
-    
-  <p>
-    <strong>First name:</strong>
-    <%= contact.first_name %>
-  </p>
-
-  <p>
-    <strong>Last name:</strong>
-    <%= contact.last_name %>
-  </p>
-
-  <p>
-    <strong>Student:</strong>
-    <%= contact.student_id %>
-  </p>
-
-  <p>
-    <strong>Phone:</strong>
-    <%= contact.phone %>
-  </p>
-
-  <p>
-    <strong>Email:</strong>
-    <%= contact.email %>
-  </p>
-
-  <p>
-    <strong>Address:</strong>
-    <%= contact.address %>
-  </p>
-
-  <p>
-    <strong>Relationship:</strong>
-    <%= contact.relationship %>
-  </p>
-
-  <p>
-    <strong>Preferred communication method:</strong>
-    <%= contact.preferred_communication_method %>
-  </p>
-
-  <p>
-    <strong>Notes:</strong>
-    <%= contact.notes %>
-  </p>
-  -->
 
 </div>
