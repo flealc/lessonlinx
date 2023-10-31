@@ -12,7 +12,6 @@ export default class extends Controller {
   }
   toggle() {
    
-    
     this.lessonsListTarget.hidden = !this.lessonsListTarget.hidden
 
     if (this.lessonsListTarget.hidden) {
@@ -23,8 +22,7 @@ export default class extends Controller {
       this.lessonDetailsTarget.classList.replace("col-12", "col-9")
       this.lessonDetailsTarget.classList.replace("col-sm-9", "col-sm-7")
       this.listToggleTarget.innerText = "Hide lessons"
-    }
-    
+    }  
     
   }
 

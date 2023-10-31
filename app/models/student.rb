@@ -27,7 +27,7 @@
 class Student < ApplicationRecord
   belongs_to :teacher, class_name: "User",  counter_cache: true
   has_many :contacts
-  has_one :default_contact, class_name: "Contact", required: false
+  has_one :default_contact, -> { self.default? }, class_name: "Contact", required: false
   has_many :lessons, dependent: :destroy
 
   has_many :scheduled_lessons, -> { scheduled }, class_name: "Lesson"

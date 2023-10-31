@@ -4,10 +4,9 @@
   <%= render @student %>
 
   <div>
-    <%= link_to "Edit info", edit_student_path(@student) %>
-  </div>
+    <%= link_to "Edit info", edit_student_path(@student), data: { turbo_frame: "student-details" } %>
 
-  <p class="h5 mt-2">Contacts</p>
+  <p class="h5 mt-2">Contacts <%= link_to "New contact", new_contact_path(student: @student.id) %></p>
   <%= turbo_frame_tag "student-contacts" do %>
     <div class="row">
       <% @student.contacts.each do |contact| %>

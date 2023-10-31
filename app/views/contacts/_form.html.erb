@@ -11,6 +11,8 @@
     </div>
   <% end %>
 
+  <%= form.hidden_field :student_id %>
+
   <div>
     <%= form.label :first_name, style: "display: block" %>
     <%= form.text_field :first_name %>
@@ -19,12 +21,7 @@
   <div>
     <%= form.label :last_name, style: "display: block" %>
     <%= form.text_field :last_name %>
-  </div>
-
-  <div>
-    <%= form.label :student_id, style: "display: block" %>
-    <%= form.text_field :student_id %>
-  </div>
+  </div>  
 
   <div>
     <%= form.label :phone, style: "display: block" %>
@@ -57,6 +54,6 @@
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit data: {action: "click->student-index#close"} %>
   </div>
 <% end %>

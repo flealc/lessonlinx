@@ -1,3 +1,4 @@
+<%= turbo_frame_tag "student-details" do %>
 <h1>Editing contact</h1>
 
 <%= render "form", contact: @contact %>
@@ -8,3 +9,4 @@
   <%= link_to "Show this contact", @contact %> |
   <%= link_to "Back to contacts", contacts_path %>
 </div>
+<% end %>
