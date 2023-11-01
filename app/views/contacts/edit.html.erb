@@ -1,12 +1,14 @@
 <%= turbo_frame_tag "student-details" do %>
-<h1>Editing contact</h1>
-
-<%= render "form", contact: @contact %>
-
-<br>
-
-<div>
-  <%= link_to "Show this contact", @contact %> |
-  <%= link_to "Back to contacts", contacts_path %>
+<div data-controller="create-contact" data-create-contact-first-value="<%= @contact.student.first_name %>"  data-create-contact-last-value="<%= @contact.student.last_name %>">
+  <h1>Editing contact</h1>
+  
+  <%= render "form", contact: @contact %>
+  
+  <br>
+  
+  <div>
+    <%= link_to "Show this contact", @contact %> |
+    <%= link_to "Back to contacts", contacts_path %>
+  </div>
 </div>
 <% end %>

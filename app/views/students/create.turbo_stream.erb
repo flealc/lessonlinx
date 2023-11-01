@@ -1,0 +1,16 @@
+<turbo-stream action="update" target="students-list">
+  <template>
+    <% current_user.students.each do |student| %>
+          <%= link_to "#{ student.full_name }", student_path(student.id), data: { turbo_frame: "student-details", action: "click->students-index#toggle" }, class: "list-group-item list-group-item-action" %>
+        <% end %>
+  </template>
+</turbo-stream>
+
+<turbo-stream action="update" target="student-details">
+  <template>
+    <%= turbo_frame_tag "student-details", src: student_path(@student) do %>
+  
+      <% end %>
+
+  </template>
+</turbo-stream>

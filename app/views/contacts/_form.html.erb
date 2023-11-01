@@ -18,14 +18,19 @@
      <%= label_tag "contact[default]", "Default contact", style: "display: inline" %>
   </span>
 
-  <div>
+  <span>
+    <%= form.check_box :self, checked: contact.relationship == "self" ? true : false, data: { "create-contact-target": "selfCheckbox", action: "click->create-contact#toggleSelf"} %>
+    <%= label_tag "contact[self]", "Self", style: "display: inline" %>
+  </span>
+
+  <div data-create-contact-target="firstNameDiv">
     <%= form.label :first_name, style: "display: block" %>
-    <%= form.text_field :first_name %>
+    <%= form.text_field :first_name, data: {"create-contact-target": "firstNameField" } %>
   </div>
 
-  <div>
+  <div data-create-contact-target="lastNameDiv">
     <%= form.label :last_name, style: "display: block" %>
-    <%= form.text_field :last_name %>
+    <%= form.text_field :last_name, data: {"create-contact-target": "lastNameField" } %>
   </div>  
 
   <div>
@@ -43,9 +48,10 @@
     <%= form.text_area :address %>
   </div>
 
-  <div>
+  
+  <div data-create-contact-target="relationshipDiv">
     <%= form.label :relationship, style: "display: block" %>
-    <%= form.text_field :relationship %>
+    <%= form.text_field :relationship, data: {"create-contact-target": "relationshipField" } %>
   </div>
 
   <div>

@@ -15,6 +15,7 @@ class ContactsController < ApplicationController
   def new
     @contact = Contact.new
     @contact.student_id = params[:student]
+    @contact.student = Student.find(params[:student])
   end
 
   # GET /contacts/1/edit

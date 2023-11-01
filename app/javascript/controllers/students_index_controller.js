@@ -5,6 +5,7 @@ export default class extends Controller {
 
   static targets = ["expandCardArrow", "contactCardBody", "studentsList", "studentDetails", "toggleIcon"]
   connect() {
+  
   }
 
   expandCard() {

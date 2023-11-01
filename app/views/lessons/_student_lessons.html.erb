@@ -1,0 +1,5 @@
+<%= turbo_frame_tag "student-lessons" do %>
+  <% student.lessons.each do |lesson| %>
+    <%= render lesson %>
+  <% end %>
+<% end %>

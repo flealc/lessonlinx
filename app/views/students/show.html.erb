@@ -7,14 +7,19 @@
     <%= link_to "Edit info", edit_student_path(@student), data: { turbo_frame: "student-details" } %>
     <%= link_to "Delete student",student_path(@student),  data: { "turbo-method": :delete, turbo_frame: "_top", turbo_confirm: "Are you sure?" } %>
 
-  <p class="h5 mt-2">Contacts <%= link_to "New contact", new_contact_path(student: @student.id) %></p>
-  <%= turbo_frame_tag "student-contacts" do %>
-    <div class="row">
-      <% @student.contacts.each do |contact| %>
-        <div class="col-12 col-md-6 col-lg-4 pb-2">
-          <%= render contact %>
-        </div>
-      <% end %>
-    </div>
+    <p class="h5 mt-2">Contacts <%= link_to "New contact", new_contact_path(student: @student.id) %></p>
+    <%= turbo_frame_tag "student-contacts" do %>
+      <div class="row">
+        <% if @student.contacts.any? %>
+          <% @student.contacts.each do |contact| %>
+            <div class="col-12 col-md-6 col-lg-4 pb-2">
+              <%= render contact %>
+            </div>
+          <% end %>
+
+        <% else %>
+            <h6>This student does not have any contacts yet.</h6>
+        <% end %>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
