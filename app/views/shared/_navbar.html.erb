@@ -21,7 +21,7 @@
             <% end %>
           </li>
           <li class="nav-item">
-            <%= link_to lessons_path, class: "nav-link"  do %>
+            <%= link_to student_lessons_path(current_user.students.first), class: "nav-link"  do %>
               <i class="fa-regular fa-calendar-days"></i>
               Lessons
             <% end %>

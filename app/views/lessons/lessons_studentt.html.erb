@@ -1,0 +1,29 @@
+<div data-controller="lessons">
+  <%= turbo_frame_tag "lessons-student" do %>
+  
+    <% if @lessons.any? %>
+    
+      <%= search_form_for @q do |f| %>
+        <div>
+          <%= f.check_box :future_eq, as: :boolean %>
+          <%= f.label :future_eq, 'Future' %>
+        </div>
+
+        <div>
+          <%= f.check_box :past_eq, as: :boolean %>
+          <%= f.label :past_eq, 'Past' %>
+        </div>
+
+        <%= f.submit 'Filter' %>
+      <% end %>
+      <%= @lessons.each do |lesson| %>
+        <div>
+          <%= render lesson %>
+        </div>
+      <% end %>
+  
+    <% else %>
+      <h6> There are no lessons scheduled for this student.</h6>
+    <% end %>
+  <% end %>
+</div>

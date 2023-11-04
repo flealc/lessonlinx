@@ -31,12 +31,27 @@ class Lesson < ApplicationRecord
 
   enum status: { scheduled: "scheduled", taught: "taught", canceled: "canceled" } 
 
-  scope :future, -> { where("starts_at > ?", Time.current).order(starts_at: :asc) }
-  scope :past, -> { where("starts_at < ?", Time.current).order(starts_at: :desc) }
+  scope :default_order, -> { order(starts_at: :asc) }
+  scope :future, ->{ where("starts_at > ?", Time.current).order(starts_at: :asc) }
+  scope :past, ->{ where("starts_at < ?", Time.current).order(starts_at: :desc) }
   scope :this_week, -> { where(starts_at: Date.today.beginning_of_week..Date.today.end_of_week)}
+
+  # TODO: move to Lesson::Ransackable concern
+  def self.ransackable_attributes(auth_object=nil)
+    [
+      "future",
+      "past"
+    ]
+  end
+
+
+  def self.ransackable_scopes(auth_object=nil)
+    %i[default_order past future]
+  end
 
 
   private
+
   def set_datetime
     self.starts_at = self.starts_at.in_time_zone
     self.ends_at = self.starts_at + duration.minutes

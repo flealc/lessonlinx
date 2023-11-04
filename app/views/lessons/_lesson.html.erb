@@ -1,5 +1,31 @@
-<div id="<%= dom_id lesson %>">
+<div id="<%= dom_id lesson %>" data-controller="students-index">
 
+  <div class="card mb-1">
+    <div class="card-header pb-1">
+      <h6 class="card-title d-flex justify-content-between">
+        <span>
+          <%= lesson.starts_at.strftime("%-d %b, %Y") %>
+          <span class="card-subtitle mb-2 text-body-secondary">
+            <%= lesson.starts_at.strftime("%I:%M%P") %>
+          </span>
+        </span>
+        <i class="fa-solid fa-angle-down" data-students-index-target="expandCardArrow" data-action="click->students-index#expandCard"></i>
+      </h6>
+
+    </div>
+    <div class="card-body collapse" data-students-index-target="contactCardBody">
+
+      <div><%= lesson.lesson_notes %></div>
+    
+
+      <a href="<%= edit_student_lesson_path(lesson.student, lesson)%>" class="card-link" data-turbo-frame="student-details">Edit lesson</a>
+      <%=link_to "Delete lesson", student_lesson_path(lesson.student, lesson), data: { "turbo-method": :delete, turbo_confirm: "Are you sure?" }, class: "card-link" %>
+    </div>
+
+  </div>
+
+</div>
+<!--
   <p>
     <strong>Student:</strong>
     <%= lesson.student.full_name %>
@@ -29,5 +55,4 @@
     <strong>Lesson notes:</strong>
     <%= lesson.lesson_notes %>
   </p>
-
-</div>
+-->

@@ -1,7 +1,7 @@
 <p style="color: green"><%= notice %></p>
 
-<div data-controller="students-index">
-  <h1> Students <%= link_to "New student", new_student_path, data: { turbo_frame: "student-details" } %></h1>
+<div data-controller="student-index lessons">
+  <h1> Lessons <%= link_to "New lesson", new_student_lesson_path(@student), data: { turbo_frame: "lessons-student" } %></h1>
 
   <i class="fa-solid fa-angle-left" data-students-index-target="toggleIcon" data-action="click->students-index#toggle"></i>
   <div class="row">
@@ -9,16 +9,37 @@
       <div class="list-group list-group-flush pb-2 fw-normal small" id="list-example" data-students-index-target="studentsList">
 
         <% current_user.students.each do |student| %>
-          <%= link_to "#{ student.full_name }", student_lessons_path(student.id), data: { turbo_frame: "lesson-content", action: "click->students-index#toggle" }, class: "list-group-item list-group-item-action" %>
+          <%= link_to "#{ student.full_name }", student_lessons_path(student), data: { turbo_frame: "lessons-student", action: "click->students-index#toggle" }, class: "list-group-item list-group-item-action" %>
         <% end %>
       </div>
     </div>
 
-    <div class="col-9 col-sm-10" data-students-index-target="studentDetails">
-      <%= turbo_frame_tag "student-lessons" do %>
-        <%= render "student_lessons", student: current_user.students.first %>
+    <div class="col-9 col-sm-10" data-controller="students-index">
+      <% if @lessons.any? %>
+        <%= search_form_for @q, url: student_lessons_path(@student) do |f| %>
+          <div>
+            <%= f.check_box :future, as: :boolean  %>
+            <!-- onchange: "this.form.submit()", checked: params[:q] && params[:q][:future_eq] == "1"-->
+            <%= f.label :future, 'Future' %>
+          </div>
+
+          <div>
+            <%= f.check_box :past, as: :boolean %>
+            <%= f.label :past, 'Past' %>
+          </div>
+
+        <%= f.submit 'Apply filter' %>
       <% end %>
 
+      <%= link_to "Clear filters", student_lessons_path(@student) %>
+        <% @lessons.each do |lesson| %>
+        <div>
+          <%= render lesson %>
+        </div>
+        <% end %>
+      <% else %>
+        <h6> There are no lessons scheduled for this student.</h6>
+      <% end %>
     </div>
 
   </div>
