@@ -20,12 +20,17 @@
               Students
             <% end %>
           </li>
+
+          <% if current_user.students.present?%>
+            
           <li class="nav-item">
             <%= link_to student_lessons_path(current_user.students.first), class: "nav-link"  do %>
               <i class="fa-regular fa-calendar-days"></i>
               Lessons
             <% end %>
           </li>
+          <% end %>
+
           <!-- Add student search here at some point? -->
         </ul>
         <div class="navbar-nav dropdown ms-lg-auto" style="min-width: initial; width: fit-content;">

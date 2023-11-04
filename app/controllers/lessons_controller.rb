@@ -5,8 +5,10 @@ class LessonsController < ApplicationController
  
   # GET /lessons or /lessons.json
   def index
-    @q = @student.lessons.default_order.ransack(params[:q])
-    @lessons = @q.result(distinct: true)
+    
+      @q = @student.lessons.default_order.ransack(params[:q])
+      @lessons = @q.result(distinct: true)
+   
   end
 
   # GET /lessons/1 or /lessons/1.json
@@ -77,7 +79,7 @@ class LessonsController < ApplicationController
   end
   
   def set_student
-    @student = Student.find(params[:student_id])
+      @student = Student.find(params[:student_id])
   end
 
   # Only allow a list of trusted parameters through.

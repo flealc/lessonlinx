@@ -36,7 +36,7 @@ class User < ApplicationRecord
 
   has_many :past_lessons, -> { past }, foreign_key: :teacher_id, class_name: "Lesson"
   has_many :future_lessons, -> { future }, foreign_key: :teacher_id, class_name: "Lesson"
-
+  has_many :todays_lessons, -> { today }, foreign_key: :teacher_id, class_name: "Lesson"
 
   def full_name
     first_name + " " + last_name

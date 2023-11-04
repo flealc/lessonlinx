@@ -6,7 +6,7 @@
       <div class="list-group-item list-group-item-action">
         <%= link_to lesson.student.full_name, student_path(lesson.student) %> 
         <div>
-          <%= link_to "Log", edit_lesson_path(lesson, lesson: { status: "taught" }) %>
+          <%= link_to "Log", edit_student_lesson_path(lesson.student, lesson, lesson: { status: "taught" }) %>
           <%= lesson.starts_at.in_time_zone(current_user.timezone).strftime("%b %d, %-l:%M %p") %>
         </div>
       </div>
