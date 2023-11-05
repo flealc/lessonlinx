@@ -1,7 +1,10 @@
-<p style="color: green"><%= notice %></p>
-
 <div data-controller="student-index lessons">
-  <h1> Lessons <%= link_to "New lesson", new_student_lesson_path(@student), data: { turbo_frame: "lessons-student" } %></h1>
+  <h1> Lessons </h1>
+  <div>
+    <%= link_to "New lesson", new_student_lesson_path(@student), data: { turbo_frame: "lessons-student" } %>
+    <%= link_to "Bulk create", bulk_new_student_lessons_path(@student), data: { turbo_frame: "lessons-student" } %>
+    <%= link_to "Bulk delete", select_delete_student_lessons_path(@student), data: { turbo_frame: "lessons-student" } %>
+  </div>
 
   <i class="fa-solid fa-angle-left" data-students-index-target="toggleIcon" data-action="click->students-index#toggle"></i>
   <div class="row">

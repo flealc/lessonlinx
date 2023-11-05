@@ -4,7 +4,7 @@
     <div class="card-header pb-1">
       <h6 class="card-title d-flex justify-content-between">
         <span>
-          <%= lesson.starts_at.strftime("%-d %b, %Y") %>
+          <%= lesson.starts_at.strftime("%a, %-d %b, %Y") %>
           <span class="card-subtitle mb-2 text-body-secondary">
             <%= lesson.starts_at.strftime("%I:%M%P") %>
           </span>
@@ -25,34 +25,3 @@
   </div>
 
 </div>
-<!--
-  <p>
-    <strong>Student:</strong>
-    <%= lesson.student.full_name %>
-  </p>
-
-  <p>
-    <strong>Date:</strong>
-    <%= lesson.starts_at.in_time_zone(current_user.timezone).strftime("%Y-%m-%d") %>
-  </p>
-
-  <p>
-    <strong>Starts at:</strong>
-    <%= lesson.starts_at.in_time_zone(current_user.timezone).strftime("%-l:%M %p") %>
-  </p>
-
-  <p>
-    <strong>Ends at:</strong>
-    <%= lesson.ends_at.in_time_zone(current_user.timezone).strftime("%-l:%M %p") %>
-  </p>
-
-  <p>
-    <strong>Status:</strong>
-    <%= lesson.status %>
-  </p>
-
-  <p>
-    <strong>Lesson notes:</strong>
-    <%= lesson.lesson_notes %>
-  </p>
--->

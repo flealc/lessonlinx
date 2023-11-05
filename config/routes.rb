@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
   resources :contacts
   resources :students do
-    resources :lessons
+    resources :lessons do
+      collection do
+        get 'bulk_new'
+        post 'bulk_create'
+        get 'select_delete'
+        delete 'bulk_delete'
+      end
+    end
   end
   resources :calendars
   devise_for :users, :controllers => { registrations: 'users/registrations'}

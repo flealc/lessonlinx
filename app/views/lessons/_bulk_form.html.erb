@@ -1,0 +1,41 @@
+<%= form_with url: bulk_create_student_lessons_path, method: :post do |form| %>
+
+  <div>
+    <%= form.label "bulk[student_id]", "Student", style: "display: block" %>
+    <%= form.collection_select "bulk[student_id]", current_user.students, :id, :full_name, {selected: @student.id }, { onchange: "window.location = '/students/' + this.value + '/lessons/bulk_new'"} %>
+  </div>
+
+
+  <div>
+    <%= form.label "bulk[starts_at]", "Starts at", style: "display: block" %>
+    <%= form.time_field "bulk[starts_at]" %>
+  </div>
+
+
+  <div>
+    <%= form.label "bulk[duration]", "Duration", style: "display: block" %>
+    <%= form.number_field "bulk[duration]" %>
+  </div>
+
+ <div>
+    <div>Weekdays</div> 
+    <% %w[Monday Tuesday Wednesday Thursday Friday Saturday Sunday].each do |weekday| %>
+    <%= form.check_box "bulk[weekdays]", { multiple: true }, weekday , nil %>
+    <%= weekday %>
+  <% end %>
+  </div>
+
+  <div>
+    <%= form.label "bulk[from]", "From", style: "display: block" %>
+    <%= form.date_field "bulk[from]" %>
+  </div>
+
+  <div>
+    <%= form.label "bulk[to]", "To", style: "display: block" %>
+    <%= form.date_field "bulk[to]" %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
