@@ -11,6 +11,11 @@ class LessonsController < ApplicationController
 
   # GET /lessons/1 or /lessons/1.json
   def show
+    respond_to do |format|
+      format.turbo_stream {render partial "lessons/lesson", lesson: @lesson}
+      format.html
+    end
+
   end
 
   # GET /lessons/new
@@ -28,6 +33,9 @@ class LessonsController < ApplicationController
       { content: @student.full_name, href: student_lessons_path(@student) },
       { content: "Edit lesson", href: "#" },
     ]
+    if params[:status] == "canceled"
+      @lesson.status = "canceled"
+    end
   end
 
   # POST /lessons or /lessons.json
@@ -49,7 +57,7 @@ class LessonsController < ApplicationController
   def update
     respond_to do |format|
       if @lesson.update(build_datetimes(lesson_params))
-        format.html { redirect_to lesson_url(@lesson), notice: "Lesson was successfully updated." }
+        format.html { redirect_to student_lessons_url(@student), notice: "Lesson was successfully updated." }
         format.json { render :show, status: :ok, location: @lesson }
       else
         format.html { render :edit, status: :unprocessable_entity }

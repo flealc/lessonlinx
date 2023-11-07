@@ -1,5 +1,5 @@
 class StudentsController < ApplicationController
-  before_action :set_student, only: %i[ show edit update destroy student_lessons]
+  before_action :set_student, only: %i[ show edit update destroy student_lessons recent_lessons ]
 
   # GET /students or /students.json
   def index
@@ -28,7 +28,7 @@ class StudentsController < ApplicationController
       if @student.save
         format.html { redirect_to student_url(@student), notice: "Student was successfully created." }
         format.json { render :show, status: :created, location: @student }
-        format.turbo_stream 
+        format.turbo_stream
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @student.errors, status: :unprocessable_entity }
@@ -59,16 +59,33 @@ class StudentsController < ApplicationController
     end
   end
 
+  def recent_lessons
+    @recent_lessons = @student.lessons.past.limit(5)
+    
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace(
+          "recent_lessons_frame",
+          partial: "students/recent_lessons",
+          locals: { recent_lessons: @recent_lessons },
+        )
+      end
+
+    end
+  end
+
   def student_lessons
   end
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_student
-      @student = Student.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def student_params
-      params.require(:student).permit(:first_name, :last_name, :age, :adult, :lessons_count)
-    end
+  private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_student
+    @student = Student.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def student_params
+    params.require(:student).permit(:first_name, :last_name, :age, :adult, :lessons_count)
+  end
 end

@@ -1,4 +1,4 @@
-<turbo-frame id="lesson-content">
+<turbo-frame id="lesson-details">
   <% if @student.lessons.past.any? %>
     <nav id="navbar-example2" class="navbar px-3 mb-3">
 
@@ -35,7 +35,7 @@
         <%= render "students/upcoming_lesson", student: @student %>
       <% end %>
 
-      <% @student.lessons.past.each do |lesson| %>
+      <% @student.lessons.past.limit(5).each do |lesson| %>
         <h4 id="<%= dom_id(lesson) %>">
           <%= lesson.starts_at.in_time_zone(current_user.timezone).strftime("%b %d, %Y, %-l:%M %p") %>
           <% if lesson.canceled? %>

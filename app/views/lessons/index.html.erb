@@ -1,4 +1,4 @@
-<div data-controller="student-index lessons">
+<div data-controller="side-bar">
   <h1> Lessons </h1>
   <div>
     <%= link_to "New lesson", new_student_lesson_path(@student), data: { turbo_frame: "lessons-student" } %>
@@ -6,39 +6,44 @@
     <%= link_to "Bulk delete", select_delete_student_lessons_path(@student), data: { turbo_frame: "lessons-student" } %>
   </div>
 
-  <i class="fa-solid fa-angle-left" data-students-index-target="toggleIcon" data-action="click->students-index#toggle"></i>
+  <i class="fa-solid fa-angle-left" data-side-bar-target="toggleIcon" data-action="click->side-bar#toggleFullPage"></i>
   <div class="row">
     <div class="col-3 col-sm-2">
-      <div class="list-group list-group-flush pb-2 fw-normal small" id="list-example" data-students-index-target="studentsList">
+      <div class="list-group list-group-flush pb-2 fw-normal small" id="list-example" data-side-bar-target="collapsibleList">
 
         <% current_user.students.each do |student| %>
-          <%= link_to "#{ student.full_name }", student_lessons_path(student), data: { turbo_frame: "lessons-student", action: "click->students-index#toggle" }, class: "list-group-item list-group-item-action" %>
+          <%= link_to "#{ student.full_name }", student_lessons_path(student), data: { turbo_frame: "lessons-student"}, class: "list-group-item list-group-item-action" %>
         <% end %>
+        <div>
+
+          <% if @lessons.any? %>
+            <%= search_form_for @q, url: student_lessons_path(@student) do |f| %>
+              <div>
+                <%= f.check_box :future, as: :boolean  %>
+                <!-- onchange: "this.form.submit()", checked: params[:q] && params[:q][:future_eq] == "1"-->
+                <%= f.label :future, 'Future' %>
+              </div>
+
+              <div>
+                <%= f.check_box :past, as: :boolean %>
+                <%= f.label :past, 'Past' %>
+              </div>
+
+              <%= f.submit 'Apply filter' %>
+            <% end %>
+            <%= link_to "Clear filters", student_lessons_path(@student) %>
+          <% end%>
+        </div>
       </div>
     </div>
 
-    <div class="col-9 col-sm-10" data-controller="students-index">
+    <div class="col-9 col-sm-10" data-controller="students-index" data-side-bar-target="contentArea">
       <% if @lessons.any? %>
-        <%= search_form_for @q, url: student_lessons_path(@student) do |f| %>
-          <div>
-            <%= f.check_box :future, as: :boolean  %>
-            <!-- onchange: "this.form.submit()", checked: params[:q] && params[:q][:future_eq] == "1"-->
-            <%= f.label :future, 'Future' %>
-          </div>
 
-          <div>
-            <%= f.check_box :past, as: :boolean %>
-            <%= f.label :past, 'Past' %>
-          </div>
-
-        <%= f.submit 'Apply filter' %>
-      <% end %>
-
-      <%= link_to "Clear filters", student_lessons_path(@student) %>
         <% @lessons.each do |lesson| %>
-        <div>
-          <%= render lesson %>
-        </div>
+          <div>
+            <%= render lesson %>
+          </div>
         <% end %>
       <% else %>
         <h6> There are no lessons scheduled for this student.</h6>

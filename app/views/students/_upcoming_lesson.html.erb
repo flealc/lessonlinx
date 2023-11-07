@@ -1,9 +1,31 @@
-<div class="h4">
-  Next lesson <%= student.upcoming_lesson.starts_at.in_time_zone(current_user.timezone).strftime("%b %d, %Y, %-l:%M %p") %>
-</div>
 
-<div class="d-flex">
-  <%= button_to "Log lesson", edit_lesson_path(student.upcoming_lesson), class: "btn btn-small btn-outline-success", data: { turbo: false }, method: :get %>
-  <%= button_to "Cancel lesson", lesson_path(student.upcoming_lesson, lesson: { status: "canceled" }), class: "btn btn-small btn-outline-danger", data: { turbo: false }, method: :patch %>
+
+<div id="<%= dom_id student.upcoming_lesson %>">
+ 
+  <div class="card mb-1">
+  
+    <div class="card-header pb-1">
+      <h6 class="card-title d-flex justify-content-between">
+        <span>
+          <%= student.upcoming_lesson.starts_at.strftime("%a, %-d %b, %Y") %>
+          <span class="card-subtitle mb-2 text-body-secondary">
+            <%= student.upcoming_lesson.starts_at.strftime("%I:%M%P") %>
+          </span>
+        </span>
+      </h6>
+
+    </div>
+    <div class="card-body" data-students-index-target="contactCardBody">
+
+<div class="d-flex justify-content-around">
+  <%= link_to "Log lesson", edit_student_lesson_path(student.id, student.upcoming_lesson), data: { turbo: false }, method: :get %>
+  <%= link_to "Cancel lesson", edit_student_lesson_path(student_id: student.id, id: student.upcoming_lesson, status: "canceled"), data: { turbo: false }, method: :get %>
+
+</div>
+      
+    
+    </div>
+
+  </div>
 
 </div>
