@@ -1,33 +1,27 @@
-<div id="<%= dom_id lesson %>">
+<div id="<%= dom_id lesson %>" data-controller="students-index">
 
-  <p>
-    <strong>Student:</strong>
-    <%= lesson.student.full_name %>
-  </p>
+  <div class="card mb-1">
+    <div class="card-header pb-1">
+      <h6 class="card-title d-flex justify-content-between">
+        <span>
+          <%= lesson.starts_at.strftime("%a, %-d %b, %Y") %>
+          <span class="card-subtitle mb-2 text-body-secondary">
+            <%= lesson.starts_at.strftime("%I:%M%P") %>
+          </span>
+        </span>
+        <i class="fa-solid fa-angle-down" data-students-index-target="expandCardArrow" data-action="click->students-index#expandCard"></i>
+      </h6>
 
-  <p>
-    <strong>Date:</strong>
-    <%= lesson.starts_at.in_time_zone(current_user.timezone).strftime("%Y-%m-%d") %>
-  </p>
+    </div>
+    <div class="card-body collapse" data-students-index-target="contactCardBody">
 
-  <p>
-    <strong>Starts at:</strong>
-    <%= lesson.starts_at.in_time_zone(current_user.timezone).strftime("%-l:%M %p") %>
-  </p>
+      <div><%= lesson.lesson_notes %></div>
+    
 
-  <p>
-    <strong>Ends at:</strong>
-    <%= lesson.ends_at.in_time_zone(current_user.timezone).strftime("%-l:%M %p") %>
-  </p>
+      <a href="<%= edit_student_lesson_path(lesson.student, lesson)%>" class="card-link" data-turbo-frame="student-details">Edit lesson</a>
+      <%=link_to "Delete lesson", student_lesson_path(lesson.student, lesson), data: { "turbo-method": :delete, turbo_confirm: "Are you sure?" }, class: "card-link" %>
+    </div>
 
-  <p>
-    <strong>Status:</strong>
-    <%= lesson.status %>
-  </p>
-
-  <p>
-    <strong>Lesson notes:</strong>
-    <%= lesson.lesson_notes %>
-  </p>
+  </div>
 
 </div>

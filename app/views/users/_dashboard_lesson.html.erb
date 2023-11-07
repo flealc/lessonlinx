@@ -1,0 +1,31 @@
+<div id="<%= dom_id lesson %>">
+
+  <div class="card mb-1">
+    <div class="card-header pb-1">
+      <h6 class="card-title d-flex justify-content-between">
+        <span>
+          <%= lesson.starts_at.strftime("%a, %-d %b, %Y") %>
+          <span class="card-subtitle mb-2 text-body-secondary">
+            <%= lesson.starts_at.strftime("%I:%M%P") %>
+          </span>
+        </span>
+      </h6>
+
+    </div>
+    <div class="card-body" data-students-index-target="contactCardBody">
+
+      <% if lesson.lesson_notes.present? %>
+        
+      <div><%= lesson.lesson_notes %></div>
+
+      <% else %>
+
+      <p class="text-body-secondary">This lesson does not have any notes. <%= link_to "Log lesson now", edit_student_lesson_path(lesson.student, lesson), data: {turbo_frame: "_top"} %></p>
+
+      <% end %>
+    
+    </div>
+
+  </div>
+
+</div>

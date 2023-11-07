@@ -1,0 +1,52 @@
+<h3>Dashboard</h3>
+
+<div class="row" data-controller="resize-list">
+
+  <div data-resize-list-target= "listToggle", data-action="click->resize-list#toggle" class="h6">Hide lessons</div>
+
+  <div data-resize-list-target="lessonsList" class="col-3 col-sm-2 collapse-horizontal" id="lessons-list" > <!--collapse class to hide-->
+    
+    <div class="list-group list-group-flush pb-2 fw-normal small" id="list-example">
+      <div class="h5 ms-3">This week</div>
+      <% current_user.lessons.this_week.each do |lesson| %>
+        <%= link_to "#{ lesson.student.full_name }", student_lessons_path(lesson.student.id), data: { turbo_frame: "lesson-content" }, class: "list-group-item list-group-item-action" %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="col-9 col-sm-7" data-resize-list-target="lessonDetails">
+    <turbo-frame id="lesson-content">
+      <nav id="navbar-example2" class="navbar px-3 mb-3">
+        <a class="navbar-brand"> Welcome! </a>
+        <div class="navbar-brand">No lessons to display</div>
+      </nav>
+      <div>DIGEST PLACEHOLDER</div>
+    </turbo-frame>
+  </div>
+
+  <% recent_students = current_user.taught_lessons.includes(:student).map(&:student).uniq { |student| student.id }.first(10) %>
+  <div class="col-12 col-sm-3">
+    <div class="h5 ms-3" >Recent students</div>
+    <div class="list-group list-group-flush pb-2 fw-normal small">
+      
+      <% recent_students.each do |student| %>
+
+        <div class="list-group-item list-group-item-action">
+         
+          <%= link_to student.preferred_communication_method == "phone" ? "sms:#{student.preferred_contact_info}" : "mailto:#{student.preferred_contact_info}", class: "inline" do %>
+            <% if student.preferred_communication_method == "phone" %>
+              <i class="fa-solid fa-envelope"></i>
+            <% else %>
+              <i class="fa-solid fa-comment-sms"></i>
+            <% end %>
+          <% end%>
+
+           <%= link_to student.full_name, student_path(student)  %>
+        </div>
+      <% end %>
+    </div>
+    <% if current_user.past_lessons.scheduled.any? %>
+      <%= render "users/lessons_to_log" %>
+    <% end %>
+  </div>
+</div>

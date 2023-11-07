@@ -1,7 +1,16 @@
-<turbo-frame id="lesson-content">
+<turbo-frame id="lesson-details">
   <% if @student.lessons.past.any? %>
-    <nav id="navbar-example2" class="navbar bg-body-tertiary px-3 mb-3">
+    <nav id="navbar-example2" class="navbar px-3 mb-3">
+
       <%= link_to @student.full_name, student_path(@student), class: "navbar-brand", data: { turbo: false } %>
+      <%= link_to @student.preferred_communication_method == "phone" ? "sms:#{@student.preferred_contact_info}" : "mailto:#{@student.preferred_contact_info}", class: "inline" do %>
+        <% if @student.preferred_communication_method == "phone" %>
+          <i class="fa-solid fa-envelope"></i>
+        <% else %>
+          <i class="fa-solid fa-comment-sms"></i>
+        <% end %>
+      <% end %>
+
       <ul class="nav nav-pills">
         <li class="nav-item">
           <%= link_to "Last lesson", "##{dom_id(@student.lessons.past.first)}", data: { turbo: false }, class: "nav-link" %>
@@ -26,7 +35,7 @@
         <%= render "students/upcoming_lesson", student: @student %>
       <% end %>
 
-      <% @student.lessons.past.each do |lesson| %>
+      <% @student.lessons.past.limit(5).each do |lesson| %>
         <h4 id="<%= dom_id(lesson) %>">
           <%= lesson.starts_at.in_time_zone(current_user.timezone).strftime("%b %d, %Y, %-l:%M %p") %>
           <% if lesson.canceled? %>

@@ -1,21 +1,14 @@
-<%= form_with(model: lesson) do |form| %>
-  <% if lesson.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(lesson.errors.count, "error") %> prohibited this lesson from being saved:</h2>
+<%= form_with(model: lesson, url: [@student, @lesson]) do |form| %>
+  
 
-      <ul>
-        <% lesson.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+  <% if lesson.new_record? %>
+    <div>
+      <%= form.label :student_id, style: "display: block" %>
+      <%= form.collection_select :student_id, current_user.students, :id, :full_name, {}, { onchange: "window.location = '/students/' + this.value + '/lessons/new'"} %>
     </div>
+  <% else %>
+    <%= form.hidden_field :student_id %>
   <% end %>
-
-
-  <div>
-    <%= form.label :student_id, style: "display: block" %>
-   <%= form.collection_select :student_id, current_user.students, :id, :full_name %>
-  </div>
 
   <div>
     <%= form.label :starts_at, style: "display: block" %>
@@ -26,7 +19,6 @@
     <%= form.label :duration, style: "display: block" %>
     <%= form.number_field :duration %>
   </div>
-
 
   <div>
     <%= form.label :status, style: "display: block" %>

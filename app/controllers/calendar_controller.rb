@@ -6,9 +6,14 @@ class CalendarController < ApplicationController
   
   def serve
     
-    calendar = User.find(params[:id]).generate_calendar
-
-    send_data calendar.to_ical, type: "text/calendar", disposition: "inline", filename: "teaching_calendar.ics"
+    begin
+      user = User.find(params[:id])
+      calendar =  user.generate_calendar
+      send_data calendar.to_ical, type: "text/calendar", disposition: "inline", filename: "teaching_calendar.ics"
+    rescue ActiveRecord::RecordNotFound
+      send_data "The requested calendar is no longer available.", status: :gone
+    end
+  
   end
 
 end

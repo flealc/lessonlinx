@@ -1,29 +1,21 @@
+
 <div id="<%= dom_id student %>">
-  <p>
-    <strong>First name:</strong>
-    <%= student.first_name %>
-  </p>
-
-  <p>
-    <strong>Last name:</strong>
-    <%= student.last_name %>
-  </p>
-
-  <p>
-    <strong>Age:</strong>
-    <%= student.age %>
-  </p>
-
-  <p>
-    <strong>Adult:</strong>
-    <%= student.adult %>
+  <p class="h5">
+   <%= student.full_name %>
   </p>
 
 
   <p>
-    <strong>Student notes:</strong>
+    <strong>Age: <%= student.age %></strong>
+    <% if student.adult? %>
+      <span class="badge rounded-pill text-bg-light">adult</span>
+    <% end %>
+  </p>
+
+
+  <p>
+    <strong>Notes:</strong>
     <%= student.student_notes %>
   </p>
-
 
 </div>

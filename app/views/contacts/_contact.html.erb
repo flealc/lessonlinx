@@ -1,47 +1,28 @@
-<div id="<%= dom_id contact %>">
-  <p>
-    <strong>First name:</strong>
-    <%= contact.first_name %>
-  </p>
+<div id="<%= dom_id contact %>" data-controller="students-index">
+  <div class="card">
+    <div class="card-header pb-1">
+      <h6 class="card-title d-flex justify-content-between">
+        <span>
+          <%= contact.full_name %>
+          <% if contact.default? == true %>
+            <i class="fa-solid fa-square-check"></i>
+          <% end %>
+        </span>
+        <i class="fa-solid fa-angle-down" data-students-index-target="expandCardArrow" data-action="click->students-index#expandCard"></i>
+      </h6>
+      <h6 class="card-subtitle mb-2 text-body-secondary">
+        <%= contact.relationship %>
+      </h6>
 
-  <p>
-    <strong>Last name:</strong>
-    <%= contact.last_name %>
-  </p>
+    </div>
+    <div class="card-body collapse" data-students-index-target="contactCardBody">
+      <%= render "contacts/contact_details", contact: contact %>
+      
+      <a href="<%= edit_contact_path(contact)%>" class="card-link" data-turbo-frame="student-details">Edit contact</a>
+      <%=link_to "Delete contact", contact_path(contact), data: { "turbo-method": :delete, turbo_confirm: "Are you sure?" }, class: "card-link" %>
+    </div>
 
-  <p>
-    <strong>Student:</strong>
-    <%= contact.student_id %>
-  </p>
 
-  <p>
-    <strong>Phone:</strong>
-    <%= contact.phone %>
-  </p>
-
-  <p>
-    <strong>Email:</strong>
-    <%= contact.email %>
-  </p>
-
-  <p>
-    <strong>Address:</strong>
-    <%= contact.address %>
-  </p>
-
-  <p>
-    <strong>Relationship:</strong>
-    <%= contact.relationship %>
-  </p>
-
-  <p>
-    <strong>Preferred communication method:</strong>
-    <%= contact.preferred_communication_method %>
-  </p>
-
-  <p>
-    <strong>Notes:</strong>
-    <%= contact.notes %>
-  </p>
+  </div>
 
 </div>

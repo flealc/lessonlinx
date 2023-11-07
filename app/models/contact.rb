@@ -29,6 +29,10 @@ class Contact < ApplicationRecord
   enum preferred_communication_method: { phone: "phone", email: "email" }
 
   
+  def full_name
+    first_name + " " + last_name
+  end
+
   def preferred_contact_info
     case preferred_communication_method
     when "phone"
@@ -36,5 +40,9 @@ class Contact < ApplicationRecord
     when "email"
       self.email
     end
+  end
+
+  def default?
+    self.student.default_contact_id == self.id
   end
 end

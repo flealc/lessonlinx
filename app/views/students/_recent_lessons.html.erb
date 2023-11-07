@@ -1,0 +1,16 @@
+<%= turbo_frame_tag "recent_lessons_frame" do %>
+  <% if @student.upcoming_lesson.present? %>
+    <div class="h6">Upcoming lesson</div>
+  <hr class="mt-0">
+    <%= render "students/upcoming_lesson", student: @student %>
+  <% end %>
+
+    <div class="h6 mt-5">Previous lessons</div>
+  <hr class="mt-0">
+  <div data-bs-spy="scroll" data-bs-target="" data-bs-smooth-scroll="true" class="scrollspy-example-2" tabindex="0">
+    <% @recent_lessons.each do |lesson| %>
+      <%= render 'users/dashboard_lesson', lesson: lesson %>
+    <% end %>
+  </div>
+
+<% end %>

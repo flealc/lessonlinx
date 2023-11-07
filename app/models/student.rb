@@ -25,9 +25,9 @@
 #  fk_rails_...  (teacher_id => users.id)
 #
 class Student < ApplicationRecord
-  belongs_to :teacher, class_name: "User",  counter_cache: true
+  belongs_to :teacher, class_name: "User", counter_cache: true
   has_many :contacts
-  has_one :default_contact, class_name: "Contact", required: false
+  has_one :default_contact, class_name: 'Contact', primary_key: 'default_contact_id', foreign_key: 'id'
   has_many :lessons, dependent: :destroy
 
   has_many :scheduled_lessons, -> { scheduled }, class_name: "Lesson"
@@ -38,12 +38,18 @@ class Student < ApplicationRecord
   has_many :future_lessons, -> { future }, class_name: "Lesson"
   has_one :upcoming_lesson, -> { future.scheduled }, class_name: "Lesson"
   has_one :last_lesson, -> { past.taught }, class_name: "Lesson"
-  
+
   delegate :preferred_communication_method, :preferred_contact_info, to: :default_contact, allow_nil: true
-  
 
   def full_name
     first_name + " " + last_name
+  end
+
+  def set_default_contact(contact)
+    if self.contacts.include?(contact)
+      self.default_contact_id = contact.id
+    end
+    save
   end
 
 end
