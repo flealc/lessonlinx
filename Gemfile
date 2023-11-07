@@ -54,7 +54,7 @@ gem "icalendar"
 gem "ransack"
 
 gem "sidekiq"
-gem "sidekiq-scheduler"
+gem "sidekiq-cron"
 
 
 group :development, :test do
