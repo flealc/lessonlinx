@@ -3,6 +3,7 @@
 # Table name: users
 #
 #  id                     :uuid             not null, primary key
+#  daily_digest           :time
 #  email                  :citext           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  first_name             :string           not null
@@ -37,6 +38,8 @@ class User < ApplicationRecord
   has_many :past_lessons, -> { past }, foreign_key: :teacher_id, class_name: "Lesson"
   has_many :future_lessons, -> { future }, foreign_key: :teacher_id, class_name: "Lesson"
   has_many :todays_lessons, -> { today }, foreign_key: :teacher_id, class_name: "Lesson"
+
+  scope :signed_up_for_daily_digest, -> { where.not(daily_digest: nil) }
 
   def full_name
     first_name + " " + last_name

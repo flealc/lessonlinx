@@ -30,5 +30,8 @@ module RailsTemplate
 
     config.action_controller.default_protect_from_forgery = false
     config.generators.system_tests = nil
+
+    # Configure ActiveJob to use sidekiq
+    config.active_job.queue_adapter = :sidekiq
   end
 end
