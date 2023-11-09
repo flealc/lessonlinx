@@ -57,7 +57,7 @@ class User < ApplicationRecord
       send_at = DateTime.now.change(hour:user.daily_digest.hour, min: user.daily_digest.min).in_time_zone(user.timezone).utc
       send_at += 1.day if send_at.past?
 
-      Rails.logger.info "Scheduling daily digest forUser #{user.first_name} at #{send_at}"
+      Rails.logger.info "Scheduling daily digest for User #{user.first_name} #{user.id} at #{send_at}"
       UserMailer.daily_digest(user).deliver_later(wait_until: send_at) if user.lessons.today.any?
     end
   end
