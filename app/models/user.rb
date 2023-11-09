@@ -25,6 +25,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
@@ -41,25 +42,39 @@ class User < ApplicationRecord
 
   scope :signed_up_for_daily_digest, -> { where.not(daily_digest: nil) }
 
+  # TODO: include DailyDigestable
+
+ 
   def full_name
     first_name + " " + last_name
   end
-  
 
-  def generate_calendar 
+  
+  # TODO: move to concern User::DailyDigestable
+  def self.schedule_daily_digest
+    
+    User.signed_up_for_daily_digest.each do |user|
+      send_at = DateTime.now.change(hour:user.daily_digest.hour, min: user.daily_digest.min).in_time_zone(user.timezone).utc
+      send_at += 1.day if send_at.past?
+
+      Rails.logger.info "Scheduling daily digest forUser #{user.first_name} at #{send_at}"
+      UserMailer.daily_digest(user).deliver_later(wait_until: send_at) if user.lessons.today.any?
+    end
+  end
+  
+  def generate_calendar
     calendar = Icalendar::Calendar.new
 
     self.lessons.each do |lesson|
-
       calendar.event do |e|
         e.dtstart = lesson.starts_at
         e.dtend = lesson.ends_at
         e.summary = lesson.canceled? ? "#{lesson.student.full_name} [CANCELED]" : lesson.student.full_name
         e.description = lesson.student.last_lesson.present? ? lesson.student.last_lesson.lesson_notes : "No previous lesson notes for this student"
       end
-      
     end
 
     calendar
   end
+
 end
