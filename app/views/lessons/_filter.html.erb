@@ -1,0 +1,21 @@
+<div>
+
+  <% if @lessons.any? %>
+    <%= search_form_for @q, url: student_lessons_path(@student) do |f| %>
+      <div>
+        <%= f.check_box :future, as: :boolean  %>
+        <!-- onchange: "this.form.submit()", checked: params[:q] && params[:q][:future_eq] == "1"-->
+        <%= f.label :future, 'Future' %>
+      </div>
+
+      <div>
+        <%= f.check_box :past, as: :boolean %>
+        <%= f.label :past, 'Past' %>
+      </div>
+
+      <%= f.submit 'Apply filter' %>
+    <% end %>
+    <%= link_to "Clear filters", student_lessons_path(@student) %>
+  <% end%>
+  
+</div>

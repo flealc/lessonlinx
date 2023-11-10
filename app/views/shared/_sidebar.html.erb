@@ -1,0 +1,23 @@
+<i class="fa-solid fa-angle-left" data-side-bar-target="toggleIcon" data-action="<%= toggle_button_action %>"></i>
+
+  <div class="row">
+    <div class="col-3 col-sm-2" data-side-bar-target="collapsibleList">
+
+
+
+      <div class="list-group list-group-flush pb-2 fw-normal small">
+        
+
+        <% array_to_iterate.each do |student| %>
+          <%= link_to student.full_name, link_path.call(student), data: { turbo_frame: frame }, class: "list-group-item list-group-item-action" %>
+        <% end %>
+      </div>
+
+     <% if @student && current_page?( student_lessons_path(@student) ) %>
+
+      <%= render partial: "lessons/filter" %>
+
+      <% end %>
+
+      
+    </div>

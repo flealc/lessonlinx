@@ -2,23 +2,20 @@
 
 <div data-controller="side-bar">
   <h1> Students <%= link_to "New student", new_student_path, data: { turbo_frame: "student-details" } %></h1>
-  
-  <i class="fa-solid fa-angle-left" data-side-bar-target="toggleIcon" data-action="click->side-bar#toggleFullPage"></i>
-  <div class="row">
-    <div class="col-3 col-sm-2">
-      <div class="list-group list-group-flush pb-2 fw-normal small" id="students-list" data-side-bar-target="collapsibleList">
-  
-        <% current_user.students.each do |student| %>
-          <%= link_to "#{ student.full_name }", student_path(student.id), data: { turbo_frame: "student-details"}, class: "list-group-item list-group-item-action" %>
-        <% end %>
-      </div>
-    </div>
-  
-    <div class="col-9 col-sm-10" data-side-bar-target="contentArea">
-      <%= turbo_frame_tag "student-details", src: student_path(current_user.students.first) do %>
-  
-      <% end %>
-    </div>
-  
+
+  <%= render partial: "shared/sidebar", 
+    locals: { 
+      toggle_button_action: "click->side-bar#toggleFullPage",
+      array_to_iterate: current_user.students,
+      link_path: ->(student_id) { student_path(student_id) },
+      frame: "student-details"
+      } %>
+
+  <div class="col-9 col-sm-10" data-side-bar-target="contentArea">
+    <%= turbo_frame_tag "student-details", src: student_path(current_user.students.first) do %>
+
+    <% end %>
   </div>
+
+</div>
 </div>
