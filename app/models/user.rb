@@ -3,7 +3,7 @@
 # Table name: users
 #
 #  id                     :uuid             not null, primary key
-#  daily_digest           :time
+#  daily_digest_at        :time
 #  email                  :citext           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  first_name             :string           not null
@@ -40,7 +40,7 @@ class User < ApplicationRecord
   has_many :future_lessons, -> { future }, foreign_key: :teacher_id, class_name: "Lesson"
   has_many :todays_lessons, -> { today }, foreign_key: :teacher_id, class_name: "Lesson"
 
-  scope :signed_up_for_daily_digest, -> { where.not(daily_digest: nil) }
+  scope :signed_up_for_daily_digest, -> { where.not(daily_digest_at: nil) }
 
   # TODO: include DailyDigestable
 
@@ -54,7 +54,7 @@ class User < ApplicationRecord
   def self.schedule_daily_digest
     
     User.signed_up_for_daily_digest.each do |user|
-      send_at = DateTime.now.change(hour:user.daily_digest.hour, min: user.daily_digest.min).in_time_zone(user.timezone).utc
+      send_at = DateTime.now.change(hour:user.daily_digest_at.hour, min: user.daily_digest_at.min).in_time_zone(user.timezone).utc
       send_at += 1.day if send_at.past?
 
       if user.lessons.today.any?

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_08_161142) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_17_201909) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pgcrypto"
@@ -71,9 +71,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_08_161142) do
     t.string "timezone"
     t.integer "students_count", default: 0
     t.integer "lessons_count", default: 0
+    t.time "daily_digest_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.time "daily_digest"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
