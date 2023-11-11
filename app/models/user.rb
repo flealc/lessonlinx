@@ -25,6 +25,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  include DailyDigestable
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
@@ -40,36 +41,11 @@ class User < ApplicationRecord
   has_many :future_lessons, -> { future }, foreign_key: :teacher_id, class_name: "Lesson"
   has_many :todays_lessons, -> { today }, foreign_key: :teacher_id, class_name: "Lesson"
 
-  scope :signed_up_for_daily_digest, -> { where.not(daily_digest_at: nil) }
-
-  # TODO: include DailyDigestable
-
- 
+  
   def full_name
     first_name + " " + last_name
   end
 
-  
-  # TODO: move to concern User::DailyDigestable
-  def self.schedule_daily_digest
-    
-    User.signed_up_for_daily_digest.each do |user|
-      send_at = DateTime.now.change(hour:user.daily_digest_at.hour, min: user.daily_digest_at.min).in_time_zone(user.timezone).utc
-      send_at += 1.day if send_at.past?
-
-      if user.lessons.today.any?
-
-        Rails.logger.info "Scheduling daily digest for User: #{user.first_name}: ID: #{user.id} at #{send_at}"
-        UserMailer.daily_digest(user).deliver_later(wait_until: send_at) 
-     
-      else
-
-        Rails.logger.info "No lessons today for User: #{user.first_name}: ID: #{user.id} - no email sent."
-
-      end
-
-    end
-  end
   
   def generate_calendar
     calendar = Icalendar::Calendar.new
