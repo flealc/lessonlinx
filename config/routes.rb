@@ -1,4 +1,12 @@
+require 'sidekiq/web'
+require 'sidekiq/cron/web'
+
 Rails.application.routes.draw do
+  authenticate :user, ->(current_user) { current_user.admin? } do
+    mount Sidekiq::Web => "/sidekiq"
+  end
+  
+
   resources :contacts
   resources :students do
     member do

@@ -1,4 +1,6 @@
 class LessonsController < ApplicationController
+include Timezoneable
+
   before_action :set_lesson, only: %i[ show edit update destroy ]
   before_action :set_timezone
   before_action :set_student
@@ -83,28 +85,6 @@ class LessonsController < ApplicationController
     ]
   end
 
-  # def bulk_create
-  #   start_time = Time.parse(bulk_params[:starts_at])
-  #   from_date= Date.parse(bulk_params[:from])
-  #   to_date = Date.parse(bulk_params[:to])
-  #   weekdays = bulk_params[:weekdays]
-  #   duration = bulk_params[:duration]
-
-    
-  #   (from_date..to_date).each do |date|
-  #     if weekdays.include?(date.strftime("%A"))
-  #       lesson_starts_at = Time.zone.local_to_utc(DateTime.new(date.year, date.month, date.day, start_time.hour, start_time.min, start_time.sec))
-  #       @student.lessons.create(
-  #         starts_at: lesson_starts_at,
-  #         duration: duration,
-  #         teacher_id: current_user.id
-  #       )
-
-  #     end
-  #   end
-    
-  #   redirect_to student_lessons_url(@student), notice: "Lessons were successfully created." 
-  # end
 
   def bulk_create
     start_time = Time.parse(bulk_params[:starts_at])
@@ -181,17 +161,5 @@ class LessonsController < ApplicationController
     params.require(:bulk).permit(:student_id, :starts_at, :duration, :from, :to, :weekdays => [])
   end
 
-  def set_timezone
-    Time.zone = current_user.timezone
-  end
-
-  def build_datetimes(lesson_params)
-    if lesson_params[:starts_at] && lesson_params[:duration]
-      lesson_params[:starts_at] = Time.zone.local_to_utc(DateTime.parse(lesson_params[:starts_at].to_s))
-      lesson_params[:ends_at] = lesson_params[:starts_at] + (lesson_params[:duration].to_i.minutes)
-    end
-
-    lesson_params[:teacher_id] = current_user.id
-    lesson_params
-  end
+ 
 end

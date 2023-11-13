@@ -3,6 +3,8 @@
 # Table name: users
 #
 #  id                     :uuid             not null, primary key
+#  admin                  :boolean          default(FALSE)
+#  daily_digest_at        :time
 #  email                  :citext           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  first_name             :string           not null
@@ -24,6 +26,8 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  include DailyDigestable
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
@@ -38,25 +42,25 @@ class User < ApplicationRecord
   has_many :future_lessons, -> { future }, foreign_key: :teacher_id, class_name: "Lesson"
   has_many :todays_lessons, -> { today }, foreign_key: :teacher_id, class_name: "Lesson"
 
+  
   def full_name
     first_name + " " + last_name
   end
-  
 
-  def generate_calendar 
+  
+  def generate_calendar
     calendar = Icalendar::Calendar.new
 
     self.lessons.each do |lesson|
-
       calendar.event do |e|
         e.dtstart = lesson.starts_at
         e.dtend = lesson.ends_at
         e.summary = lesson.canceled? ? "#{lesson.student.full_name} [CANCELED]" : lesson.student.full_name
         e.description = lesson.student.last_lesson.present? ? lesson.student.last_lesson.lesson_notes : "No previous lesson notes for this student"
       end
-      
     end
 
     calendar
   end
+
 end

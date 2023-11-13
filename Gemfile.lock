@@ -133,6 +133,8 @@ GEM
       color_namer
       rspec
     erubi (1.12.0)
+    et-orbi (1.2.7)
+      tzinfo
     faker (3.1.1)
       i18n (>= 1.8.11, < 2)
     faraday (2.7.9)
@@ -144,6 +146,9 @@ GEM
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
+    fugit (1.9.0)
+      et-orbi (~> 1, >= 1.2.7)
+      raabro (~> 1.4)
     git (1.18.0)
       addressable (~> 2.8)
       rchardet (~> 1.8)
@@ -244,6 +249,9 @@ GEM
     public_suffix (5.0.1)
     puma (5.6.5)
       nio4r (~> 2.0)
+    pundit (2.3.1)
+      activesupport (>= 3.0.0)
+    raabro (1.4.0)
     racc (1.6.2)
     rack (2.2.7)
     rack-protection (3.0.6)
@@ -345,6 +353,10 @@ GEM
       connection_pool (>= 2.3.0)
       rack (>= 2.2.4)
       redis-client (>= 0.14.0)
+    sidekiq-cron (1.11.0)
+      fugit (~> 1.8)
+      globalid (>= 1.0.1)
+      sidekiq (>= 6)
     simple_form (5.2.0)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
@@ -447,6 +459,7 @@ DEPENDENCIES
   pg (~> 1.1)
   pry-rails
   puma (~> 5.0)
+  pundit
   rails (~> 7.0.4, >= 7.0.4.3)
   rails-erd
   rails_db
@@ -457,6 +470,7 @@ DEPENDENCIES
   rufo
   selenium-webdriver
   sidekiq
+  sidekiq-cron
   specs_to_readme
   sprockets-rails
   sqlite3 (~> 1.4)
