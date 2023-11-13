@@ -37,6 +37,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       t.integer :students_count, default: 0
       t.integer :lessons_count, default: 0
       t.time :daily_digest_at
+      t.boolean :admin, default: false
 
       t.timestamps null: false
     end

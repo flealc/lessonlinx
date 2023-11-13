@@ -72,6 +72,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_17_201909) do
     t.integer "students_count", default: 0
     t.integer "lessons_count", default: 0
     t.time "daily_digest_at"
+    t.boolean "admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true

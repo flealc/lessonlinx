@@ -3,6 +3,7 @@
 # Table name: users
 #
 #  id                     :uuid             not null, primary key
+#  admin                  :boolean          default(FALSE)
 #  daily_digest_at        :time
 #  email                  :citext           default(""), not null
 #  encrypted_password     :string           default(""), not null
