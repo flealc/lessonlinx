@@ -1,7 +1,12 @@
 <p style="color: green"><%= notice %></p>
 
 <div data-controller="side-bar">
-  <h1> Students <%= link_to "New student", new_student_path, data: { turbo_frame: "student-details" } %></h1>
+  <div class="d-flex align-items-end">
+    <div class="h1 mb-0 pb-0">Students</div>
+    <div class="mb-1 ps-3">
+      <%= link_to "New student", new_student_path, data: { turbo_frame: "student-details" }, class:"h6" %>
+    </div>
+  </div>
 
   <%= render partial: "shared/sidebar", 
     locals: { 
@@ -12,8 +17,13 @@
       } %>
 
   <div class="col-9 col-sm-10" data-side-bar-target="contentArea">
-    <%= turbo_frame_tag "student-details", src: student_path(current_user.students.first) do %>
+    <% if current_user.students.any? %>
+      <%= turbo_frame_tag "student-details", src: student_path(current_user.students.first) do %>
 
+      <% end %>
+
+    <% else %>
+      <div class="bg-body-tertiary h-100 text-center py-5 px-5">Your students' information will be displayed here.</div>
     <% end %>
   </div>
 

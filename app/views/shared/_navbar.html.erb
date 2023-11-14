@@ -29,6 +29,13 @@
               Lessons
             <% end %>
           </li>
+
+          <% else %>
+            <%= link_to false, class: "nav-link"  do %>
+              <i class="fa-regular fa-calendar-days"></i>
+              Lessons
+            <% end %>
+
           <% end %>
 
           <!-- Add student search here at some point? -->
