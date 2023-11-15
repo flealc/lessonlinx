@@ -1,6 +1,6 @@
-<div id="<%= dom_id contact %>" data-controller="students-index">
+<div id="<%= dom_id contact %>" data-controller="card">
   <div class="card">
-    <div class="card-header pb-1">
+    <div class="card-header pb-1" data-action="click->card#expandCard" data-card-target="cardTitleBar">
       <h6 class="card-title d-flex justify-content-between">
         <span>
           <%= contact.full_name %>
@@ -8,14 +8,14 @@
             <i class="fa-solid fa-square-check"></i>
           <% end %>
         </span>
-        <i class="fa-solid fa-angle-down" data-students-index-target="expandCardArrow" data-action="click->students-index#expandCard"></i>
+        <i class="fa-solid fa-angle-down" data-card-target="expandCardArrow" data-action="click->card#expandCard"></i>
       </h6>
       <h6 class="card-subtitle mb-2 text-body-secondary">
         <%= contact.relationship %>
       </h6>
 
     </div>
-    <div class="card-body collapse" data-students-index-target="contactCardBody">
+    <div class="card-body collapse" data-card-target="cardBody">
       <%= render "contacts/contact_details", contact: contact %>
       
       <a href="<%= edit_contact_path(contact)%>" class="card-link" data-turbo-frame="student-details">Edit contact</a>

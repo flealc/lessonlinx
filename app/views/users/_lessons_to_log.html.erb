@@ -1,13 +1,13 @@
-<div class="h5 ms-3">Lessons to log</div>
+<div class="h5 ms-3 mt-2">Lessons to log</div>
 
 <% if current_user.past_lessons.any? %>
 
   <div class="list-group list-group-flush pb-2 fw-normal small">
     <% current_user.past_lessons.scheduled.each do |lesson| %>
       <div class="list-group-item list-group-item-action">
-        <%= link_to lesson.student.full_name, student_path(lesson.student) %>
+        <%= lesson.student.full_name %>
         <div>
-          <%= link_to "Log", edit_student_lesson_path(lesson.student, lesson, lesson: { status: "taught" }) %>
+          <%= link_to "Log", edit_student_lesson_path(lesson.student, lesson, lesson: { status: "taught" }), class: "stretched-link" %>
           <%= lesson.starts_at.in_time_zone(current_user.timezone).strftime("%b %d, %-l:%M %p") %>
         </div>
       </div>

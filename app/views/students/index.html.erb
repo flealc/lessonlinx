@@ -16,7 +16,7 @@
       frame: "student-details"
       } %>
 
-  <div class="col-9 col-sm-10" data-side-bar-target="contentArea">
+  <div class="col-9 col-sm-10 mt-2" data-side-bar-target="contentArea">
     <% if current_user.students.any? %>
       <%= turbo_frame_tag "student-details", src: student_path(current_user.students.first) do %>
 

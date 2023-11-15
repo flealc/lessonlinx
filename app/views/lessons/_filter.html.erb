@@ -1,21 +1,18 @@
-<div>
+<div class="d-flex align-items-center">
 
   <% if @lessons.any? %>
     <%= search_form_for @q, url: student_lessons_path(@student) do |f| %>
-      <div>
+      <div class="d-flex align-items-center">
         <%= f.check_box :future, as: :boolean  %>
-        <!-- onchange: "this.form.submit()", checked: params[:q] && params[:q][:future_eq] == "1"-->
-        <%= f.label :future, 'Future' %>
-      </div>
-
-      <div>
+        <%= f.label :future, 'Future', class: "mx-1 form-text mt-0" %>
+      
         <%= f.check_box :past, as: :boolean %>
-        <%= f.label :past, 'Past' %>
+        <%= f.label :past, 'Past', class: "mx-1 form-text mt-0" %>
+      <%= f.submit 'Apply', class: "btn btn-link btn-sm ms-1 px-0 text-nowrap", style: "color: black;" %>
       </div>
 
-      <%= f.submit 'Apply filter' %>
     <% end %>
-    <%= link_to "Clear filters", student_lessons_path(@student) %>
+    <%= link_to "Clear", student_lessons_path(@student), class: "btn btn-link btn-sm ms-1 px-0 text-nowrap", style: "color: black;" %>
   <% end%>
   
 </div>
