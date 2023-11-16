@@ -1,25 +1,34 @@
-<div id="<%= dom_id lesson %>" data-controller="students-index">
+<div id="<%= dom_id lesson %>" data-controller="card">
 
   <div class="card mb-1">
-    <div class="card-header pb-1">
-      <h6 class="card-title d-flex justify-content-between">
-        <span>
-          <%= lesson.starts_at.strftime("%a, %-d %b, %Y") %>
-          <span class="card-subtitle mb-2 text-body-secondary">
+    <div class="card-header pb-1" data-action="click->card#expandCard" data-card-target="cardTitleBar">
+      <div class="row align-items-center">
+        
+        <div class="col-10 col-sm-8 col-md-auto d-flex align-items-center">
+          <div class="text-nowrap">
+            <%= lesson.starts_at.strftime("%a, %-d %b, %Y") %>
+          </div>
+        </div>
+        
+        <div class="col-10 col-sm-8 col-md-auto d-flex justify-content-start mt-2 mt-sm-0">
+          <div class="text-body-secondary">
             <%= lesson.starts_at.strftime("%I:%M%P") %>
-          </span>
-        </span>
-        <i class="fa-solid fa-angle-down" data-students-index-target="expandCardArrow" data-action="click->students-index#expandCard"></i>
-      </h6>
+          </div>
+        </div>
 
+        <div class="col-2 col-sm-4 col-md-auto ms-auto">
+          <i class="fa-solid fa-angle-down" data-card-target="expandCardArrow"></i>
+        </div>
+      </div>
     </div>
-    <div class="card-body collapse" data-students-index-target="contactCardBody">
+    <div class="card-body collapse" data-card-target="cardBody">
+
 
       <div><%= lesson.lesson_notes %></div>
-    
-
-      <a href="<%= edit_student_lesson_path(lesson.student, lesson)%>" class="card-link" data-turbo-frame="student-details">Edit lesson</a>
-      <%=link_to "Delete lesson", student_lesson_path(lesson.student, lesson), data: { "turbo-method": :delete, turbo_confirm: "Are you sure?" }, class: "card-link" %>
+      <div class="d-flex justify-content-end">
+        <%=link_to "Edit lesson", edit_student_lesson_path(lesson.student, lesson), data: { turbo_frame: "student-details" }, class: "h6 me-3" %>
+        <%=link_to "Delete lesson", student_lesson_path(lesson.student, lesson), data: { "turbo-method": :delete, turbo_confirm: "Are you sure?" }, class: "h6 me-3" %>
+      </div>
     </div>
 
   </div>

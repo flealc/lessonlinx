@@ -22,7 +22,8 @@
 
   <div>
     <%= form.label :status, style: "display: block" %>
-    <%= form.text_field :status %>
+    <%= form.select :status, Lesson.statuses.keys.map { |s| [s.titleize, s]}, {prompt: "Select a status"}, style: "display: block" %>
+  
   </div>
 
   <div>

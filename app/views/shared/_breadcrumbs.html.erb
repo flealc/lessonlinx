@@ -8,7 +8,7 @@
           </li>
         <% else %>
           <li class="breadcrumb-item">
-            <%= link_to breadcrumb.fetch(:content), breadcrumb[:href] %>
+            <%= link_to breadcrumb.fetch(:content), breadcrumb[:href], class: "h6" %>
           </li>
         <% end %>
       <% end %>

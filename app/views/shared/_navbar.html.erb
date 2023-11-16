@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary mb-4">
   <div class="container-fluid align-items-center">
-    <a class="navbar-brand" href="/">Notes</a>
+    <a class="navbar-brand" href="/">LessonLinx</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -29,9 +29,14 @@
               Lessons
             <% end %>
           </li>
-          <% end %>
 
-          <!-- Add student search here at some point? -->
+          <% else %>
+            <%= link_to false, class: "nav-link disabled", style: "color: lightgrey; text-color: lightgrey;" do %>
+              <i class="fa-regular fa-calendar-days">></i>
+              Lessons
+            <% end %>
+
+          <% end %>
         </ul>
         <div class="navbar-nav dropdown ms-lg-auto" style="min-width: initial; width: fit-content;">
           <a class="nav-link dropdown-toggle"  href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

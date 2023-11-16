@@ -3,70 +3,64 @@
 <div data-controller="students-index">
   <h1> Lessons </h1>
 
-  <i class="fa-solid fa-angle-left" data-students-index-target="toggleIcon" data-action="click->students-index#toggle"></i>
-  <div class="row">
-    <div class="col-3 col-sm-2">
-      <div class="list-group list-group-flush pb-2 fw-normal small" id="list-example" data-students-index-target="studentsList">
+  <%= render partial: "shared/sidebar", 
+    locals: { 
+      toggle_button_action: "click->side-bar#toggleFullPage",
+      array_to_iterate: current_user.students,
+      link_path: ->(student_id) { student_lessons_path(student_id) },
+      frame: "lessons-student"
+      } %>
 
-        <% current_user.students.each do |student| %>
-          <%= link_to "#{ student.full_name }", student_lessons_path(student), data: { turbo_frame: "lessons-student", action: "click->students-index#toggle" }, class: "list-group-item list-group-item-action" %>
-        <% end %>
-      </div>
-    </div>
+  <div class="col-9 col-sm-10" data-controller="students-index">
+    <% if @lessons.any? %>
 
-    <div class="col-9 col-sm-10" data-controller="students-index">
-      <% if @lessons.any? %>
-        <%= search_form_for @q, url: student_lessons_path(@student) do |f| %>
-          <div>
-            <%= f.check_box :future, as: :boolean  %>
+      <div class="d-flex justify-content-between flex-wrap">
+        <%= render partial: "lessons/filter" %>
 
-            <%= f.label :future, 'Future' %>
-          </div>
-
-          <div>
-            <%= f.check_box :past, as: :boolean %>
-            <%= f.label :past, 'Past' %>
-          </div>
-
-          <%= f.submit 'Apply filter' %>
-        <% end %>
-
-        <%= link_to "Clear filters", student_lessons_path(@student) %>
-
-        <div>
+        <div class="pe-3">
+          <%= label_tag "select_all", "Select all", class: "mx-1 form-text" %>
           <%= check_box_tag "select_all", "1", false, id: "select_all", data: { action: "change->students-index#selectAll" } %>
-          <%= label_tag "select_all", "Select all" %>
         </div>
-        <%= form_with(url: bulk_delete_student_lessons_path(@student), method: :delete) do |form| %>
-          <% @lessons.each do |lesson| %>
+      </div>
+      <%= form_with(url: bulk_delete_student_lessons_path(@student), method: :delete) do |form| %>
+        <% @lessons.each do |lesson| %>
 
-            <div class="card mb-1">
-              <div class="card-header pb-1">
-                <h6 class="card-title d-flex justify-content-between">
-                  <span>
+          <div class="card mb-1">
+            <div class="card-header pb-1">
+              <div class="row align-items-center">
+
+                <div class="col-10 col-sm-8 col-md-auto d-flex align-items-center">
+                  <div class="text-nowrap">
                     <%= lesson.starts_at.strftime("%a, %-d %b, %Y") %>
-                    <span class="card-subtitle mb-2 text-body-secondary">
-                      <%= lesson.starts_at.strftime("%I:%M%P") %>
-                    </span>
-                  </span>
+                  </div>
+                </div>
+
+                <div class="col-10 col-sm-8 col-md-auto d-flex justify-content-start mt-2 mt-sm-0">
+                  <div class="text-body-secondary">
+                    <%= lesson.starts_at.strftime("%I:%M%P") %>
+                  </div>
+                </div>
+
+                <div class="col-2 col-sm-4 col-md-auto ms-auto">
                   <%= check_box_tag "lessons[]", lesson.id, false, :id => dom_id(lesson), data: {students_index_target: "checkbox"} %>
-
-                </h6>
-
+                </div>
               </div>
             </div>
 
-          <% end %>
+          </div>
+        
 
-          <%= submit_tag "Delete Selected", data: { confirm: "Are you sure?" } %>
-        <% end %>
-      </div>
+      <% end %>
 
-    <% else %>
-
-      <h6> There are no lessons scheduled for this student.</h6>
+      <%= submit_tag "Delete Selected", data: { confirm: "Are you sure?" }, class: "btn btn-link btn-sm ms-1 px-0 text-nowrap", style: "color: black;" %>
     <% end %>
   </div>
+
+<% else %>
+
+  <h6> There are no lessons scheduled for this student.</h6>
+<% end %>
+</div>
 
 </div>
 </div>

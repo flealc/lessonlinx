@@ -1,0 +1,32 @@
+<div class="h5 ms-3" >Recent students</div>
+
+    <% if current_user.taught_lessons.any? %>
+      <% recent_students = current_user.taught_lessons.includes(:student).map(&:student).uniq { |student| student.id }.first(10) %>
+      <div class="list-group list-group-flush pb-2 fw-normal small">
+
+        <% recent_students.each do |student| %>
+
+          <div class="list-group-item list-group-item-action">
+
+            <% preferred = student&.preferred_communication_method %>
+            <% if preferred.present? %>
+
+              <%= link_to preferred == "phone" ? "sms:#{student.preferred_contact_info}" : "mailto:#{student.preferred_contact_info}", class: "stretched-link" do %>
+                <% if preferred == "phone" %>
+                  <i class="fa-solid fa-comment-sms"></i>
+                <% else %>
+                  <i class="fa-solid fa-envelope"></i>
+                <% end %>
+
+                <%= student.full_name %>
+              <% end%>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+
+    <% else %>
+      <div class="bg-body-tertiary h-100 d-flex justify-content-center align-items-center">
+        <div class="text-center text-secondary">No students to display.</div>
+      </div>
+    <% end %>

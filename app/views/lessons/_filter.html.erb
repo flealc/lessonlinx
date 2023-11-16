@@ -1,0 +1,18 @@
+<div class="d-flex align-items-center">
+
+  <% if @lessons.any? %>
+    <%= search_form_for @q, url: student_lessons_path(@student) do |f| %>
+      <div class="d-flex align-items-center">
+        <%= f.check_box :future, as: :boolean  %>
+        <%= f.label :future, 'Future', class: "mx-1 form-text mt-0" %>
+      
+        <%= f.check_box :past, as: :boolean %>
+        <%= f.label :past, 'Past', class: "mx-1 form-text mt-0" %>
+      <%= f.submit 'Apply', class: "btn btn-link btn-sm ms-1 px-0 text-nowrap", style: "color: black;" %>
+      </div>
+
+    <% end %>
+    <%= link_to "Clear", student_lessons_path(@student), class: "btn btn-link btn-sm ms-1 px-0 text-nowrap", style: "color: black;" %>
+  <% end%>
+  
+</div>

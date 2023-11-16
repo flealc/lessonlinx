@@ -1,54 +1,34 @@
 <div data-controller="side-bar">
-  <h1> Dashboard </h1>
+  <div class="h1 mb-0 pb-0">Dashboard</div>
 
-  <i class="fa-solid fa-angle-left" data-side-bar-target="toggleIcon" data-action="click->side-bar#toggle"></i>
-  <div class="row">
-    <div class="col-3 col-sm-2 collapse-horizontal" data-side-bar-target="collapsibleList">
-      <div class="list-group list-group-flush pb-2 fw-normal small">
-        <% week_lessons = current_user.lessons.this_week.where.not(status: "canceled" ).includes(:student).map(&:student).uniq { |student| student.id } %>
+  <% week_lessons = current_user.lessons.this_week.where.not(status: "canceled" ).includes(:student).map(&:student).uniq { |student| student.id } %>
 
-        <% week_lessons.each do |student| %>
-          <%= link_to "#{ student.full_name }", recent_lessons_student_path(student), data: { turbo_frame: "recent_lessons_frame"}, class: "list-group-item list-group-item-action" %>
-        <% end %>
+  <%= render partial: "shared/sidebar", 
+    locals: { 
+      toggle_button_action: "click->side-bar#toggle",
+      array_to_iterate: week_lessons,
+      link_path: ->(student_id) { recent_lessons_student_path(student_id) },
+      frame: "recent_lessons_frame"
+      } %>
+
+  <div class="col-9 col-sm-7 mt-2" data-side-bar-target="contentArea">
+    <turbo-frame id="recent_lessons_frame", src="<%= recent_lessons_student_path(week_lessons.first) if current_user.students.any? %>", class="align-items-center justify-content-center" >
+
+      <div class="bg-body-tertiary h-100 text-center py-5 px-5">
+        <div class="h5">Welcome!</div>
+        This page will populate with helpful information as you begin to <%= link_to "add students", students_path, data: { turbo_frame: "_top" } %> and schedule lessons.
       </div>
-    </div>
 
-    <div class="col-9 col-sm-7" data-side-bar-target="contentArea">
-      <turbo-frame id="recent_lessons_frame">
-        <div>DIGEST PLACEHOLDER</div>
-      </turbo-frame>
-    </div>
+    </turbo-frame>
+  </div>
 
+  <div class="col-12 col-sm-3">
 
-    <% recent_students = current_user.taught_lessons.includes(:student).map(&:student).uniq { |student| student.id }.first(10) %>
-    <div class="col-12 col-sm-3">
-      <div class="h5 ms-3" >Recent students</div>
-      <div class="list-group list-group-flush pb-2 fw-normal small">
-
-        <% recent_students.each do |student| %>
-
-          <div class="list-group-item list-group-item-action">
-
-            <% if student.preferred_communication_method.present? %>
-
-              <%= link_to student.preferred_communication_method == "phone" ? "sms:#{student.preferred_contact_info}" : "mailto:#{student.preferred_contact_info}", class: "inline" do %>
-                <% if student.preferred_communication_method == "phone" %>
-                  <i class="fa-solid fa-envelope"></i>
-                <% else %>
-                  <i class="fa-solid fa-comment-sms"></i>
-                <% end %>
-              <% end%>
-
-            <%= link_to student.full_name, student_path(student)  %>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-      <% if current_user.past_lessons.scheduled.any? %>
-        <%= render "users/lessons_to_log" %>
-      <% end %>
-    </div>
+    <%= render "students/recent_students" %>
+    <%= render "users/lessons_to_log" %>
 
   </div>
+
+</div>
 
 </div>
