@@ -1,6 +1,8 @@
 <% if current_user.students.any? %>
 
-  <i class="fa-solid fa-angle-left" data-side-bar-target="toggleIcon" data-action="<%= toggle_button_action %>"></i>
+  <div class="col-2" data-action="<%= toggle_button_action %>">
+    <i class="fa-solid fa-angle-left" data-side-bar-target="toggleIcon" data-action="<%= toggle_button_action %>"></i>
+    </div>
 
   <div class="row">
     <div class="col-3 col-sm-2" data-side-bar-target="collapsibleList">
