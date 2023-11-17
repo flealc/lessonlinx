@@ -1,25 +1,32 @@
+<p style="color: green"><%= notice %></p>
+
+<div data-controller="side-bar">
+  <div class="d-flex align-items-end">
+    <div class="h1 mb-0 pb-0">Students</div>
+    <div class="mb-1 ps-3">
+      <%= link_to "New student", new_student_path, data: { turbo_frame: "student-details" }, class:"h6" %>
+    </div>
+  </div>
+
+  <%= render partial: "shared/sidebar", 
+    locals: { 
+      toggle_button_action: "click->side-bar#toggleFullPage",
+      array_to_iterate: current_user.students,
+      link_path: ->(student_id) { student_path(student_id) },
+      frame: "_top"
+      } %>
+
+  <div class="col-9 col-sm-10 mt-2" data-side-bar-target="contentArea">
+
+    <%= render @student %>
+
+  </div>
+  
+
+</div>
+<!--
 <%= turbo_frame_tag "student-details" do %>
   <p style="color: green"><%= notice %></p>
 
-  <%= render @student %>
-
-  <div>
-    <%= link_to "Edit info", edit_student_path(@student), data: { turbo_frame: "student-details" } %>
-    <%= link_to "Delete student",student_path(@student),  data: { "turbo-method": :delete, turbo_frame: "_top", turbo_confirm: "Are you sure?" } %>
-
-    <p class="h5 mt-2">Contacts <%= link_to "New contact", new_contact_path(student: @student.id) %></p>
-    <%= turbo_frame_tag "student-contacts" do %>
-      <div class="row">
-        <% if @student.contacts.any? %>
-          <% @student.contacts.each do |contact| %>
-            <div class="col-12 col-md-6 col-lg-4 pb-2">
-              <%= render contact %>
-            </div>
-          <% end %>
-
-        <% else %>
-            <h6>This student does not have any contacts yet.</h6>
-        <% end %>
-      </div>
-    <% end %>
-  <% end %>
+<% end %>
+-->

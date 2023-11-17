@@ -1,6 +1,6 @@
 <%= render "shared/breadcrumbs" %>
 
-<div data-controller="students-index">
+<div data-controller="students-index side-bar">
   <h1> Lessons </h1>
 
   <%= render partial: "shared/sidebar", 
@@ -11,11 +11,14 @@
       frame: "lessons-student"
       } %>
 
-  <div class="col-9 col-sm-10" data-controller="students-index">
+  <div class="col-9 col-sm-10" data-controller="students-index" data-side-bar-target="contentArea">
+      <p class="h5">
+        <%= @student.full_name %>
+      </p>
+        <%= render partial: "lessons/filter" %>
     <% if @lessons.any? %>
 
       <div class="d-flex justify-content-between flex-wrap">
-        <%= render partial: "lessons/filter" %>
 
         <div class="pe-3">
           <%= label_tag "select_all", "Select all", class: "mx-1 form-text" %>
@@ -48,18 +51,17 @@
             </div>
 
           </div>
-        
 
+        <% end %>
+
+        <%= submit_tag "Delete Selected", data: { confirm: "Are you sure?" }, class: "btn btn-link btn-sm ms-1 px-0 text-nowrap", style: "color: black;" %>
       <% end %>
+    </div>
 
-      <%= submit_tag "Delete Selected", data: { confirm: "Are you sure?" }, class: "btn btn-link btn-sm ms-1 px-0 text-nowrap", style: "color: black;" %>
-    <% end %>
-  </div>
+  <% else %>
 
-<% else %>
-
-  <h6> There are no lessons scheduled for this student.</h6>
-<% end %>
+    <h6> There are no lessons scheduled for this student.</h6>
+  <% end %>
 </div>
 
 </div>

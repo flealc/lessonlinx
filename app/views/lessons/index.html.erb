@@ -20,7 +20,12 @@
       } %>
 
   <div class="col-9 col-sm-10" data-controller="students-index" data-side-bar-target="contentArea">
+    <p class="h5">
+      <%= @student.full_name %>
+    </p>
+
     <%= render partial: "lessons/filter" %>
+
     <% if @lessons.any? %>
 
       <% @lessons.each do |lesson| %>
@@ -29,7 +34,7 @@
         </div>
       <% end %>
     <% else %>
-      <h6> There are no lessons scheduled for this student.</h6>
+      <h6> There are no lessons scheduled.</h6>
     <% end %>
   </div>
 

@@ -3,7 +3,9 @@ class StudentsController < ApplicationController
 
   # GET /students or /students.json
   def index
-    @students = Student.all
+    if current_user.students.any?
+      redirect_to student_path(current_user.students.first)
+    end
   end
 
   # GET /students/1 or /students/1.json

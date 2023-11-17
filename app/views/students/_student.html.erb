@@ -1,21 +1,41 @@
 
-<div id="<%= dom_id student %>">
-  <p class="h5">
-   <%= student.full_name %>
-  </p>
 
+  <div id="<%= dom_id student %>">
+    <p class="h5">
+      <%= student.full_name %>
+    </p>
 
-  <p>
-    <strong>Age: <%= student.age %></strong>
-    <% if student.adult? %>
-      <span class="badge rounded-pill text-bg-light">adult</span>
-    <% end %>
-  </p>
+    <p>
+      <strong>Age: <%= student.age %></strong>
+      <% if student.adult? %>
+        <span class="badge rounded-pill text-bg-light">adult</span>
+      <% end %>
+    </p>
 
+    <p>
+      <strong>Notes:</strong>
+      <%= student.student_notes %>
+    </p>
 
-  <p>
-    <strong>Notes:</strong>
-    <%= student.student_notes %>
-  </p>
+    <div>
+      <%= link_to "Edit info", edit_student_path(@student), data: { turbo_frame: "student-details" } %>
+      <%= link_to "Delete student",student_path(@student),  data: { "turbo-method": :delete, turbo_frame: "_top", turbo_confirm: "Are you sure?" } %>
 
-</div>
+      <p class="h5 mt-2">Contacts <%= link_to "New contact", new_contact_path(student: @student.id) %></p>
+      <%= turbo_frame_tag "student-contacts" do %>
+        <div class="row">
+          <% if @student.contacts.any? %>
+            <% @student.contacts.each do |contact| %>
+              <div class="col-12 col-md-6 col-lg-4 pb-2">
+                <%= render contact %>
+              </div>
+            <% end %>
+
+          <% else %>
+            <h6>This student does not have any contacts yet.</h6>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+  </div>
