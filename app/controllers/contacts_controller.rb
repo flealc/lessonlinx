@@ -36,7 +36,6 @@ class ContactsController < ApplicationController
   # POST /contacts or /contacts.json
   def create
     @contact = Contact.new(contact_params.except(:default))
-
     respond_to do |format|
       if @contact.save
         check_contact_default

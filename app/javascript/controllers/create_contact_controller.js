@@ -5,8 +5,11 @@ export default class extends Controller {
   
   static targets = ["relationshipField", "selfCheckbox", "relationshipDiv", "firstNameField", "lastNameField", "firstNameDiv", "lastNameDiv"]
   static values = {
-    first: String,
-    last: String
+    studentFirst: String,
+    studentLast: String,
+    contactFirst: String,
+    contactLast: String,
+    relationship: String
   }
 
   
@@ -23,12 +26,12 @@ export default class extends Controller {
       this.lastNameDivTarget.style.display = "none"
 
       this.relationshipFieldTarget.value = "self"
-      this.firstNameFieldTarget.value = this.firstValue
-      this.lastNameFieldTarget.value = this.lastValue
+      this.firstNameFieldTarget.value = this.studentFirstValue
+      this.lastNameFieldTarget.value = this.studentLastValue
     } else {
-      this.relationshipFieldTarget.value = ""
-      this.firstNameFieldTarget.value = ""
-      this.lastNameFieldTarget.value = ""
+      this.relationshipFieldTarget.value = this.relationshipValue
+      this.firstNameFieldTarget.value = this.contactFirstValue
+      this.lastNameFieldTarget.value = this.contactLastValue
 
       this.relationshipDivTarget.style.display = "block"
       this.firstNameDivTarget.style.display = "block"

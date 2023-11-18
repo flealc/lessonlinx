@@ -1,5 +1,12 @@
 
-<div data-controller="create-contact" data-create-contact-first-value="<%= @contact.student.first_name %>"  data-create-contact-last-value="<%= @contact.student.last_name %>">
+<div data-controller="create-contact" 
+  data-create-contact-student-first-value="<%= @contact.student.first_name %>"  
+  data-create-contact-student-last-value="<%= @contact.student.last_name %>"
+  data-create-contact-contact-first-value="<%= @contact.first_name %>"
+  data-create-contact-contact-last-value="<%= @contact.last_name %>"
+  data-create-contact-relationship-value="<%= @contact.relationship %>"
+  >
+  
   <%= render "shared/breadcrumbs" %>
   <h1>New contact</h1>
   

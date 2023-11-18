@@ -9,7 +9,6 @@ export default class extends Controller {
   ]
 
   expandCard() {
-    console.log("expanded");
     this.cardBodyTarget.classList.add("show")
     this.expandCardArrowTarget.classList.replace('fa-angle-down', 'fa-angle-up')
     this.cardTitleBarTarget.setAttribute('data-action', 'click->card#collapseCard')
@@ -17,7 +16,6 @@ export default class extends Controller {
   }
   
   collapseCard() {
-    console.log("collapsed");
     this.cardBodyTarget.classList.remove("show")
     this.expandCardArrowTarget.classList.replace('fa-angle-up', 'fa-angle-down')
     this.cardTitleBarTarget.setAttribute('data-action', 'click->card#expandCard')

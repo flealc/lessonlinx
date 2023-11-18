@@ -24,6 +24,7 @@
 #  fk_rails_...  (student_id => students.id)
 #
 class Contact < ApplicationRecord
+  before_save :name_if_self
   belongs_to :student
 
   enum preferred_communication_method: { phone: "phone", email: "email" }
@@ -44,5 +45,14 @@ class Contact < ApplicationRecord
 
   def default?
     self.student.default_contact_id == self.id
+  end
+
+  private
+
+  def name_if_self
+    if self.relationship == "self"
+      self.first_name = self.student.first_name
+      self.last_name = self.student.last_name
+    end
   end
 end
