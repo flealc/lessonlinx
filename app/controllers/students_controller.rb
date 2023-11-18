@@ -15,10 +15,18 @@ class StudentsController < ApplicationController
   # GET /students/new
   def new
     @student = Student.new
+    @breadcrumbs = [
+      { content: "Students", href: students_path },
+      { content: "New student", href: "#" },
+    ]
   end
 
   # GET /students/1/edit
   def edit
+    @breadcrumbs = [
+      { content: @student.full_name, href: student_path(@student) },
+      { content: "Edit student", href: "#" },
+    ]
   end
 
   # POST /students or /students.json

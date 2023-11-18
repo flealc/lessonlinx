@@ -18,8 +18,9 @@
     <div class="card-body collapse" data-card-target="cardBody">
       <%= render "contacts/contact_details", contact: contact %>
       
-      <a href="<%= edit_contact_path(contact)%>" class="card-link" data-turbo-frame="student-details">Edit contact</a>
-      <%=link_to "Delete contact", contact_path(contact), data: { "turbo-method": :delete, turbo_confirm: "Are you sure?" }, class: "card-link" %>
+    
+      <%= link_to "edit contact", edit_contact_path(contact), data: { turbo_frame: "_top" }, class: "h6 me-3" %>
+      <%= link_to "delete contact", contact_path(contact), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "h6" %>
     </div>
 
 

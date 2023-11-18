@@ -1,41 +1,46 @@
-
-
-  <div id="<%= dom_id student %>">
-    <p class="h5">
-      <%= student.full_name %>
-    </p>
-
-    <p>
-      <strong>Age: <%= student.age %></strong>
-      <% if student.adult? %>
-        <span class="badge rounded-pill text-bg-light">adult</span>
-      <% end %>
-    </p>
-
-    <p>
-      <strong>Notes:</strong>
-      <%= student.student_notes %>
-    </p>
+<div id="<%= dom_id student %>">
+  <div class="d-flex align-items-end pb-2">
+    <div class="h5 mb-0 pb-0 me-3"><%= student.full_name %></div>
 
     <div>
-      <%= link_to "Edit info", edit_student_path(@student), data: { turbo_frame: "student-details" } %>
-      <%= link_to "Delete student",student_path(@student),  data: { "turbo-method": :delete, turbo_frame: "_top", turbo_confirm: "Are you sure?" } %>
-
-      <p class="h5 mt-2">Contacts <%= link_to "New contact", new_contact_path(student: @student.id) %></p>
-      <%= turbo_frame_tag "student-contacts" do %>
-        <div class="row">
-          <% if @student.contacts.any? %>
-            <% @student.contacts.each do |contact| %>
-              <div class="col-12 col-md-6 col-lg-4 pb-2">
-                <%= render contact %>
-              </div>
-            <% end %>
-
-          <% else %>
-            <h6>This student does not have any contacts yet.</h6>
-          <% end %>
-        </div>
-      <% end %>
+      <%= link_to "edit info", edit_student_path(@student), data: { turbo_frame: "_top" }, class:"h6 me-3" %>
+      <%= link_to "delete student",student_path(@student),  data: { "turbo-method": :delete, turbo_frame: "_top", turbo_confirm: "Are you sure? Contacts for this student will be deleted as well!" }, class:"h6 me-3" %>
     </div>
 
   </div>
+
+  <p>
+    <strong>Age: <%= student.age %></strong>
+    <% if student.adult? %>
+      <span class="badge rounded-pill text-bg-light">adult</span>
+    <% end %>
+  </p>
+
+  <p>
+    <strong>Notes:</strong>
+    <%= student.student_notes %>
+  </p>
+
+  <%= turbo_frame_tag "student-contacts" do %>
+    <div class="mt-5">
+      <hr class="mb-4">
+      <div class="d-flex align-items-end mb-4">
+        <div class="h5 mb-0 pb-0">Contacts </div>
+        <div><%= link_to "new contact", new_contact_path(student: @student.id), data: { turbo_frame: "_top"}, class:"h6 ms-3" %></div>
+      </div>
+      <div class="row">
+        <% if @student.contacts.any? %>
+          <% @student.contacts.each do |contact| %>
+            <div class="col-12 col-md-6 col-lg-4 pb-2">
+              <%= render contact %>
+            </div>
+          <% end %>
+
+        <% else %>
+          <h6>This student does not have any contacts yet.</h6>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+</div>

@@ -1,4 +1,5 @@
-<%= turbo_frame_tag "student-details" do %>
+
+<%= render "shared/breadcrumbs" %>
 <h1>Editing student</h1>
 
 <%= render "form", student: @student %>
@@ -8,5 +9,3 @@
 <div>
   <%= link_to "Cancel", student_path(@student) %>
 </div>
-
-<% end  %>
