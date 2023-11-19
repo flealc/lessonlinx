@@ -1,41 +1,41 @@
 <%= form_with url: bulk_create_student_lessons_path, method: :post do |form| %>
 
-  <div>
-    <%= form.label "bulk[student_id]", "Student", style: "display: block" %>
-    <%= form.collection_select "bulk[student_id]", current_user.students, :id, :full_name, {selected: @student.id }, { onchange: "window.location = '/students/' + this.value + '/lessons/bulk_new'"} %>
+  <div class="mb-2 col-md-4">
+    <%= form.label "bulk[student_id]", "Student", style: "display: block", class: "form-label" %>
+    <%= form.select :student_id, current_user.students.map { |s| [s.full_name, s.id] }, {}, onchange: "window.location = '/students/' + this.value + '/lessons/new'", class: "form-select" %>
   </div>
 
 
-  <div>
-    <%= form.label "bulk[starts_at]", "Starts at", style: "display: block" %>
-    <%= form.time_field "bulk[starts_at]" %>
+  <div class="mb-2 col-md-2">
+    <%= form.label "bulk[starts_at]", "Starts at", style: "display: block", class: "form-label" %>
+    <%= form.time_field "bulk[starts_at]", class: "form-control" %>
   </div>
 
 
-  <div>
-    <%= form.label "bulk[duration]", "Duration", style: "display: block" %>
-    <%= form.number_field "bulk[duration]" %>
+  <div class="mb-2 col-md-1">
+    <%= form.label "bulk[duration]", "Duration", style: "display: block", class: "form-label" %>
+    <%= form.number_field "bulk[duration]", class: "form-control" %>
   </div>
 
- <div>
-    <div>Weekdays</div> 
+ <div class="mb-2">
+    <div class="form-label">Weekdays</div> 
     <% %w[Monday Tuesday Wednesday Thursday Friday Saturday Sunday].each do |weekday| %>
     <%= form.check_box "bulk[weekdays]", { multiple: true }, weekday , nil %>
     <%= weekday %>
   <% end %>
   </div>
 
-  <div>
-    <%= form.label "bulk[from]", "From", style: "display: block" %>
-    <%= form.date_field "bulk[from]" %>
+  <div class="mb-2 col-md-2">
+    <%= form.label "bulk[from]", "From", style: "display: block", class: "form-label" %>
+    <%= form.date_field "bulk[from]", class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label "bulk[to]", "To", style: "display: block" %>
-    <%= form.date_field "bulk[to]" %>
+  <div class="mb-2 col-md-2">
+    <%= form.label "bulk[to]", "To", style: "display: block", class: "form-label" %>
+    <%= form.date_field "bulk[to]", class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="mb-2">
+    <%= form.submit class: "btn btn-outline-dark" %>
   </div>
 <% end %>

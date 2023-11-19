@@ -3,8 +3,8 @@
   <div class="d-flex align-items-end">
     <div class="h1 mb-0 pb-0"> Lessons </div>
 
-    <div class="mb-1 ps-3 ms-4">
-      <%= link_to "new lesson", new_student_lesson_path(@student), data: { turbo_frame: "lessons-student" }, class:"h6 me-3" %>
+    <div class="mb-1 ps-3 ms-5">
+      <%= link_to "new", new_student_lesson_path(@student), data: { turbo_frame: "lessons-student" }, class:"h6 me-3" %>
       <%= link_to "bulk create", bulk_new_student_lessons_path(@student), data: { turbo_frame: "lessons-student" }, class:"h6 me-3" %>
       <%= link_to "bulk delete", select_delete_student_lessons_path(@student), data: { turbo_frame: "lessons-student" }, class:"h6" %>
     </div>
@@ -20,7 +20,12 @@
       } %>
 
   <div class="col-9 col-sm-10" data-controller="students-index" data-side-bar-target="contentArea">
+    <p class="h5">
+      <%= @student.full_name %>
+    </p>
+
     <%= render partial: "lessons/filter" %>
+
     <% if @lessons.any? %>
 
       <% @lessons.each do |lesson| %>
@@ -29,7 +34,7 @@
         </div>
       <% end %>
     <% else %>
-      <h6> There are no lessons scheduled for this student.</h6>
+      <h6> There are no lessons scheduled.</h6>
     <% end %>
   </div>
 

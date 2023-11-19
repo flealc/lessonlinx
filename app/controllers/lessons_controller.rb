@@ -81,7 +81,7 @@ include Timezoneable
   def bulk_new
     @breadcrumbs = [
       { content: @student.full_name, href: student_lessons_path(@student) },
-      { content: "Create lesson", href: "#" },
+      { content: "Create lessons", href: "#" },
     ]
   end
 

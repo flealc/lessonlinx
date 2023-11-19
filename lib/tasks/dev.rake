@@ -81,9 +81,20 @@ task({ :sample_data => :environment }) do
       starting_date = starting_date + [7, 6, 8].sample.days
     end
     
-  
-    1..3.times do
-      name = Faker::Name.first_name
+    if student.adult? 
+      student.contacts.create(
+        address: Faker::Address.full_address,
+        email: "#{student.first_name.downcase}@example.com" ,
+        notes: Faker::Lorem.paragraph(sentence_count: 2..3),
+        phone: Faker::PhoneNumber.cell_phone,
+        preferred_communication_method: %w[ phone email ].sample,
+        relationship: "self"
+      )
+    end
+
+    2.times do
+      relationship = %w[ mother father grandmother grandfather ].sample
+      name = %w[ mother grandmother].include?(relationship) ? Faker::Name.female_first_name : Faker::Name.male_first_name
       student.contacts.create(
         address: Faker::Address.full_address,
         email: "#{name.downcase}@example.com" ,
@@ -91,10 +102,11 @@ task({ :sample_data => :environment }) do
         last_name: Faker::Name.last_name,
         notes: Faker::Lorem.paragraph(sentence_count: 2..3),
         phone: Faker::PhoneNumber.cell_phone,
+        relationship: relationship,
         preferred_communication_method: %w[ phone email ].sample,
-        relationship: student.adult ? "self" : %w[ mother father ].sample
       )
     end
+
     student.default_contact_id = student.adult ? student.contacts.find_by(relationship: "self").id : student.contacts.sample.id
     student.save
 

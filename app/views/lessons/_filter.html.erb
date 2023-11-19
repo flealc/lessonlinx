@@ -1,7 +1,7 @@
 <div class="d-flex align-items-center">
 
-  <% if @lessons.any? %>
-    <%= search_form_for @q, url: student_lessons_path(@student) do |f| %>
+  
+    <%= search_form_for @q, url: current_page?(student_lessons_path(@student)) ? student_lessons_path(@student) : select_delete_student_lessons_path(@student) do |f| %>
       <div class="d-flex align-items-center">
         <%= f.check_box :future, as: :boolean  %>
         <%= f.label :future, 'Future', class: "mx-1 form-text mt-0" %>
@@ -12,7 +12,7 @@
       </div>
 
     <% end %>
-    <%= link_to "Clear", student_lessons_path(@student), class: "btn btn-link btn-sm ms-1 px-0 text-nowrap", style: "color: black;" %>
-  <% end%>
+    <%= link_to "Clear", current_page?(student_lessons_path(@student)) ? student_lessons_path(@student) : select_delete_student_lessons_path(@student), class: "btn btn-link btn-sm ms-1 px-0 text-nowrap", style: "color: black;" %>
+  
   
 </div>

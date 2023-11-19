@@ -25,8 +25,10 @@
 #  fk_rails_...  (teacher_id => users.id)
 #
 class Student < ApplicationRecord
+  before_destroy :clear_default_contact
+
   belongs_to :teacher, class_name: "User", counter_cache: true
-  has_many :contacts
+  has_many :contacts, dependent: :destroy
   has_one :default_contact, class_name: 'Contact', primary_key: 'default_contact_id', foreign_key: 'id'
   has_many :lessons, dependent: :destroy
 
@@ -50,6 +52,12 @@ class Student < ApplicationRecord
       self.default_contact_id = contact.id
     end
     save
+  end
+
+  private
+
+  def clear_default_contact
+    update_column(:default_contact_id, nil)
   end
 
 end

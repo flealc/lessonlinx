@@ -8,7 +8,7 @@
             <i class="fa-solid fa-square-check"></i>
           <% end %>
         </span>
-        <i class="fa-solid fa-angle-down" data-card-target="expandCardArrow" data-action="click->card#expandCard"></i>
+        <i class="fa-solid fa-angle-down" data-card-target="expandCardArrow"></i>
       </h6>
       <h6 class="card-subtitle mb-2 text-body-secondary">
         <%= contact.relationship %>
@@ -18,8 +18,11 @@
     <div class="card-body collapse" data-card-target="cardBody">
       <%= render "contacts/contact_details", contact: contact %>
       
-      <a href="<%= edit_contact_path(contact)%>" class="card-link" data-turbo-frame="student-details">Edit contact</a>
-      <%=link_to "Delete contact", contact_path(contact), data: { "turbo-method": :delete, turbo_confirm: "Are you sure?" }, class: "card-link" %>
+    
+      <div class="d-flex justify-content-end">
+        <%= link_to "edit", edit_contact_path(contact), data: { turbo_frame: "_top" }, class: "h6 me-3" %>
+        <%= link_to "delete", contact_path(contact), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "h6" %>
+      </div>
     </div>
 
 

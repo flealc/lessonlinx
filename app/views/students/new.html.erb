@@ -1,11 +1,3 @@
-<%= turbo_frame_tag "student-details" do %>
-<div class="h2">Add a student</div>
+<%= render "shared/breadcrumbs" %>
 
 <%= render "form", student: @student %>
-
-<br>
-
-<div>
-  <%= link_to "Cancel", dashboard_path %>
-</div>
-<% end %>

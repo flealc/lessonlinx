@@ -26,8 +26,8 @@
 
       <div><%= lesson.lesson_notes %></div>
       <div class="d-flex justify-content-end">
-        <%=link_to "Edit lesson", edit_student_lesson_path(lesson.student, lesson), data: { turbo_frame: "student-details" }, class: "h6 me-3" %>
-        <%=link_to "Delete lesson", student_lesson_path(lesson.student, lesson), data: { "turbo-method": :delete, turbo_confirm: "Are you sure?" }, class: "h6 me-3" %>
+        <%=link_to "edit", edit_student_lesson_path(lesson.student, lesson), data: { turbo_frame: "student-details" }, class: "h6 me-3" %>
+        <%=link_to "delete", student_lesson_path(lesson.student, lesson), data: { "turbo-method": :delete, turbo_confirm: "Are you sure?" }, class: "h6 me-3" %>
       </div>
     </div>
 

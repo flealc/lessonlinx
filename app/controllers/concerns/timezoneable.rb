@@ -1,4 +1,4 @@
-module LessonsController::Timezoneable
+module Timezoneable
   extend ActiveSupport::Concern
 
   included do
