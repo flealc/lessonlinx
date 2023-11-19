@@ -17,7 +17,7 @@ class StudentsController < ApplicationController
     @student = Student.new
     @breadcrumbs = [
       { content: "Students", href: students_path },
-      { content: "New student", href: "#" },
+      { content: "Add student", href: "#" },
     ]
   end
 

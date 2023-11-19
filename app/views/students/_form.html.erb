@@ -11,17 +11,17 @@
     </div>
   <% end %>
 
-  <div>
+  <div class=" mb-2 col-md-4">
     <%= form.label :first_name, class: "form-label" %>
     <%= form.text_field :first_name, class: "form-control" %>
   </div>
 
-  <div>
+  <div class=" mb-2 col-md-4">
     <%= form.label :last_name, class: "form-label" %>
     <%= form.text_field :last_name, class: "form-control" %>
   </div>
 
-  <div>
+  <div class=" mb-2 col-md-1">
     <%= form.label :age, class: "form-label" %>
     <%= form.text_field :age, class: "form-control" %>
 
@@ -31,12 +31,12 @@
     </span>
   </div>
 
-  <div>
+  <div class="mb-2">
     <%= form.label :student_notes, class: "form-label" %>
-    <%= form.text_field :student_notes, class: "form-control" %>
+    <%= form.text_area :student_notes, class: "form-control", rows: 3 %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-outline-dark" %>
   </div>
 <% end %>

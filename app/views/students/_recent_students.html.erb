@@ -11,7 +11,7 @@
             <% preferred = student&.preferred_communication_method %>
             <% if preferred.present? %>
 
-              <%= link_to preferred == "phone" ? "sms:#{student.preferred_contact_info}" : "mailto:#{student.preferred_contact_info}", class: "stretched-link" do %>
+              <%= link_to preferred == "phone" ? "sms:#{student.preferred_contact_info}" : "mailto:#{student.preferred_contact_info}", class: "stretched-link", style: "color: black;" do %>
                 <% if preferred == "phone" %>
                   <i class="fa-solid fa-comment-sms"></i>
                 <% else %>

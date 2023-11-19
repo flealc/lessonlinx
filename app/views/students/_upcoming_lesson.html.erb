@@ -18,8 +18,8 @@
     <div class="card-body" data-students-index-target="contactCardBody">
 
 <div class="d-flex justify-content-around">
-  <%= link_to "Log lesson", edit_student_lesson_path(student.id, student.upcoming_lesson), data: { turbo: false }, method: :get %>
-  <%= link_to "Cancel lesson", edit_student_lesson_path(student_id: student.id, id: student.upcoming_lesson, status: "canceled"), data: { turbo: false }, method: :get %>
+  <%= link_to "Log lesson", edit_student_lesson_path(student.id, student.upcoming_lesson), data: { turbo: false }, method: :get, class: "h6" %>
+  <%= link_to "Cancel lesson", edit_student_lesson_path(student_id: student.id, id: student.upcoming_lesson, status: "canceled"), data: { turbo: false }, method: :get, class: "h6"%>
 
 </div>
       

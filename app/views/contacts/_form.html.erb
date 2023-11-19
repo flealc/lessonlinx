@@ -13,58 +13,57 @@
 
   <%= form.hidden_field :student_id %>
 
-  <span>
+  <div class="d-flex mb-2">
     <%= form.check_box :default, checked: contact.default? ? true : false %>
-     <%= label_tag "contact[default]", "Default contact", style: "display: inline" %>
-  </span>
-
-  <span>
+     <%= label_tag "contact[default]", "Default contact", class: "form-label mb-0 ms-1 me-2" %>
+    
     <%= form.check_box :self, checked: contact.relationship == "self" ? true : false, data: { "create-contact-target": "selfCheckbox", action: "click->create-contact#toggleSelf"} %>
-    <%= label_tag "contact[self]", "Self", style: "display: inline" %>
-  </span>
-
-  <div data-create-contact-target="firstNameDiv">
-    <%= form.label :first_name, style: "display: block" %>
-    <%= form.text_field :first_name, data: {"create-contact-target": "firstNameField" } %>
+    <%= label_tag "contact[self]", "Self", class: "form-label mb-0 ms-1 me-2" %>
   </div>
 
-  <div data-create-contact-target="lastNameDiv">
-    <%= form.label :last_name, style: "display: block" %>
-    <%= form.text_field :last_name, data: {"create-contact-target": "lastNameField" } %>
+
+  <div data-create-contact-target="firstNameDiv" class="mb-2 col-md-4">
+    <%= form.label :first_name, style: "display: block", class: "form-label" %>
+    <%= form.text_field :first_name, data: {"create-contact-target": "firstNameField" }, class: "form-control" %>
+  </div>
+
+  <div data-create-contact-target="lastNameDiv" class="mb-2 col-md-4">
+    <%= form.label :last_name, style: "display: block", class: "form-label" %>
+    <%= form.text_field :last_name, data: {"create-contact-target": "lastNameField" }, class: "form-control"  %>
   </div>  
 
-  <div>
-    <%= form.label :phone, style: "display: block" %>
-    <%= form.text_field :phone %>
+  <div class="mb-2 col-md-2">
+    <%= form.label :phone, style: "display: block", class: "form-label" %>
+    <%= form.text_field :phone, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :email, style: "display: block" %>
-    <%= form.text_field :email %>
+  <div class="mb-2 col-md-4">
+    <%= form.label :email, style: "display: block", class: "form-label" %>
+    <%= form.text_field :email, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :address, style: "display: block" %>
-    <%= form.text_area :address %>
+  <div class="mb-2">
+    <%= form.label :address, style: "display: block", class: "form-label" %>
+    <%= form.text_area :address, class: "form-control", rows: 2 %>
   </div>
 
   
-  <div data-create-contact-target="relationshipDiv">
-    <%= form.label :relationship, style: "display: block" %>
-    <%= form.text_field :relationship, data: {"create-contact-target": "relationshipField" } %>
+  <div data-create-contact-target="relationshipDiv" class="mb-2 col-md-4">
+    <%= form.label :relationship, style: "display: block", class: "form-label" %>
+    <%= form.text_field :relationship, data: {"create-contact-target": "relationshipField" }, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :preferred_communication_method, style: "display: block" %>
-    <%= form.text_field :preferred_communication_method %>
+  <div class="mb-2">
+    <%= form.label :preferred_communication_method, style: "display: block", class: "form-label" %>
+    <div class="col-md-3"><%= form.select :preferred_communication_method, Contact.preferred_communication_methods.keys.map { |m| [m.titleize, m]}, {prompt: "Select a method"}, style: "display: block", class: "form-select" %></div>
   </div>
 
-  <div>
-    <%= form.label :notes, style: "display: block" %>
-    <%= form.text_area :notes %>
+  <div class="mb-2">
+    <%= form.label :notes, style: "display: block", class: "form-label" %>
+    <%= form.text_area :notes, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="mb-2">
+    <%= form.submit class: "btn btn-outline-dark" %>
   </div>
 <% end %>

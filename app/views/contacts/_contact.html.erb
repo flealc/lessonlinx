@@ -19,8 +19,10 @@
       <%= render "contacts/contact_details", contact: contact %>
       
     
-      <%= link_to "edit contact", edit_contact_path(contact), data: { turbo_frame: "_top" }, class: "h6 me-3" %>
-      <%= link_to "delete contact", contact_path(contact), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "h6" %>
+      <div class="d-flex justify-content-end">
+        <%= link_to "edit", edit_contact_path(contact), data: { turbo_frame: "_top" }, class: "h6 me-3" %>
+        <%= link_to "delete", contact_path(contact), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "h6" %>
+      </div>
     </div>
 
 

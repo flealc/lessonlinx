@@ -20,7 +20,7 @@
 
       <% else %>
 
-      <p class="text-body-secondary">This lesson does not have any notes. <%= link_to "Log lesson now", edit_student_lesson_path(lesson.student, lesson), data: {turbo_frame: "_top"} %></p>
+      <p class="text-body-secondary">This lesson does not have any notes. <%= link_to "Log lesson now", edit_student_lesson_path(lesson.student, lesson), data: {turbo_frame: "_top"}, class: "h6" %></p>
 
       <% end %>
     

@@ -20,7 +20,7 @@ class ContactsController < ApplicationController
     @breadcrumbs = [
       { content: @contact.student.full_name, href: student_path(@contact.student) },
       { content: "Contacts", href: student_path(@contact.student) },
-      { content: "New contact", href: "#" },
+      { content: "Add contact", href: "#" },
     ]
   end
   

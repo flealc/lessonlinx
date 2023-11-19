@@ -2,36 +2,35 @@
   
 
   <% if lesson.new_record? %>
-    <div>
-      <%= form.label :student_id, style: "display: block" %>
-      <%= form.collection_select :student_id, current_user.students, :id, :full_name, {}, { onchange: "window.location = '/students/' + this.value + '/lessons/new'"} %>
+    <div class="col-md-4 mb-2">
+      <%= form.label :student_id, style: "display: block", class: "form-label" %>
+      <%= form.select :student_id, current_user.students.map { |s| [s.full_name, s.id] }, {}, onchange: "window.location = '/students/' + this.value + '/lessons/new'", class: "form-select" %>
     </div>
   <% else %>
     <%= form.hidden_field :student_id %>
   <% end %>
 
-  <div>
-    <%= form.label :starts_at, style: "display: block" %>
-    <%= form.datetime_field :starts_at %>
+  <div class="col-md-4 mb-2">
+    <%= form.label :starts_at, style: "display: block", class: "form-label" %>
+    <%= form.datetime_field :starts_at, class: "form-control" %>
+  </div>
+
+  <div class="col-md-1 mb-2">
+    <%= form.label :duration, style: "display: block", class: "form-label" %>
+    <%= form.number_field :duration, class: "form-control" %>
+  </div>
+
+  <div class="col-md-2 mb-2">
+    <%= form.label :status, style: "display: block", class: "form-label" %>
+    <%= form.select :status, Lesson.statuses.keys.map { |s| [s.titleize, s]}, {prompt: "Select a status"}, style: "display: block", class: "form-select" %>
+  </div>
+
+  <div class="mb-2"> 
+    <%= form.label :lesson_notes, style: "display: block", class: "form-label" %>
+    <%= form.text_area :lesson_notes, class: "form-control", rows: 3 %>
   </div>
 
   <div>
-    <%= form.label :duration, style: "display: block" %>
-    <%= form.number_field :duration %>
-  </div>
-
-  <div>
-    <%= form.label :status, style: "display: block" %>
-    <%= form.select :status, Lesson.statuses.keys.map { |s| [s.titleize, s]}, {prompt: "Select a status"}, style: "display: block" %>
-  
-  </div>
-
-  <div>
-    <%= form.label :lesson_notes, style: "display: block" %>
-    <%= form.text_area :lesson_notes %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-outline-dark" %>
   </div>
 <% end %>
