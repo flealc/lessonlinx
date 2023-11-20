@@ -1,6 +1,6 @@
 <div class="h5 ms-3 mt-2">Lessons to log</div>
 
-<% if current_user.past_lessons.any? %>
+<% if current_user.past_lessons.where(status: :scheduled).any? %>
 
   <div class="list-group list-group-flush pb-2 fw-normal small">
     <% current_user.past_lessons.scheduled.each do |lesson| %>
@@ -16,6 +16,6 @@
 
 <% else %>
   <div class="bg-body-tertiary h-100 d-flex justify-content-center align-items-center">
-    <div class="text-center text-secondary">No lessons to display.</div>
+    <div class="text-center text-secondary">No lessons to log.</div>
   </div>
 <% end %>

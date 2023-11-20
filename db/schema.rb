@@ -23,7 +23,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_17_201909) do
     t.string "phone"
     t.string "email"
     t.text "address"
-    t.string "relationship", default: "self"
+    t.string "relationship"
     t.string "preferred_communication_method"
     t.text "notes"
     t.datetime "created_at", null: false

@@ -10,7 +10,7 @@
 #  notes                          :text
 #  phone                          :string
 #  preferred_communication_method :string
-#  relationship                   :string           default("self")
+#  relationship                   :string
 #  created_at                     :datetime         not null
 #  updated_at                     :datetime         not null
 #  student_id                     :uuid             not null

@@ -2,7 +2,7 @@
 
   <div class="mb-2 col-md-4">
     <%= form.label "bulk[student_id]", "Student", style: "display: block", class: "form-label" %>
-    <%= form.select :student_id, current_user.students.map { |s| [s.full_name, s.id] }, {}, onchange: "window.location = '/students/' + this.value + '/lessons/new'", class: "form-select" %>
+    <%= form.select :student_id, current_user.students.map { |s| [s.full_name, s.id] }, {selected: @student.id}, onchange: "window.location = '/students/' + this.value + '/lessons/bulk_new'", class: "form-select" %>
   </div>
 
 
@@ -25,12 +25,12 @@
   <% end %>
   </div>
 
-  <div class="mb-2 col-md-2">
+  <div class="mb-2 col-md-3">
     <%= form.label "bulk[from]", "From", style: "display: block", class: "form-label" %>
     <%= form.date_field "bulk[from]", class: "form-control" %>
   </div>
 
-  <div class="mb-2 col-md-2">
+  <div class="mb-2 col-md-3">
     <%= form.label "bulk[to]", "To", style: "display: block", class: "form-label" %>
     <%= form.date_field "bulk[to]", class: "form-control" %>
   </div>

@@ -1,5 +1,6 @@
 class ContactsController < ApplicationController
   before_action :set_contact, only: %i[ show edit update destroy ]
+  before_action { authorize @contact || Contact }
   
 
   # GET /contacts or /contacts.json
