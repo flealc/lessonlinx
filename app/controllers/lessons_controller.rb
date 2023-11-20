@@ -4,6 +4,9 @@ include Timezoneable
   before_action :set_lesson, only: %i[ show edit update destroy ]
   before_action :set_timezone
   before_action :set_student
+  before_action except: %i[select_delete bulk_delete] do
+    authorize @lesson || Lesson
+  end
 
   # GET /lessons or /lessons.json
   def index
@@ -118,21 +121,23 @@ include Timezoneable
   end
 
   def select_delete
+    authorize @student
     @q = @student.lessons.default_order.ransack(params[:q])
     @lessons = @q.result(distinct: true)
+  
     @breadcrumbs = [
       { content: @student.full_name, href: student_lessons_path(@student) },
       { content: "Delete lessons", href: "#" },
     ]
   end
+
   def bulk_delete
+    authorize @student
     params.require(:lessons)
-    
+
     if params[:lessons].any?
       @lessons = Lesson.where(id: params[:lessons])
     end
-
-    
     
     if @lessons.delete_all
       redirect_to student_lessons_url(@student), notice: "Lessons were successfully deleted."
