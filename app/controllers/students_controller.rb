@@ -34,6 +34,10 @@ class StudentsController < ApplicationController
   def create
     @student = Student.new(student_params)
     @student.teacher_id = current_user.id
+    @breadcrumbs = [
+          { content: "Students", href: students_path },
+          { content: "Add student", href: "#" },
+        ]
 
     respond_to do |format|
       if @student.save
@@ -48,6 +52,10 @@ class StudentsController < ApplicationController
 
   # PATCH/PUT /students/1 or /students/1.json
   def update
+    @breadcrumbs = [
+          { content: "Students", href: students_path },
+          { content: "Add student", href: "#" },
+        ]
     respond_to do |format|
       if @student.update(student_params)
         format.html { redirect_to student_url(@student), notice: "Student was successfully updated." }
@@ -71,7 +79,7 @@ class StudentsController < ApplicationController
 
   def recent_lessons
     @recent_lessons = @student.lessons.past.limit(5)
-    
+
     respond_to do |format|
       format.turbo_stream do
         render turbo_stream: turbo_stream.replace(
@@ -80,7 +88,6 @@ class StudentsController < ApplicationController
           locals: { recent_lessons: @recent_lessons },
         )
       end
-
     end
   end
 

@@ -25,6 +25,8 @@
 #  fk_rails_...  (teacher_id => users.id)
 #
 class Student < ApplicationRecord
+  validates :first_name, presence: true
+  validates :age, numericality: { numeric_only: true, allow_nil: true }
   before_destroy :clear_default_contact
 
   belongs_to :teacher, class_name: "User", counter_cache: true

@@ -24,6 +24,7 @@
 #  fk_rails_...  (student_id => students.id)
 #
 class Contact < ApplicationRecord
+  validates :first_name, presence: true
   before_save :name_if_self
   belongs_to :student
 

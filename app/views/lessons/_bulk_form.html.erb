@@ -2,7 +2,7 @@
 
   <div class="mb-2 col-md-4">
     <%= form.label "bulk[student_id]", "Student", style: "display: block", class: "form-label" %>
-    <%= form.select :student_id, current_user.students.map { |s| [s.full_name, s.id] }, {selected: @student.id}, onchange: "window.location = '/students/' + this.value + '/lessons/bulk_new'", class: "form-select" %>
+    <%= form.select "bulk[student_id]", current_user.students.map { |s| [s.full_name, s.id] }, {selected: @student.id}, onchange: "window.location = '/students/' + this.value + '/lessons/bulk_new'", class: "form-select" %>
   </div>
 
 

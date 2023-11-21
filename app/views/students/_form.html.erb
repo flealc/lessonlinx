@@ -1,11 +1,11 @@
 <%= form_with(model: student) do |form| %>
   <% if student.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(student.errors.count, "error") %> prohibited this student from being saved:</h2>
+      <div class="h3"><%= pluralize(student.errors.count, "error") %> prohibited this student from being saved</div>
 
       <ul>
         <% student.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+          <div class="h6"><%= error.full_message %></div>
         <% end %>
       </ul>
     </div>

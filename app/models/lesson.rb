@@ -25,13 +25,16 @@
 #
 class Lesson < ApplicationRecord
   before_create :set_datetime, :set_teacher
+  validates :duration, presence: true, numericality: { integer_only: true }
+  validates :starts_at, presence: true
+
   
   belongs_to :teacher, class_name: "User", counter_cache: true
   belongs_to :student, counter_cache: true
 
   enum status: { scheduled: "scheduled", taught: "taught", canceled: "canceled" } 
 
-  scope :default_order, -> { order(starts_at: :asc) }
+  scope :default_order, -> { order(starts_at: :desc) }
   scope :future, ->{ where("starts_at > ?", Time.current).order(starts_at: :asc) }
   scope :past, ->{ where("starts_at < ?", Time.current).order(starts_at: :desc) }
   scope :this_week, -> { where(starts_at: Date.today.beginning_of_week..Date.today.end_of_week)}

@@ -1,5 +1,5 @@
 class LessonsController < ApplicationController
-include Timezoneable
+  include Timezoneable
 
   before_action :set_lesson, only: %i[ show edit update destroy ]
   before_action :set_timezone
@@ -17,10 +17,9 @@ include Timezoneable
   # GET /lessons/1 or /lessons/1.json
   def show
     respond_to do |format|
-      format.turbo_stream {render partial "lessons/lesson", lesson: @lesson}
+      format.turbo_stream { render partial "lessons/lesson", lesson: @lesson }
       format.html
     end
-
   end
 
   # GET /lessons/new
@@ -45,6 +44,11 @@ include Timezoneable
 
   # POST /lessons or /lessons.json
   def create
+    if params[:lesson][:starts_at].blank? || params[:lesson][:duration].blank?
+      flash[:alert] = "Please provide all necessary information for the lesson."
+      redirect_to new_student_lesson_url
+      return
+    end
     @lesson = @student.lessons.new(build_datetimes(lesson_params))
 
     respond_to do |format|
@@ -60,6 +64,11 @@ include Timezoneable
 
   # PATCH/PUT /lessons/1 or /lessons/1.json
   def update
+    if params[:lesson][:starts_at].blank? || params[:lesson][:duration].blank? || !params[:lesson][:duration].to_i
+      flash[:alert] = "Please provide all necessary information for the lesson."
+      redirect_to edit_student_lesson_url
+      return
+    end
     respond_to do |format|
       if @lesson.update(build_datetimes(lesson_params))
         format.html { redirect_to student_lessons_url(@student), notice: "Lesson was successfully updated." }
@@ -88,15 +97,19 @@ include Timezoneable
     ]
   end
 
-
   def bulk_create
+    if bulk_params[:starts_at].blank? || bulk_params[:weekdays].blank? || bulk_params[:duration].blank? || bulk_params[:from].blank? || bulk_params[:to].blank?
+      flash[:alert] = "Please provide all necessary information for the lessons."
+      redirect_to bulk_new_student_lessons_path
+      return
+    end
     start_time = Time.parse(bulk_params[:starts_at])
     from_date = Date.parse(bulk_params[:from])
     to_date = Date.parse(bulk_params[:to])
     weekdays = bulk_params[:weekdays]
     duration = bulk_params[:duration]
     lessons_to_create = []
-  
+
     ActiveRecord::Base.transaction do
       (from_date..to_date).each do |date|
         if weekdays.include?(date.strftime("%A"))
@@ -104,19 +117,23 @@ include Timezoneable
           lesson = @student.lessons.build(
             starts_at: lesson_starts_at,
             duration: duration,
-            teacher_id: current_user.id
+            teacher_id: current_user.id,
           )
-         
-          raise ActiveRecord::Rollback unless lesson.valid?
+
+          unless lesson.valid?
+            Rails.logger.debug "Invalid lesson: #{lesson.errors.full_messages}"
+            raise ActiveRecord::Rollback
+          end
           lessons_to_create << lesson
+          
         end
       end
-  
+
       lessons_to_create.each(&:save!)
     end
-  
+
     redirect_to student_lessons_url(@student), notice: "Lessons were successfully created."
-  rescue ActiveRecord::Rollback
+    rescue ActiveRecord::Rollback
     redirect_to new_bulk_student_lessons_url(@student), alert: "There was an error creating the lessons."
   end
 
@@ -124,7 +141,7 @@ include Timezoneable
     authorize @student
     @q = @student.lessons.default_order.ransack(params[:q])
     @lessons = @q.result(distinct: true)
-  
+
     @breadcrumbs = [
       { content: @student.full_name, href: student_lessons_path(@student) },
       { content: "Delete lessons", href: "#" },
@@ -138,14 +155,14 @@ include Timezoneable
     if params[:lessons].any?
       @lessons = Lesson.where(id: params[:lessons])
     end
-    
+
     if @lessons.delete_all
       redirect_to student_lessons_url(@student), notice: "Lessons were successfully deleted."
     else
       redirect to select_delete_url(@student), alert: "There was an error deleting the lessons."
     end
-
   end
+
   private
 
   def set_lesson
@@ -154,7 +171,6 @@ include Timezoneable
 
   def set_student
     @student = Student.find(params[:student_id])
-
   end
 
   # Only allow a list of trusted parameters through.
@@ -165,6 +181,4 @@ include Timezoneable
   def bulk_params
     params.require(:bulk).permit(:student_id, :starts_at, :duration, :from, :to, :weekdays => [])
   end
-
- 
 end

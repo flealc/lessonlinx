@@ -37,7 +37,7 @@ task({ :sample_data => :environment }) do
     password: "password",
     first_name: "Bob",
     last_name: Faker::Name.last_name,
-    timezone: ActiveSupport::TimeZone.us_zones.sample
+    timezone: "Central Time (US & Canada)"
   )
   p "There are now #{User.count} users"
   
