@@ -6,6 +6,11 @@ require "active_support/core_ext/integer/time"
 # and recreated between test runs. Don't rely on the data there!
 
 Rails.application.configure do
+  config.action_mailer.delivery_method = :postmark
+
+  config.action_mailer.postmark_settings = {
+    api_token: Rails.application.credentials.postmark_api_token,
+  }
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Turn false under Spring and add config.action_view.cache_template_loading = true.
@@ -19,11 +24,11 @@ Rails.application.configure do
   # Configure public file server for tests with Cache-Control for performance.
   config.public_file_server.enabled = true
   config.public_file_server.headers = {
-    "Cache-Control" => "public, max-age=#{1.hour.to_i}"
+    "Cache-Control" => "public, max-age=#{1.hour.to_i}",
   }
 
   # Show full error reports and disable caching.
-  config.consider_all_requests_local       = true
+  config.consider_all_requests_local = true
   config.action_controller.perform_caching = false
   config.cache_store = :null_store
 

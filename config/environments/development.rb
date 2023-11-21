@@ -2,9 +2,13 @@ require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
 
-  # config letter-opener
-  config.action_mailer.delivery_method = :letter_opener
-  config.action_mailer.perform_deliveries = true
+  # config postmark
+  config.action_mailer.delivery_method = :postmark
+
+  config.action_mailer.postmark_settings = {
+    api_token: Rails.application.credentials.postmark_api_token,
+  }
+  
   # define default url for devise
   config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
   # Allow server to be hosted on any URL

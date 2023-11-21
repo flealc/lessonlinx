@@ -1,12 +1,11 @@
-require 'sidekiq/web'
-require 'sidekiq/cron/web'
+require "sidekiq/web"
+require "sidekiq/cron/web"
 
 Rails.application.routes.draw do
   authenticate :user, ->(current_user) { current_user.admin? } do
     mount Sidekiq::Web => "/sidekiq"
-    mount RailsDb::Engine => '/rails/db', :as => 'rails_db'
+    mount RailsDb::Engine => "/rails/db", :as => "rails_db"
   end
-  
 
   resources :contacts
   resources :students do
@@ -15,21 +14,20 @@ Rails.application.routes.draw do
     end
     resources :lessons do
       collection do
-        get 'bulk_new'
-        post 'bulk_create'
-        get 'select_delete'
-        delete 'bulk_delete'
+        get "bulk_new"
+        post "bulk_create"
+        get "select_delete"
+        delete "bulk_delete"
       end
     end
   end
   resources :calendars
-  devise_for :users, :controllers => { registrations: 'users/registrations'}
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-   root "users#dashboard"
+  devise_for :users, :controllers => { registrations: "users/registrations" }
 
-   get "dashboard", to: "users#dashboard", as: "dashboard"
+  root "users#dashboard"
 
-   get "subscribe/:id", to: "calendar#serve", as: "subscription"
+  get "dashboard", to: "users#dashboard", as: "dashboard"
+
+  get "subscribe/:id", to: "calendar#serve", as: "subscription"
 end

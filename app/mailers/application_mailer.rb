@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "digest@lessonmanager.pro"
+  default from: "daily@lessonlinx.pro"
   layout "mailer"
 end
