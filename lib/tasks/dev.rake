@@ -74,7 +74,7 @@ task({ :sample_data => :environment }) do
         starts_at: starting_date,
         ends_at: starting_date + duration.minutes,
         duration: duration,
-        status: starting_date < Date.current ? %w[taught canceled].sample : "scheduled",
+        status: starting_date < Date.current ? %w[taught canceled scheduled].sample : "scheduled",
         teacher_id: student.teacher_id,     
       )
 
@@ -109,7 +109,7 @@ task({ :sample_data => :environment }) do
       )
     end
 
-    student.default_contact_id = student.adult ? student.contacts.find_by(relationship: "self") : student.contacts.sample.id
+    student.default_contact_id = student.adult ? student.contacts.find_by(relationship: "self").id : student.contacts.sample.id
     student.save
 
   end

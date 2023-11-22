@@ -68,7 +68,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_17_201909) do
     t.datetime "remember_created_at"
     t.string "first_name", null: false
     t.string "last_name", null: false
-    t.string "timezone"
+    t.string "timezone", default: "Central Time (US & Canada)"
     t.integer "students_count", default: 0
     t.integer "lessons_count", default: 0
     t.time "daily_digest_at"
