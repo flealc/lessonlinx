@@ -11,5 +11,6 @@ User.create(
   password: "memememe",
   first_name: "Fidel",
   last_name: "Leal",
-  timezone: "Central Time (US & Canada)"
+  timezone: "Central Time (US & Canada)",
+  admin: true
 )
