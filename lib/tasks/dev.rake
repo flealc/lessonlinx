@@ -109,7 +109,7 @@ task({ :sample_data => :environment }) do
       )
     end
 
-    student.default_contact_id = student.adult ? student.contacts.find_by(relationship: "self").id : student.contacts.sample.id
+    student.default_contact_id = student.adult ? student.contacts.find_by(relationship: "self") : student.contacts.sample.id
     student.save
 
   end
