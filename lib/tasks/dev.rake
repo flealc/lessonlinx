@@ -83,6 +83,8 @@ task({ :sample_data => :environment }) do
     
     if student.adult? 
       student.contacts.create(
+        first_name: student.first_name,
+        last_name: student.last_name,
         address: Faker::Address.full_address,
         email: "#{student.first_name.downcase}@example.com" ,
         notes: Faker::Lorem.paragraph(sentence_count: 2..3),

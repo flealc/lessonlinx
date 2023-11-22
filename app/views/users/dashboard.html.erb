@@ -12,7 +12,7 @@
       } %>
 
   <div class="col-9 col-sm-7 mt-2" data-side-bar-target="contentArea">
-    <turbo-frame id="recent_lessons_frame", src="<%= recent_lessons_student_path(week_lessons.first) if current_user.students.any? %>", class="align-items-center justify-content-center" >
+    <turbo-frame id="recent_lessons_frame", src="<%= recent_lessons_student_path(week_lessons.first) if current_user.students.any? && current_user.students.first.lessons.any? %>", class="align-items-center justify-content-center" >
 
       <div class="bg-body-tertiary h-100 text-center py-5 px-5">
         <div class="h5">Welcome!</div>
