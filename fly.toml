@@ -15,7 +15,7 @@ console_command = "/rails/bin/rails console"
 
 [processes]
   app = "./bin/rails server"
-  sidekiq = "bundle exec sidekiq -C config/schedule.yml"
+  sidekiq = "bundle exec sidekiq -C config/sidekiq.yml"
 
 [http_service]
   internal_port = 3000

@@ -31,7 +31,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :students, -> { order(first_name: :asc) }, foreign_key: :teacher_id
+  has_many :students, -> { order(first_name: :asc) }, foreign_key: :teacher_id, dependent: :destroy
   has_many :lessons, foreign_key: :teacher_id
 
   has_many :scheduled_lessons, -> { scheduled }, foreign_key: :teacher_id, class_name: "Lesson"
@@ -53,8 +53,8 @@ class User < ApplicationRecord
 
     self.lessons.each do |lesson|
       calendar.event do |e|
-        e.dtstart = lesson.starts_at
-        e.dtend = lesson.ends_at
+        e.dtstart = lesson.starts_at.in_time_zone(self.timezone)
+        e.dtend = lesson.ends_at.in_time_zone(self.timezone)
         e.summary = lesson.canceled? ? "#{lesson.student.full_name} [CANCELED]" : lesson.student.full_name
         e.description = lesson.student.last_lesson.present? ? lesson.student.last_lesson.lesson_notes : "No previous lesson notes for this student"
       end
