@@ -8,7 +8,7 @@
         <%= lesson.student.full_name %>
         <div>
           <%= link_to "Log", edit_student_lesson_path(lesson.student, lesson, lesson: { status: "taught" }), class: "stretched-link", style: "color: black;" %>
-          <%= lesson.starts_at.in_time_zone(current_user.timezone).strftime("%b %d, %-l:%M %p") %>
+          <%= lesson.starts_at.strftime("%b %d, %-l:%M %p") %>
         </div>
       </div>
     <% end %>

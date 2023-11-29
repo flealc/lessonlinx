@@ -8,7 +8,7 @@ module User::DailyDigestable
   class_methods do
     def schedule_daily_digest
       User.signed_up_for_daily_digest.each do |user|
-        send_at = DateTime.now.change(hour: user.daily_digest_at.hour, min: user.daily_digest_at.min).in_time_zone(user.timezone).utc
+        send_at = DateTime.current.change(hour: user.daily_digest_at.hour, min: user.daily_digest_at.min).in_time_zone(user.timezone).utc
         send_at += 1.day if send_at.past?
 
         if user.lessons.today.any?

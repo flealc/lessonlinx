@@ -2,7 +2,7 @@ class LessonsController < ApplicationController
   include Timezoneable
 
   before_action :set_lesson, only: %i[ show edit update destroy ]
-  before_action :set_timezone
+  #before_action :set_timezone
   before_action :set_student
   before_action except: %i[select_delete bulk_delete] do
     authorize @lesson || Lesson

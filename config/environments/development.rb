@@ -2,8 +2,11 @@ require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
 
+  # Set ActiveRecord timezone
+  config.time_zone = "UTC"
+
   # config postmark
-  config.action_mailer.delivery_method = :postmark
+  config.action_mailer.delivery_method = :letter_opener
 
   config.action_mailer.postmark_settings = {
     api_token: Rails.application.credentials.postmark_api_token,

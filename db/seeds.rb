@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-Student.destroy_all
+
 User.destroy_all
 
 User.create(
@@ -16,4 +16,13 @@ User.create(
   last_name: "Leal",
   timezone: "Central Time (US & Canada)",
   admin: true
+)
+
+User.create(
+  email: "test@lessonlinx.pro",
+  password: "s3cr3tp4ssw0rd",
+  first_name: "Test",
+  last_name: "User",
+  timezone: "Central Time (US & Canada)",
+  admin: false
 )

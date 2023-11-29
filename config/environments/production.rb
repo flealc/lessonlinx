@@ -3,6 +3,9 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # Set ActiveRecord timezone
+  config.time_zone = "UTC"
+  
   # define default url for devise
   config.action_mailer.default_url_options = { host: "lessonlinx.pro", port: 3000 }
 

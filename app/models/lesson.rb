@@ -53,6 +53,9 @@ class Lesson < ApplicationRecord
     %i[default_order past future]
   end
 
+  def previous_lesson
+    Lesson.where(student_id: self.student_id).where("starts_at < ?", self.starts_at).first
+  end
 
   private
 

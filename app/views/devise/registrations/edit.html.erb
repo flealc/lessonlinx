@@ -34,7 +34,7 @@
     <%= f.time_zone_select :timezone, ActiveSupport::TimeZone.all, { prompt: "Select your current timezone" }, { class: 'form-control' } %>
   </div>
 
-  <div data-controller="digest-signup" data-digest-signup-signedup-value="<%= current_user.daily_digest_at != nil %>" data-digest-signup-link-value="https://www.lessonlinx.pro/subscribe/<%= current_user.id %>">
+  <div data-controller="digest-signup" data-digest-signup-signedup-value="<%= current_user.daily_digest_at != nil %>" data-digest-signup-link-value="https://lessonlinx.pro/subscribe/<%= current_user.id %>">
     <div class="input-group mt-3">
     <span class="input-group-text">Copy calendar subscription link</span>
     <button data-digest-signup-target="copyButton" class="btn btn-outline-dark" type="button" data-action="click->digest-signup#copyLink"><i class="fa-regular fa-clipboard"></i></button>
