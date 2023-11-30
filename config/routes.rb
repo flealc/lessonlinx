@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   authenticate :user, ->(current_user) { current_user.admin? } do
+    mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
     mount GoodJob::Engine => '/good_job'
-    mount RailsDb::Engine => "/rails/db", :as => "rails_db"
   end
 
   resources :contacts
