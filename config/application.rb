@@ -31,8 +31,8 @@ module RailsTemplate
     config.action_controller.default_protect_from_forgery = false
     config.generators.system_tests = nil
 
-    # Configure ActiveJob to use sidekiq
-    config.active_job.queue_adapter = :sidekiq
+    # Configure ActiveJob to use good_job
+    config.active_job.queue_adapter = :good_job
 
     # Configure Postmark
     config.action_mailer.delivery_method = :postmark
