@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  around_action :set_timezone, if: :current_user
   include Pundit::Authorization
 
   #skip_forgery_protection
@@ -15,4 +16,9 @@ class ApplicationController < ActionController::Base
     flash[:alert] = "You are not authorized to perform this action."
     redirect_back(fallback_location: root_path)
   end
+
+  def set_timezone(&block) 
+    Time.use_zone(current_user.timezone, &block) 
+  end
+
 end

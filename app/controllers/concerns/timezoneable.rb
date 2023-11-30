@@ -2,9 +2,6 @@ module Timezoneable
   extend ActiveSupport::Concern
 
   included do
-    def set_timezone
-      Time.zone = current_user.timezone
-    end
 
     def build_datetimes(lesson_params)
       if lesson_params[:starts_at] && lesson_params[:duration]
