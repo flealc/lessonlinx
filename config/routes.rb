@@ -1,6 +1,3 @@
-require "sidekiq/web"
-require "sidekiq/cron/web"
-
 Rails.application.routes.draw do
   authenticate :user, ->(current_user) { current_user.admin? } do
     mount GoodJob::Engine => '/good_job'
