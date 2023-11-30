@@ -5,13 +5,16 @@ Rails.application.configure do
   # Set ActiveRecord timezone
   config.time_zone = "UTC"
 
+  # Configure ActiveJob to use good_job
+  config.active_job.queue_adapter = :good_job
+
   # config postmark
   config.action_mailer.delivery_method = :letter_opener
 
   config.action_mailer.postmark_settings = {
     api_token: Rails.application.credentials.postmark_api_token,
   }
-  
+
   # define default url for devise
   config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
   # Allow server to be hosted on any URL

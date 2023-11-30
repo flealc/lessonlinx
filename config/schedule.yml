@@ -1,4 +1,0 @@
-schedule_daily_digest:
-  cron: "1 0 * * *"
-  class: "DailyDigestJob"
-  queue: default

@@ -6,6 +6,9 @@ Rails.application.configure do
   # Set ActiveRecord timezone
   config.time_zone = "UTC"
   
+  # Configure ActiveJob to use good_job
+  config.active_job.queue_adapter = :good_job
+  
   # define default url for devise
   config.action_mailer.default_url_options = { host: "lessonlinx.pro", port: 3000 }
 

@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "3.2.1"
 
 gem "bootsnap", require: false
+gem "good_job"
 gem "icalendar"
 gem "importmap-rails"
 gem "jbuilder"
@@ -15,8 +16,6 @@ gem "rails", "~> 7.0.4", ">= 7.0.4.3"
 gem "rails_db"
 gem "ransack"
 gem "redis", "~> 4.0"
-gem "sidekiq-cron"
-gem "sidekiq"
 gem "sprockets-rails"
 gem "stimulus-rails"
 gem "turbo-rails"
