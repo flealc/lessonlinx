@@ -36,7 +36,7 @@
   
   <div class="form-group col-md-6 mb-2">
     <%= f.label :timezone %>
-    <%= f.time_zone_select :timezone, ActiveSupport::TimeZone.all, { prompt: "Select your current timezone" }, { class: 'form-control' } %>
+    <%= f.time_zone_select :timezone, ActiveSupport::TimeZone.all, { prompt: "Select your current timezone", priority_zones: ActiveSupport::TimeZone.us_zones, default: "Central Time (US & Canada)" }, { class: 'form-control' } %>
   </div>
 
   <div class="form-actions my-4">
