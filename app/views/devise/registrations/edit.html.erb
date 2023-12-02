@@ -37,7 +37,7 @@
   <div data-controller="digest-signup" data-digest-signup-signedup-value="<%= current_user.daily_digest_at != nil %>" data-digest-signup-link-value="https://lessonlinx.pro/subscribe/<%= current_user.id %>">
     <div class="input-group mt-3">
     <span class="input-group-text">Copy calendar subscription link</span>
-    <button data-digest-signup-target="copyButton" class="btn btn-outline-dark" type="button" data-action="click->digest-signup#copyLink"><i class="fa-regular fa-clipboard"></i></button>
+    <button data-digest-signup-target="copyButton" class="btn btn-outline-primary" type="button" data-action="click->digest-signup#copyLink"><i class="fa-regular fa-clipboard"></i></button>
     </div>
     <div class="form-check form-switch mt-4">
       <input class="form-check-input" type="checkbox" role="switch" id="dailyDigestSwitch" data-digest-signup-target="signupSwitch" data-action="click->digest-signup#toggleDigest" >
@@ -60,8 +60,8 @@
       <div class="form-text mb-1">Please enter your current password to save any changes to your account</div>
       <%= f.password_field :current_password, class: 'form-control col-md-6', autocomplete: 'current-password', required: true, placeholder: "Enter current password" %>
     </div>
-    <%= f.submit "Update", class: "btn btn-outline-dark" %>
-    <%= link_to "Back", :back, class: "btn btn-outline-dark" %>
+    <%= f.submit "Update", class: "btn btn-outline-primary" %>
+    <%= link_to "Back", :back, class: "btn btn-outline-primary" %>
   </div>
 <% end %>
 

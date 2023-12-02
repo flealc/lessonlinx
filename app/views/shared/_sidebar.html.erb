@@ -1,8 +1,12 @@
 <% if array_to_iterate.present? %>
 
+
   <div class="col-2" data-action="<%= toggle_button_action %>">
     <i class="fa-solid fa-angle-left" data-side-bar-target="toggleIcon" ></i>
+    <i class="fa-solid fa-angle-left" data-side-bar-target="toggleIcon" ></i>
+    <i class="fa-solid fa-angle-left" data-side-bar-target="toggleIcon" ></i>
   </div>
+
 
   <div class="row">
     <div class="col-3 col-sm-2" data-side-bar-target="collapsibleList">
@@ -10,7 +14,7 @@
       <div class="list-group list-group-flush pb-2 fw-normal small">
 
         <% array_to_iterate.each do |student| %>
-          <%= link_to student.full_name, link_path.call(student), data: { turbo_frame: frame }, class: "list-group-item list-group-item-action" %>
+          <%= link_to student.full_name, link_path.call(student), data: { turbo_frame: frame }, class: "list-group-item list-group-item-action ps-0" %>
         <% end %>
       </div>
       
