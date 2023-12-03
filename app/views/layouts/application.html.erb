@@ -27,7 +27,7 @@
 
       <div class= "col-md-8 offset-2">
         <% if notice.present? %>
-          <%= render partial: 'shared/flash', locals: { message: notice, role: "success" }  %>
+          <%= render partial: 'shared/flash', locals: { message: notice, role: "primary" }  %>
         <% end %>
         <% if alert.present? %>
           <%= render partial: 'shared/flash', locals: { message: alert, role: "danger" } %>
