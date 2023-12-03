@@ -2,7 +2,6 @@ class LessonsController < ApplicationController
   include Timezoneable
 
   before_action :set_lesson, only: %i[ show edit update destroy ]
-  #around_action :set_timezone
   before_action :set_student
   before_action except: %i[select_delete bulk_delete] do
     authorize @lesson || Lesson
@@ -125,7 +124,6 @@ class LessonsController < ApplicationController
             raise ActiveRecord::Rollback
           end
           lessons_to_create << lesson
-          
         end
       end
 
@@ -133,7 +131,7 @@ class LessonsController < ApplicationController
     end
 
     redirect_to student_lessons_url(@student), notice: "Lessons were successfully created."
-    rescue ActiveRecord::Rollback
+  rescue ActiveRecord::Rollback
     redirect_to new_bulk_student_lessons_url(@student), alert: "There was an error creating the lessons."
   end
 
@@ -150,16 +148,21 @@ class LessonsController < ApplicationController
 
   def bulk_delete
     authorize @student
-    params.require(:lessons)
 
-    if params[:lessons].any?
-      @lessons = Lesson.where(id: params[:lessons])
+    lesson_ids = params[:lessons]
+
+    if lesson_ids.blank?
+      redirect_back(fallback_location: student_lessons_path(@student), alert: "Please select lessons to delete.") 
+      return
     end
+   
+      @lessons = Lesson.where(id: lesson_ids)
+    
 
-    if @lessons.delete_all
+    if @lessons.destroy_all
       redirect_to student_lessons_url(@student), notice: "Lessons were successfully deleted."
     else
-      redirect to select_delete_url(@student), alert: "There was an error deleting the lessons."
+      redirect_to select_delete_url(@student), alert: "There was an error deleting the lessons."
     end
   end
 

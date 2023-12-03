@@ -5,6 +5,7 @@
       <%= link_to "new", new_student_path, data: { turbo_frame: "student-details" }, class:"h6" %>
     </div>
   </div>
+  <hr>
 
   <%= render partial: "shared/sidebar", 
     locals: { 
@@ -15,7 +16,7 @@
       } %>
 
   <div class="col-9 col-sm-10 mt-2" data-side-bar-target="contentArea">
-      <div class="bg-body-tertiary h-100 text-center py-5 px-5">Your students' information will be displayed here.
+      <div class="bg-body-tertiary h-100 text-center py-5 px-5 text-wrap mx-3 rounded-3">Your students' information will be displayed here.
       </div>
   </div>
 

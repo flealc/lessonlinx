@@ -1,6 +1,6 @@
 <% if @breadcrumbs.present? %>
   <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
+    <ol class="breadcrumb mb-0">
       <% @breadcrumbs.each do |breadcrumb| %>
         <% if breadcrumb == @breadcrumbs.last %>
           <li class="breadcrumb-item active" aria-current="page">
@@ -8,7 +8,7 @@
           </li>
         <% else %>
           <li class="breadcrumb-item">
-            <%= link_to breadcrumb.fetch(:content), breadcrumb[:href], class: "h6" %>
+            <%= link_to breadcrumb.fetch(:content), breadcrumb[:href], class: "link-dark" %>
           </li>
         <% end %>
       <% end %>
