@@ -9,7 +9,6 @@
 
   <%= render partial: "shared/sidebar", 
     locals: { 
-      toggle_button_action: "click->side-bar#toggleFullPage",
       array_to_iterate: current_user.students,
       link_path: ->(student_id) { student_path(student_id) },
       frame: "student-details"
