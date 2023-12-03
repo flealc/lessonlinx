@@ -20,9 +20,13 @@
       } %>
 
   <div class="col-9 col-sm-10" data-controller="students-index" data-side-bar-target="contentArea">
-    <p class="h5">
-      <%= @student.full_name %>
-    </p>
+    <div class="d-flex">
+      <div class="me-2" data-action="click->side-bar#toggleFullPage">
+        <i class="fa-solid fa-angles-left" data-side-bar-target="toggleIcon" ></i>
+      </div>
+      <div class="h5"><%= @student.full_name %></div>
+    </div>
+    
 
     <% if @lessons.any? %>
 

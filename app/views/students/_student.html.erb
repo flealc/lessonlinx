@@ -1,6 +1,9 @@
 <div id="<%= dom_id student %>">
   <div class="d-flex align-items-end pb-2">
-    <div class="h5 mb-0 pb-0 me-3"><%= student.full_name %></div>
+    <div class="me-2" data-action="click->side-bar#toggleFullPage">
+      <i class="fa-solid fa-angles-left" data-side-bar-target="toggleIcon" ></i>
+    </div>
+    <div class="h5 mb-0 pb-0 me-3 text-nowrap"><%= student.full_name %></div>
 
     <div>
       <%= link_to "edit", edit_student_path(@student), data: { turbo_frame: "_top" }, class:"h6 me-3" %>

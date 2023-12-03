@@ -2,7 +2,7 @@
 
 <% if current_user.past_lessons.where(status: :scheduled).any? %>
 
-  <div class="list-group list-group-flush pb-2 fw-normal small">
+  <div class="list-group list-group-flush pb-2 fw-normal small pe-4 pe-sm-0">
     <% current_user.past_lessons.scheduled.first(5).each do |lesson| %>
       <div class="list-group-item list-group-item-action">
         <%= lesson.student.full_name %>
