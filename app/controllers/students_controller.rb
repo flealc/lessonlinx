@@ -35,9 +35,9 @@ class StudentsController < ApplicationController
     @student = Student.new(student_params)
     @student.teacher_id = current_user.id
     @breadcrumbs = [
-          { content: "Students", href: students_path },
-          { content: "Add student", href: "#" },
-        ]
+      { content: "Students", href: students_path },
+      { content: "Add student", href: "#" },
+    ]
 
     respond_to do |format|
       if @student.save
@@ -53,9 +53,9 @@ class StudentsController < ApplicationController
   # PATCH/PUT /students/1 or /students/1.json
   def update
     @breadcrumbs = [
-          { content: "Students", href: students_path },
-          { content: "Add student", href: "#" },
-        ]
+      { content: "Students", href: students_path },
+      { content: "Add student", href: "#" },
+    ]
     respond_to do |format|
       if @student.update(student_params)
         format.html { redirect_to student_url(@student), notice: "Student was successfully updated." }
@@ -98,7 +98,12 @@ class StudentsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_student
-    @student = Student.find(params[:id])
+    begin
+      @student = Student.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to students_path, alert: "The requested student record has already been deleted!" 
+      return
+    end
   end
 
   # Only allow a list of trusted parameters through.
