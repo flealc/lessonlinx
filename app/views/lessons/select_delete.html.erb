@@ -22,7 +22,7 @@
       <div class="d-flex justify-content-between flex-wrap align-items-center ps-sm-2">
         <%= render partial: "lessons/filter" %>
 
-        <div class="pe-3 d-flex align-items-center">
+        <div class="pe-4 d-flex align-items-center">
         <%= submit_tag "delete selected", data: { turbo_confirm: "Are you sure?" }, class: "btn btn-link btn-sm ms-1 px-0 py-0 text-nowrap", form: "bulk-delete", style: "color: black;" %>
           <%= label_tag "select_all", "Select all", class: "mx-1 mb-1 form-text" %>
           <%= check_box_tag "select_all", "1", false, id: "select_all", data: { action: "change->students-index#selectAll" } %>
@@ -30,11 +30,10 @@
         </div>
       </div>
       <%= form_with(url: bulk_delete_student_lessons_path(@student), id: "bulk-delete", method: :delete) do |form| %>
-        <%# form.hidden_field "lessons[]" %>
         <hr class="my-0">
         <div class="overflow-auto mb-0 mx-sm-2" style="max-height: 75vh;">
           <% @lessons.each do |lesson| %>
-            <div class="card my-2">
+            <div class="card mt-3">
               <div class="card-header pb-1">
                 <div class="row align-items-center">
                   <div class="col-10 col-sm-8 col-md-auto d-flex align-items-center">
