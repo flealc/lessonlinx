@@ -159,11 +159,15 @@ class LessonsController < ApplicationController
       @lessons = Lesson.where(id: lesson_ids)
     
 
-    if @lessons.destroy_all
-      redirect_to student_lessons_url(@student), notice: "Lessons were successfully deleted."
-    else
-      redirect_to select_delete_url(@student), alert: "There was an error deleting the lessons."
-    end
+      begin
+        ActiveRecord::Base.transaction do
+          @lessons.each(&:destroy!)
+        end
+        redirect_to student_lessons_url(@student), notice: "Lessons were successfully deleted."
+      rescue ActiveRecord::RecordNotDestroyed => e
+        logger.error "Error deleting lessons: #{e.message}"
+        redirect_to select_delete_url(@student), alert: "There was an error deleting the lessons."
+      end
   end
 
   private
