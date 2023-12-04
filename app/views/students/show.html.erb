@@ -1,7 +1,7 @@
 <div data-controller="side-bar">
-  <div class="d-flex align-items-end">
+  <div class="d-flex align-items-end justify-content-between">
     <div class="h1 mb-0 pb-0 ps-sm-2 col-5 col-sm-2">Students</div>
-    <div class="mb-1 col-7 col-sm-10 ps-sm-2">
+    <div class="mb-1 me-sm-2 ps-4">
       <%= link_to "new", new_student_path, data: { turbo_frame: "_top" }, class:"h6 ps-sm-2" %>
     </div>
   </div>
