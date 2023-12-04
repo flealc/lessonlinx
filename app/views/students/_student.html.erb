@@ -1,34 +1,55 @@
 <div id="<%= dom_id student %>">
-  <div class="d-flex align-items-end pb-2">
-    <div class="h5 mb-0 pb-0 me-3"><%= student.full_name %></div>
+  <div class="d-flex align-items-end pb-2 justify-content-between">
+    <div class="d-flex">
+      <div class="pe-2 ps-sm-2" data-action="click->side-bar#toggleFullPage">
+        <i class="fa-solid fa-angles-left" data-side-bar-target="toggleIcon" ></i>
+      </div>
+      <div class="h5 mb-0 pb-0 me-3 text-nowrap"><%= student.full_name %></div>
+    </div>
 
-    <div>
+    <div class="me-sm-2 justify-content-end ">
       <%= link_to "edit", edit_student_path(@student), data: { turbo_frame: "_top" }, class:"h6 me-3" %>
-      <%= link_to "delete",student_path(@student),  data: { "turbo-method": :delete, turbo_frame: "_top", turbo_confirm: "Are you sure? Contacts for this student will be deleted as well!" }, class:"h6 me-3" %>
+      <%= link_to "delete", student_path(@student),  data: { "turbo-method": :delete, turbo_frame: "_top", turbo_confirm: "Are you sure? Contacts for this student will be deleted as well!" }, class:"h6" %>
     </div>
 
   </div>
 
-  <p>
-    <strong>Age: <%= student.age %></strong>
-    <% if student.adult? %>
-      <span class="badge rounded-pill text-bg-light">adult</span>
-    <% end %>
-  </p>
+  <div class="h6 mt-1 ps-sm-2">Details</div>
+  <hr class="mt-0">
 
-  <p>
-    <strong>Notes:</strong>
-    <%= student.student_notes %>
-  </p>
+  <dl class="ps-sm-2">
+
+    <% if student.age.present? %>
+      <dt class="fw-light"><small>Age</small></dt>
+      <dd>
+        <%= student.age %>
+        <% if student.adult? %>
+          <span class="badge rounded-pill text-bg-light">adult</span>
+        <% end %>
+      </dd>
+    <% end %>
+
+    <dt class="fw-light"><small>Notes</small></dt>
+    <dd>
+      <% if student.student_notes.present? %>
+        <%= student.student_notes %>
+      <% else %>
+        <div class="h6 pt-4">This student does not have any notes yet.</div>
+      <% end %>
+    </dd>
+
+  </dl>
 
   <%= turbo_frame_tag "student-contacts" do %>
-    <div class="mt-5">
-      <hr class="mb-4">
-      <div class="d-flex align-items-end mb-4">
-        <div class="h5 mb-0 pb-0">Contacts </div>
-        <div><%= link_to "new contact", new_contact_path(student: @student.id), data: { turbo_frame: "_top"}, class:"h6 ms-3" %></div>
+    <div class="mt-2">
+      <div class="d-flex align-items-end justify-content-between">
+        
+      <div class="h6 mt-1 ps-sm-2">Contacts</div>
+        <div class="mb-1 me-sm-2"><%= link_to "new contact", new_contact_path(student: @student.id), data: { turbo_frame: "_top"}, class:"h6 ms-3" %></div>
       </div>
-      <div class="row">
+      <hr class="mt-0">
+
+      <div class="row px-sm-2">
         <% if @student.contacts.any? %>
           <% @student.contacts.each do |contact| %>
             <div class="col-12 col-md-6 col-lg-4 pb-2">
@@ -37,10 +58,11 @@
           <% end %>
 
         <% else %>
-          <h6>This student does not have any contacts yet.</h6>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
+          <div class="h6 pt-2">This student does not have any contacts yet.
+            <div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
 
-</div>
+    </div>

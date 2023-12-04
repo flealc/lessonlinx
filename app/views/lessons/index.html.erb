@@ -1,40 +1,59 @@
 <div data-controller="side-bar">
 
-  <div class="d-flex align-items-end">
-    <div class="h1 mb-0 pb-0"> Lessons </div>
+  <div class="d-flex align-items-end justify-content-between">
+    <div class="h1 mb-0 pb-0 ms-sm-2"> Lessons </div>
 
-    <div class="mb-1 ps-3 ms-5">
+    <div class="mb-1 pe-sm-2 ps-4">
       <%= link_to "new", new_student_lesson_path(@student), data: { turbo_frame: "lessons-student" }, class:"h6 me-3" %>
-      <%= link_to "bulk create", bulk_new_student_lessons_path(@student), data: { turbo_frame: "lessons-student" }, class:"h6 me-3" %>
-      <%= link_to "bulk delete", select_delete_student_lessons_path(@student), data: { turbo_frame: "lessons-student" }, class:"h6" %>
+      <%= link_to "bulk create", bulk_new_student_lessons_path(@student), data: { turbo_frame: "lessons-student" }, class:"h6 me-3 text-nowrap" %>
+      <%= link_to "bulk delete", select_delete_student_lessons_path(@student), data: { turbo_frame: "lessons-student" }, class:"h6 text-nowrap" if @lessons.any?%>
     </div>
-
   </div>
+  <hr class="my-2">
 
   <%= render partial: "shared/sidebar", 
     locals: { 
-      toggle_button_action: "click->side-bar#toggleFullPage",
       array_to_iterate: current_user.students,
       link_path: ->(student_id) { student_lessons_path(student_id) },
       frame: "lessons-student"
       } %>
 
-  <div class="col-9 col-sm-10" data-controller="students-index" data-side-bar-target="contentArea">
-    <p class="h5">
-      <%= @student.full_name %>
-    </p>
-
-    <%= render partial: "lessons/filter" %>
+  <div class="col-9 col-sm-10 mt-1" data-controller="students-index" data-side-bar-target="contentArea">
+    <div class="d-flex">
+      <div class="pe-2 ps-sm-2" data-action="click->side-bar#toggleFullPage">
+        <i class="fa-solid fa-angles-left" data-side-bar-target="toggleIcon" ></i>
+      </div>
+      <div class="h5"><%= @student.full_name %></div>
+    </div>
+    
 
     <% if @lessons.any? %>
 
-      <% @lessons.each do |lesson| %>
-        <div>
-          <%= render lesson %>
-        </div>
+      <% if @student.last_lesson.present? %>
+        <div class="h6 mt-1 ps-sm-2">Last lesson</div>
+        <hr class="mt-0">
+        <%= render "students/highlighted_lesson", student: @student, lesson: @student.last_lesson %>
       <% end %>
+
+      <div class="h6 mt-3 d-sm-flex align-items-center justify-content-between text-nowrap px-sm-2">
+        All lessons (<%= @lessons.count %>) 
+        <div class="mb-0 pe-1"><%= render partial: "lessons/filter" %></div>
+      </div>
+      <hr class="my-0">
+      <div class="overflow-auto mb-0 mx-sm-2" style="max-height: 60vh;">
+        <% @lessons.each do |lesson| %>
+          <%= render lesson %>
+        <% end %>
+      </div>
+      <hr class="my-0">
     <% else %>
-      <h6> There are no lessons scheduled.</h6>
+    <hr class="my-2">
+      <div class="d-flex justify-content-center align-items-center py-5">
+        <div class="h6 mb-0">No lessons scheduled.</div>
+      </div>
+    <hr class="my-2">
+      
+
     <% end %>
   </div>
 

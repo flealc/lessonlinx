@@ -1,0 +1,49 @@
+<div id="<%= dom_id lesson %>">
+
+  <div class="card my-1 mx-sm-2">
+
+    <div class="card-header pb-1">
+      <h6 class="card-title d-flex justify-content-between">
+        <span>
+          <%= lesson.starts_at.strftime("%a, %-d %b, %Y") %>
+          <span class="card-subtitle mb-2 text-body-secondary">
+            <%= lesson.starts_at.strftime("%I:%M%P") %>
+          </span>
+        </span>
+      </h6>
+
+    </div>
+    <div class="card-body" data-students-index-target="contactCardBody">
+
+      <% if current_page?(recent_lessons_student_path(student)) %>
+
+        <div class="d-flex justify-content-around">
+          <%= link_to "Log lesson", edit_student_lesson_path(student.id, lesson), data: { turbo: false }, method: :get, class: "h6" %>
+          <%= link_to "Cancel lesson", edit_student_lesson_path(student_id: student.id, id: lesson, status: "canceled"), data: { turbo: false }, method: :get, class: "h6"%>
+        </div>
+
+      <% end %>
+
+      <% if current_page?(student_lessons_path(student)) %>
+
+        <% if lesson.lesson_notes.present? %>
+
+          <div><%= lesson.lesson_notes %></div>
+
+        <% else %>
+
+          <p class="text-body-secondary mb-0">This lesson does not have any notes. <%= link_to "Log lesson now", edit_student_lesson_path(student, lesson), data: {turbo_frame: "_top"}, class: "h6" %></p>
+
+        <% end %>
+        <div class="d-flex justify-content-end mt-1">
+          <%=link_to "edit", edit_student_lesson_path(student, lesson), data: { turbo_frame: "student-details" }, class: "h6 me-3" %>
+          <%=link_to "delete", student_lesson_path(student, lesson), data: { "turbo-method": :delete, turbo_confirm: "Are you sure?" }, class: "h6 me-3" %>
+        </div>
+
+      <% end %>
+
+    </div>
+
+  </div>
+
+</div>

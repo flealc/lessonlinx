@@ -2,8 +2,8 @@
 
 <% if current_user.past_lessons.where(status: :scheduled).any? %>
 
-  <div class="list-group list-group-flush pb-2 fw-normal small">
-    <% current_user.past_lessons.scheduled.each do |lesson| %>
+  <div class="list-group list-group-flush pb-2 fw-normal small pe-4 pe-sm-0">
+    <% current_user.past_lessons.scheduled.first(5).each do |lesson| %>
       <div class="list-group-item list-group-item-action">
         <%= lesson.student.full_name %>
         <div>
@@ -15,7 +15,7 @@
   </div>
 
 <% else %>
-  <div class="bg-body-tertiary h-100 d-flex justify-content-center align-items-center">
-    <div class="text-center text-secondary">No lessons to log.</div>
+  <div class="bg-body-tertiary h-100 d-flex justify-content-center align-items-center rounded-3">
+    <div class="text-center text-secondary text-wrap mx-3">No lessons to log.</div>
   </div>
 <% end %>

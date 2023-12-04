@@ -1,12 +1,12 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary mb-4">
+<nav class="navbar navbar-expand-lg bg-primary fw-normal mb-2 py-1 d-flex flex-align-center" data-bs-theme="dark">
   <div class="container-fluid align-items-center">
-    <a class="navbar-brand" href="/">LessonLinx</a>
+    <a class="navbar-brand" href="/"><%= image_tag 'logo.png', alt: 'LessonLinx', style: "filter: invert(99%) sepia(5%) saturate(0%) hue-rotate(165deg) brightness(117%) contrast(100%); height: 2rem; width: auto;", class: "pe-2 mb-1" %>LessonLinx</a>
     <% unless current_page?(new_user_session_path) || current_page?(new_user_registration_path) %>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <% end %>
-    <div class="collapse navbar-collapse d-flex-wrap" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse d-flex-wrap pb-1" id="navbarSupportedContent">
 
       <% if user_signed_in? %>
         <ul class="navbar-nav mb-2 mb-lg-0 d-flex">
@@ -32,20 +32,14 @@
             <% end %>
           </li>
 
-          <% else %>
-            <%= link_to false, class: "nav-link disabled", style: "color: lightgrey; text-color: lightgrey;" do %>
-              <i class="fa-regular fa-calendar-days">></i>
-              Lessons
-            <% end %>
-
           <% end %>
         </ul>
-        <div class="navbar-nav dropdown ms-lg-auto" style="min-width: initial; width: fit-content;">
+        <div class="navbar-nav dropdown ms-lg-auto bg-primary" style="min-width: initial; width: fit-content;">
           <a class="nav-link dropdown-toggle"  href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fa-solid fa-user"></i>
             My account
           </a>
-          <ul class="dropdown-menu bg-body-tertiary ms-sm-3 me-sm-3 ps-2">
+          <ul class="dropdown-menu bg-primary ms-sm-3 me-sm-3 ps-2">
             <li><%= link_to "Edit account", edit_user_registration_path, class: "nav-link" %></li>
             <li><%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-link" %></li>
           </ul>

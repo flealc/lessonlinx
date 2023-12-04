@@ -1,11 +1,11 @@
 <div id="<%= dom_id lesson %>" data-controller="card">
 
-  <div class="card mb-1">
+  <div class="card mt-3">
     <div class="card-header pb-1" data-action="click->card#expandCard" data-card-target="cardTitleBar">
       <div class="row align-items-center">
         
         <div class="col-10 col-sm-8 col-md-auto d-flex align-items-center">
-          <div class="text-nowrap">
+          <div class="text-nowrap", style="width: 140px;">
             <%= lesson.starts_at.strftime("%a, %-d %b, %Y") %>
           </div>
         </div>
@@ -22,10 +22,16 @@
       </div>
     </div>
     <div class="card-body collapse" data-card-target="cardBody">
-
-
+      <% if lesson.lesson_notes.present? %>
+        
       <div><%= lesson.lesson_notes %></div>
-      <div class="d-flex justify-content-end">
+
+      <% else %>
+
+      <p class="text-body-secondary mb-0">This lesson does not have any notes. <%= link_to "Log lesson now", edit_student_lesson_path(lesson.student, lesson), data: {turbo_frame: "_top"}, class: "h6" %></p>
+
+      <% end %>
+      <div class="d-flex justify-content-end mt-1">
         <%=link_to "edit", edit_student_lesson_path(lesson.student, lesson), data: { turbo_frame: "student-details" }, class: "h6 me-3" %>
         <%=link_to "delete", student_lesson_path(lesson.student, lesson), data: { "turbo-method": :delete, turbo_confirm: "Are you sure?" }, class: "h6 me-3" %>
       </div>

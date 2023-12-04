@@ -1,18 +1,24 @@
 <%= turbo_frame_tag "recent_lessons_frame" do %>
-<div class="h5 mt-2"><%= @student.full_name %></div>
+  <div class="d-flex">
+    <div class="pe-2 ps-sm-2" data-action="click->side-bar#toggle">
+      <i class="fa-solid fa-angles-left" data-side-bar-target="toggleIcon" ></i>
+    </div>
+    <div class="h5"><%= @student.full_name %></div>
+  </div>
 
   <% if @student.upcoming_lesson.present? %>
-    <div class="h6 mt-3">Upcoming lesson</div>
-  <hr class="mt-0">
-    <%= render "students/upcoming_lesson", student: @student %>
+    <div class="h6 mt-1 ps-sm-2">Upcoming lesson</div>
+    <hr class="mt-0">
+    <%= render "students/highlighted_lesson", student: @student, lesson: @student.upcoming_lesson %>
   <% end %>
 
-    <div class="h6 mt-3">Previous lessons</div>
+  <div class="h6 mt-3 ps-sm-2">Previous lessons</div>
   <hr class="mt-0">
-  <div data-bs-spy="scroll" data-bs-target="" data-bs-smooth-scroll="true" class="scrollspy-example-2" tabindex="0">
+  <div class="overflow-auto mb-0 mx-sm-2" style="max-height: 60vh;">
     <% @recent_lessons.each do |lesson| %>
       <%= render 'users/dashboard_lesson', lesson: lesson %>
     <% end %>
   </div>
+  <hr class="mt-0">
 
 <% end %>

@@ -1,21 +1,22 @@
 <div data-controller="side-bar">
   <div class="d-flex align-items-end">
-    <div class="h1 mb-0 pb-0">Students</div>
-    <div class="mb-1 ps-3">
-      <%= link_to "new", new_student_path, data: { turbo_frame: "student-details" }, class:"h6" %>
+    <div class="h1 mb-0 pb-0 ps-sm-2 col-5 col-sm-2">Students</div>
+    <div class="mb-1 col-7 col-sm-10 ps-sm-3">
+      <%= link_to "new", new_student_path, data: { turbo_frame: "_top" }, class:"h6 ps-sm-2" %>
     </div>
   </div>
+  <hr class="my-2">
+
 
   <%= render partial: "shared/sidebar", 
     locals: { 
-      toggle_button_action: "click->side-bar#toggleFullPage",
       array_to_iterate: current_user.students,
       link_path: ->(student_id) { student_path(student_id) },
       frame: "student-details"
       } %>
 
-  <div class="col-9 col-sm-10 mt-2" data-side-bar-target="contentArea">
-      <div class="bg-body-tertiary h-100 text-center py-5 px-5">Your students' information will be displayed here.
+  <div class="col-9 col-sm-10 mt-2 px-0" data-side-bar-target="contentArea">
+      <div class="bg-body-tertiary h-100 text-center py-5 px-5 text-wrap mx-3 rounded-3">Your students' information will be displayed here.
       </div>
   </div>
 
