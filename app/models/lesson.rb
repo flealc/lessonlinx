@@ -2,16 +2,15 @@
 #
 # Table name: lessons
 #
-#  id           :uuid             not null, primary key
-#  duration     :integer          not null
-#  ends_at      :datetime         not null
-#  lesson_notes :text
-#  starts_at    :datetime         not null
-#  status       :string           default("scheduled"), not null
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  student_id   :uuid             not null
-#  teacher_id   :uuid             not null
+#  id         :uuid             not null, primary key
+#  duration   :integer          not null
+#  ends_at    :datetime         not null
+#  starts_at  :datetime         not null
+#  status     :string           default("scheduled"), not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  student_id :uuid             not null
+#  teacher_id :uuid             not null
 #
 # Indexes
 #
@@ -32,6 +31,8 @@ class Lesson < ApplicationRecord
   belongs_to :teacher, class_name: "User", counter_cache: true
   belongs_to :student, counter_cache: true
 
+  has_rich_text :lesson_notes
+  
   enum status: { scheduled: "scheduled", taught: "taught", canceled: "canceled" } 
 
   scope :default_order, -> { order(starts_at: :desc) }
