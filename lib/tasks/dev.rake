@@ -65,16 +65,16 @@ task({ :sample_data => :environment }) do
   students = Student.all
 
   students.each do |student|
-    starting_date = Faker::Time.backward(days: 20, period: [:afternoon, :morning].sample)
+    starting_date = Faker::Time.backward(days: 20, period: [:afternoon, :morning].sample).change(sec: 00) # Needed to change seconds to 00 because of Safari datetime field validation bug
     10.times do
       duration = [30, 45, 60].sample
       
       student.lessons.create(
-        lesson_notes: Faker::Lorem.paragraph(sentence_count: 10),
+        lesson_notes: "<p>#{Faker::Lorem.paragraphs(number: 2).join('</p><p>')}</p>",
         starts_at: starting_date,
         ends_at: starting_date + duration.minutes,
         duration: duration,
-        status: starting_date < Date.current ? %w[taught canceled scheduled].sample : "scheduled",
+        status: starting_date < Date.current ? %w[taught canceled].sample : "scheduled",
         teacher_id: student.teacher_id,     
       )
 

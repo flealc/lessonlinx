@@ -1,4 +1,4 @@
-<%= form_with(model: lesson, url: [@student, @lesson]) do |form| %>
+<%= form_with(model: lesson, url: [@student, @lesson], data:{ controller:"trix"}) do |form| %>
   
 
   <% if lesson.new_record? %>
@@ -27,7 +27,7 @@
 
   <div class="mb-2"> 
     <%= form.label :lesson_notes, style: "display: block", class: "form-label" %>
-    <%= form.text_area :lesson_notes, class: "form-control", rows: 3 %>
+    <%= form.rich_text_area :lesson_notes, class: "form-control", rows: 3, class: "trix-content" %>
   </div>
 
   <div>
