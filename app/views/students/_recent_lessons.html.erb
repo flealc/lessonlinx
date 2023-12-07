@@ -12,13 +12,15 @@
     <%= render "students/highlighted_lesson", student: @student, lesson: @student.upcoming_lesson %>
   <% end %>
 
-  <div class="h6 mt-3 ps-sm-2">Previous lessons</div>
-  <hr class="mt-0">
-  <div class="overflow-auto mb-0 mx-sm-2" style="max-height: 60vh;">
-    <% @recent_lessons.each do |lesson| %>
-      <%= render 'users/dashboard_lesson', lesson: lesson %>
-    <% end %>
-  </div>
-  <hr class="mt-0">
+  <% if @recent_lessons.where("starts_at <= ?", Time.current).exists? %>
+    <div class="h6 mt-3 ps-sm-2">Previous lessons</div>
+    <hr class="mt-0">
+    <div class="overflow-auto mb-0 mx-sm-2" style="max-height: 60vh;">
+      <% @recent_lessons.each do |lesson| %>
+        <%= render 'users/dashboard_lesson', lesson: lesson %>
+      <% end %>
+    </div>
+    <hr class="mt-0">
+  <% end %>
 
 <% end %>
