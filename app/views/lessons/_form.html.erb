@@ -15,9 +15,9 @@
     <%= form.datetime_field :starts_at, class: "form-control" %>
   </div>
 
-  <div class="col-md-1 mb-2">
+  <div class="col-md-2 mb-2">
     <%= form.label :duration, style: "display: block", class: "form-label" %>
-    <%= form.number_field :duration, class: "form-control" %>
+    <div class="d-flex align-items-end"><%= form.number_field :duration, class: "form-control", style: "max-width: 60px;" %> <span class="ps-2 pb-1">min.</span></div>
   </div>
 
   <div class="col-md-2 mb-2">
