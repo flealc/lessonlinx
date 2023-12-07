@@ -1,6 +1,6 @@
 <%= render "shared/breadcrumbs" %>
 
-<div data-controller="students-index side-bar" class="row h-100">
+<div data-controller="students-index side-bar" data-side-bar-show-value="<%= image_path('show-sidebar.svg') %>" data-side-bar-hide-value="<%= image_path('hide-sidebar.svg') %>" class="row h-100">
 
   <%= render partial: "shared/sidebar", 
     locals: { 
@@ -12,7 +12,7 @@
   <div class="col-9 col-sm-10" data-controller="students-index" data-side-bar-target="contentArea">
     <div class="d-flex">
       <div class="pe-2 ps-sm-2" data-action="click->side-bar#toggleFullPage">
-        <i class="fa-solid fa-angles-left" data-side-bar-target="toggleIcon" ></i>
+        <img src="<%= image_path('hide-sidebar.svg') %>" alt="Toggle Icon" data-side-bar-target="toggleIcon" style="width: 18px; height: auto;" class="mb-1">
       </div>
       <div class="h5"><%= @student.full_name %></div>
     </div>

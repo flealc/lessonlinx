@@ -1,4 +1,4 @@
-<div data-controller="side-bar">
+<div data-controller="side-bar" data-side-bar-show-value="<%= image_path('show-sidebar.svg') %>" data-side-bar-hide-value="<%= image_path('hide-sidebar.svg') %>" >
   <div class="d-flex align-items-end justify-content-between">
     <div class="h1 mb-0 pb-0 ps-sm-2 col-5 col-sm-2">Students</div>
     <div class="mb-1 me-sm-2 ps-4">
@@ -14,7 +14,7 @@
       frame: "_top"
       } %>
 
-  <div class="col-9 col-sm-10 mt-2" data-side-bar-target="contentArea">
+  <div class="col-9 col-sm-10 mt-1" data-side-bar-target="contentArea">
     <% if current_user.students.any? %>      
         <%= render @student %>
     <% end %>
