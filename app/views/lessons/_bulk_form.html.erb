@@ -14,7 +14,7 @@
 
   <div class="mb-2 col-md-1">
     <%= form.label "bulk[duration]", "Duration", style: "display: block", class: "form-label" %>
-    <%= form.number_field "bulk[duration]", class: "form-control" %>
+    <div class="d-flex align-items-end"><%= form.number_field "bulk[duration]", class: "form-control", style: "max-width: 60px;" %> <span class="ps-2 pb-1">min.</span></div>
   </div>
 
  <div class="mb-2">

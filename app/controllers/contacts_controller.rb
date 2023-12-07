@@ -20,7 +20,6 @@ class ContactsController < ApplicationController
 
     @breadcrumbs = [
       { content: @contact.student.full_name, href: student_path(@contact.student) },
-      { content: "Contacts", href: student_path(@contact.student) },
       { content: "Add contact", href: "#" },
     ]
   end
@@ -29,8 +28,7 @@ class ContactsController < ApplicationController
   def edit
     @breadcrumbs = [
       { content: @contact.student.full_name, href: student_path(@contact.student) },
-      { content: "Contacts", href: student_path(@contact.student) },
-      { content: @contact.full_name, href: "#" },
+      { content: "Contacts / #{@contact.full_name}", href: "#" },
     ]
   end
 

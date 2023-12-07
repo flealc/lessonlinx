@@ -5,8 +5,8 @@
 
     <div class="mb-1 pe-sm-2 ps-4">
       <%= link_to "new", new_student_lesson_path(@student), data: { turbo_frame: "lessons-student" }, class:"h6 me-3" %>
-      <%= link_to "bulk create", bulk_new_student_lessons_path(@student), data: { turbo_frame: "lessons-student" }, class:"h6 me-3 text-nowrap" %>
-      <%= link_to "bulk delete", select_delete_student_lessons_path(@student), data: { turbo_frame: "lessons-student" }, class:"h6 text-nowrap" if @lessons.any?%>
+      <%= link_to "batch create", bulk_new_student_lessons_path(@student), data: { turbo_frame: "lessons-student" }, class:"h6 me-3 text-nowrap" %>
+      <%= link_to "batch delete", select_delete_student_lessons_path(@student), data: { turbo_frame: "lessons-student" }, class:"h6 text-nowrap" if @lessons.any?%>
     </div>
   </div>
   <hr class="my-2">
