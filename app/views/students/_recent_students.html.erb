@@ -1,8 +1,8 @@
-<div class="h5 ms-3 mb-0">Recent students</div>
+<div class="h5 ms-3 mb-2">Recent students</div>
 
 <% if current_user.taught_lessons.any? %>
   <% recent_students = current_user.taught_lessons.includes(:student).map(&:student).uniq { |student| student.id }.first(10) %>
-  <div class="list-group list-group-flush pb-2 fw-normal small pe-4 pe-sm-0">
+  <div class="list-group list-group-flush fw-normal small me-4 me-sm-0 rounded-3">
 
     <% recent_students.each do |student| %>
 

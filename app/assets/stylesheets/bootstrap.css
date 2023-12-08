@@ -11,6 +11,9 @@
  * Copyright 2011-2023 The Bootstrap Authors
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+
+
+/* linear-gradient(to top, #e8f1f5 0%, #f7f7f7 100%) */
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
 :root,
 [data-bs-theme="light"] {
@@ -256,7 +259,16 @@ table {
   }
 }
 
+html {
+  min-height: 100%;
+  background-attachment:scroll;
+  background-repeat: no-repeat; 
+  background: linear-gradient(to top, #e8f1f5 0%, #f7f7f7 100%);
+}
+
 body {
+
+  
   margin: 0;
   font-family: var(--bs-body-font-family);
   font-size: var(--bs-body-font-size);
@@ -264,7 +276,7 @@ body {
   line-height: var(--bs-body-line-height);
   color: var(--bs-body-color);
   text-align: var(--bs-body-text-align);
-  background-color: var(--bs-body-bg);
+  /* background-color: var(--bs-body-bg); */
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
@@ -9531,10 +9543,11 @@ fieldset:disabled .btn {
 
 .bg-body {
   --bs-bg-opacity: 1;
-  background-color: rgba(
+  /* background-color: rgba(
     var(--bs-body-bg-rgb),
     var(--bs-bg-opacity)
-  ) !important;
+  ) !important; */
+  background-color: linear-gradient(to top, #e8f1f5 0%, #f7f7f7 100%) !important; 
 }
 
 .bg-transparent {
@@ -12963,6 +12976,7 @@ label,
 .list-group {
   font-size: 0.875rem;
   font-weight: 300;
+  border: 1px solid #dee2e6;
 }
 
 .list-group-item.disabled,
