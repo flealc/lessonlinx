@@ -23,7 +23,7 @@
         <%= render partial: "lessons/filter" %>
 
         <div class="pe-4 d-flex align-items-center">
-        <%= submit_tag "delete selected", data: { turbo_confirm: "Are you sure?" }, class: "btn btn-link btn-sm ms-1 px-0 py-0 text-nowrap", form: "bulk-delete", style: "color: black;" %>
+        <%= submit_tag "delete selected", data: { turbo_confirm: "Are you sure?" }, class: "btn btn-link btn-sm ms-1 px-0 py-0 text-nowrap", form: "bulk-delete" %>
           <%= label_tag "select_all", "Select all", class: "mx-1 mb-1 form-text" %>
           <%= check_box_tag "select_all", "1", false, id: "select_all", data: { action: "change->students-index#selectAll" } %>
          
@@ -34,15 +34,15 @@
         <div class="overflow-auto mb-0 mx-sm-2" style="max-height: 75vh;">
           <% @lessons.each do |lesson| %>
             <div class="card mt-3">
-              <div class="card-header pb-1">
+              <div class="card-header pb-0">
                 <div class="row align-items-center">
                   <div class="col-10 col-sm-8 col-md-auto d-flex align-items-center">
-                    <div class="text-nowrap">
+                    <div class="text-nowrap card-title">
                       <%= lesson.starts_at.strftime("%a, %-d %b, %Y") %>
                     </div>
                   </div>
                   <div class="col-10 col-sm-8 col-md-auto d-flex justify-content-start mt-2 mt-sm-0">
-                    <div class="text-body-secondary">
+                    <div class="card-subtitle">
                       <%= lesson.starts_at.strftime("%I:%M%P") %>
                     </div>
                   </div>

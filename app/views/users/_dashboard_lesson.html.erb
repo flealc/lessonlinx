@@ -1,15 +1,15 @@
 <div id="<%= dom_id lesson %>">
 
   <div class="card mb-3">
-    <div class="card-header pb-1">
-      <h6 class="card-title d-flex justify-content-between">
-        <span>
+    <div class="card-header pb-0 mb-0">
+      <div class="card-title d-flex justify-content-between">
+        <span class="card-title mb-0">
           <%= lesson.starts_at.strftime("%a, %-d %b, %Y") %>
-          <span class="card-subtitle mb-2 text-body-secondary">
+          <span class="card-subtitle mb-2">
             <%= lesson.starts_at.strftime("%I:%M%P") %>
           </span>
         </span>
-      </h6>
+      </div>
 
     </div>
     <div class="card-body" data-students-index-target="contactCardBody">
@@ -20,7 +20,7 @@
 
       <% else %>
 
-      <p class="text-body-secondary">This lesson does not have any notes. <%= link_to "Log lesson now", edit_student_lesson_path(lesson.student, lesson), data: {turbo_frame: "_top"}, class: "h6 text-primary" %></p>
+      <p class="text-body-secondary">This lesson does not have any notes. <%= link_to "Log lesson now", edit_student_lesson_path(lesson.student, lesson), data: {turbo_frame: "_top"}, class: "h6" %></p>
 
       <% end %>
     

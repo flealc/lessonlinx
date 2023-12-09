@@ -7,7 +7,7 @@
       <div class="list-group-item list-group-item-action">
         <%= lesson.student.full_name %>
         <div>
-          <%= link_to "Log", edit_student_lesson_path(lesson.student, lesson, lesson: { status: "taught" }), class: "stretched-link", style: "color: black;" %>
+          <%= link_to "Log", edit_student_lesson_path(lesson.student, lesson, lesson: { status: "taught" }), class: "stretched-link" %>
           <%= lesson.starts_at.strftime("%b %d, %-l:%M %p") %>
         </div>
       </div>

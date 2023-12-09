@@ -2,15 +2,15 @@
 
   <div class="card my-1 mx-sm-2">
 
-    <div class="card-header pb-1">
-      <h6 class="card-title d-flex justify-content-between">
+    <div class="card-header pb-0">
+      <div class="card-title d-flex justify-content-between">
         <span>
           <%= lesson.starts_at.strftime("%a, %-d %b, %Y") %>
-          <span class="card-subtitle mb-2 text-body-secondary">
+          <span class="card-subtitle mb-2">
             <%= lesson.starts_at.strftime("%I:%M%P") %>
           </span>
         </span>
-      </h6>
+      </div>
 
     </div>
     <div class="card-body" data-students-index-target="contactCardBody">

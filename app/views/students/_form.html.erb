@@ -1,15 +1,5 @@
 <%= form_with(model: student) do |form| %>
-  <% if student.errors.any? %>
-    <div style="color: red">
-      <div class="h3"><%= pluralize(student.errors.count, "error") %> prohibited this student from being saved</div>
-
-      <ul>
-        <% student.errors.each do |error| %>
-          <div class="h6"><%= error.full_message %></div>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  
 
   <div class=" mb-2 col-md-4">
     <%= form.label :first_name, class: "form-label" %>
