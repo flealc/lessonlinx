@@ -30,7 +30,7 @@
           <%= render partial: 'shared/flash', locals: { message: notice, role: "primary" }  %>
         <% end %>
         <% if alert.present? %>
-          <%= render partial: 'shared/flash', locals: { message: alert, role: "danger" } %>
+          <%= render partial: 'shared/flash', locals: { message: alert, role: "warning" } %>
         <% end %>
       </div>
 
