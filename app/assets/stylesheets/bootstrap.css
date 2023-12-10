@@ -72,7 +72,7 @@
   --bs-danger-bg-subtle: #f8d4d5;
   --bs-light-bg-subtle: #fcfcfd;
   --bs-dark-bg-subtle: #ced4da;
-  --bs-primary-border-subtle: #1c7cbf;
+  --bs-primary-border-subtle: rgba(149, 217, 236, 0.921);
   --bs-secondary-border-subtle: white;
   --bs-success-border-subtle: #ace1cc;
   --bs-info-border-subtle: #a9cae1;
@@ -5156,7 +5156,7 @@ span.card-subtitle {
 
 .alert-dismissible {
   position: fixed;
-  top: 3rem;
+  top: 4.5rem;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1050; 
