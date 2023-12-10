@@ -10,10 +10,19 @@
           </div>
         </div>
         
-        <div class="col-10 col-sm-8 col-md-auto d-flex justify-content-start mt-2 mt-sm-0">
-          <div class="card-subtitle">
+        <div class="col-10 col-sm-8 col-md-auto d-flex justify-content-start align-items-center mt-2 mt-sm-0">
+          <div class="card-subtitle mb-1">
             <%= lesson.starts_at.strftime("%I:%M%P") %>
           </div>
+
+          <% if lesson.canceled? %>
+            <span class="badge rounded-pill text-bg-warning px-2 ms-4 mb-2">canceled</span>
+          <% end %>
+          
+          <% if lesson.taught? %>
+            <span class="badge rounded-pill text-bg-info px-2 ms-4 mb-2">taught</span>
+          <% end %>
+          
         </div>
 
         <div class="col-2 col-sm-4 col-md-auto ms-auto">

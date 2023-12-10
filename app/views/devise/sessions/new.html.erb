@@ -1,46 +1,43 @@
-<div class="row d-flex align-items-center justify-content-center my-5">
+<div class="row d-flex align-items-end justify-content-center my-5">
   
   
-  <div class="col-md-6 text-left mb-1">
+  <div class="col-md-6 mb-5 d-flex flex-column align-items-center">
     <h1 style="font-size: 3rem; line-height: 1.2; font-weight: bold; color: #05406a; margin-bottom: 0.5em;">Your students, <br> one tap away</h1>
 
-    <div class="d-flex ms-4 ms-sm-0 mt-5">
-      <div>
-        <div class="fs-3"><i class="fa-regular fa-paper-plane" style="color: #05406a;"></i></div>
+    <div>
+      <div class="d-flex ms-4 ms-sm-0 mt-5">
+        <div>
+          <div class="fs-3"><i class="fa-regular fa-paper-plane" style="color: #05406a;"></i></div>
+        </div>
+        <div class="w-auto ms-2">
+          <div class="h5 mt-2 fw-medium" style="color: #05406a;">Ditch the paper trail</div>
+          <div style="color: #1c7cbf;">Keep all your lesson notes in <br> one secure place.</div>
+        </div>
       </div>
-
-      <div class="w-auto ms-2">
-        <div class="h5 mt-2 fw-medium" style="color: #05406a;">Ditch the paper trail</div>
-        <div style="color: #1c7cbf;">Keep all your lesson notes in <br> one secure place.</div>
+      <div class="d-flex ms-4 ms-sm-0 mt-4">
+        <div>
+          <div class="fs-3"><i class="fa-regular fa-calendar-days" style="color: #05406a;"></i></div>
+        </div>
+        <div class="w-auto ms-2">
+          <div class="h5 mt-2 fw-medium" style="color: #05406a;">Synchronize your success</div>
+          <div style="color: #1c7cbf;">Keep your teaching calendar  <br> up-to-date across all your devices.</div>
+        </div>
       </div>
-    </div>
-
-    <div class="d-flex ms-4 ms-sm-0 mt-4">
-      <div>
-        <div class="fs-3"><i class="fa-regular fa-calendar-days" style="color: #05406a;"></i></div>
-      </div>
-
-      <div class="w-auto ms-2">
-        <div class="h5 mt-2 fw-medium" style="color: #05406a;">Synchronize your success</div>
-        <div style="color: #1c7cbf;">Keep your teaching calendar  <br> up-to-date across all your devices.</div>
-      </div>
-    </div>
-
-    <div class="d-flex ms-4 ms-sm-0 mt-4">
-      <div>
-        <div class="fs-3"><i class="fa-regular fa-envelope-open" style="color: #05406a;"></i></div>
-      </div>
-
-      <div class="w-auto ms-2">
-        <div class="h5 mt-2 fw-medium" style="color: #05406a;">Stay informed with daily digests</div>
-        <div style="color: #1c7cbf;">Email digests give you a concise <br> snapshot of your upcoming lessons.</div>
+      <div class="d-flex ms-4 ms-sm-0 mt-4">
+        <div>
+          <div class="fs-3"><i class="fa-regular fa-envelope-open" style="color: #05406a;"></i></div>
+        </div>
+        <div class="w-auto ms-2">
+          <div class="h5 mt-2 fw-medium" style="color: #05406a;">Stay informed with daily digests</div>
+          <div style="color: #1c7cbf;">Email digests give you a concise <br> snapshot of your upcoming lessons.</div>
+        </div>
       </div>
     </div>
 
     <div class="h4 mt-5 mb-0 fw-medium" style="color: #05406a;">No account? <br> We're giving those out for free!</div>
-    <div class="" style="color: #05406a;">(for a limited time only 🙃)</div>
+    <div style="color: #05406a;">(for a limited time only 🙃)</div>
     
-  <%= link_to "I want one now!", new_registration_path(resource_name), class: "btn btn-warning mt-4", style: "color: #fff; background-color: #fb8042;" %><br />
+    <%= link_to "I want one now!", new_registration_path(resource_name), class: "btn btn-warning mt-4 align-self-center", style: "color: #fff; background-color: #fb8042;" %><br />
   </div>
 
  
@@ -48,7 +45,7 @@
 
   <div class="col-md-6 flex-column align-items-center justify-content-center">
     
-      <div class="h2 text-left mb-3 text-sm-center fw-medium">Welcome!</div>
+      <div class="h2 text-left mb-3 text-sm-center fw-medium" style="color: #05406a;" >Have an account?</div>
 
       <%= form_with(model: resource, as: resource_name, url: session_path(resource_name), html: { class: 'form-horizontal' }) do |f| %>
         <div class="d-flex align-items-start justify-content-center flex-wrap">

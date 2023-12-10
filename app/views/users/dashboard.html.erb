@@ -15,7 +15,7 @@
   <div class="col-9 col-sm-8 mt-1" data-side-bar-target="contentArea">
     <turbo-frame id="recent_lessons_frame", src="<%= recent_lessons_student_path(week_lessons.first) if week_lessons.present? && current_user.students.exists? && current_user.students.first.lessons.exists? %>", class="align-items-center justify-content-center" >
 
-      <div class="bg-body-tertiary h-100 text-center py-5 px-5 rounded-3">
+      <div class="bg-body-tertiary h-100 text-center py-5 px-5 placeholder-custom rounded-3">
         <div class="h5">Welcome!</div>
         This page will populate with helpful information as you begin to <%= link_to "add students", students_path, data: { turbo_frame: "_top" }, class: "h6" %> and schedule lessons.
       </div>

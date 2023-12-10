@@ -3,15 +3,30 @@
   <div class="card my-1 mx-sm-2">
 
     <div class="card-header pb-0">
-      <div class="card-title d-flex justify-content-between">
-        <span>
-          <%= lesson.starts_at.strftime("%a, %-d %b, %Y") %>
-          <span class="card-subtitle mb-2">
-            <%= lesson.starts_at.strftime("%I:%M%P") %>
-          </span>
-        </span>
-      </div>
 
+      <div class="row align-items-center">
+
+        <div class="col-10 col-sm-8 col-md-auto d-flex align-items-center">
+          <div class="text-nowrap card-title", style="width: 140px;">
+            <%= lesson.starts_at.strftime("%a, %-d %b, %Y") %>
+          </div>
+        </div>
+
+        <div class="col-10 col-sm-8 col-md-auto d-flex justify-content-start align-items-center mt-2 mt-sm-0">
+          <div class="card-subtitle mb-1">
+            <%= lesson.starts_at.strftime("%I:%M%P") %>
+          </div>
+
+          <% if lesson.canceled? %>
+            <span class="badge rounded-pill text-bg-warning px-2 ms-4 mb-2">canceled</span>
+          <% end %>
+
+          <% if lesson.taught? %>
+            <span class="badge rounded-pill text-bg-info px-2 ms-4 mb-2">taught</span>
+          <% end %>
+
+        </div>
+      </div>
     </div>
     <div class="card-body" data-students-index-target="contactCardBody">
 

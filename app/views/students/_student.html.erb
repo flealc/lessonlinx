@@ -2,7 +2,7 @@
   <div class="d-flex align-items-end pb-2 justify-content-between">
     <div class="d-flex">
       <div class="pe-2 ps-sm-2" data-action="click->side-bar#toggleFullPage">
-        <img src="<%= image_path('hide-sidebar.svg') %>" alt="Toggle Icon" data-side-bar-target="toggleIcon" style="width: 16px; height: auto;" class="mb-1">
+        <img src="<%= image_path('hide-sidebar.svg') %>" alt="Toggle Icon" data-side-bar-target="toggleIcon" style="width: 16px; height: auto;" class="mb-1 sidebar-icon">
       </div>
       <div class="h5 mb-0 pb-0 me-3 text-nowrap"><%= student.full_name %></div>
     </div>
@@ -24,7 +24,7 @@
       <dd>
         <%= student.age %>
         <% if student.adult? %>
-          <span class="badge rounded-pill text-bg-light px-2">adult</span>
+          <span class="badge rounded-pill text-bg-warning px-2">adult</span>
         <% end %>
       </dd>
     <% end %>
@@ -34,7 +34,7 @@
       <% if student.student_notes.present? %>
         <%= student.student_notes %>
       <% else %>
-        <div class="h6 pt-4">This student does not have any notes yet.</div>
+        <div class="h6 pt-4 pb-4">This student does not have any notes yet.</div>
       <% end %>
     </dd>
 
