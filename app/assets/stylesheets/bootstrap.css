@@ -72,7 +72,7 @@
   --bs-danger-bg-subtle: #f8d4d5;
   --bs-light-bg-subtle: #fcfcfd;
   --bs-dark-bg-subtle: #ced4da;
-  --bs-primary-border-subtle: rgba(149, 217, 236, 0.921);
+  --bs-primary-border-subtle: rgba(49, 152, 180, 0.921);
   --bs-secondary-border-subtle: white;
   --bs-success-border-subtle: #ace1cc;
   --bs-info-border-subtle: #a9cae1;
@@ -263,8 +263,9 @@ html {
   min-height: 100%;
   background-attachment:scroll;
   background-repeat: no-repeat; 
-  background: linear-gradient(to top, #dee2f8 0%, #ffffff 100%);
+  background: linear-gradient(to top, #d3ebfad9 0%, #ffffff 100%);
 }
+/*  #dee2f8  */
 
 body {
   margin: 0;
@@ -5180,7 +5181,7 @@ span.card-subtitle {
 
 .alert-primary {
   --bs-alert-color: #fff;
-  --bs-alert-bg: var(--bs-primary-bg-subtle);
+  --bs-alert-bg: #3884baf2;
   --bs-alert-border-color: var(--bs-primary-border-subtle);
   --bs-alert-link-color: var(--bs-primary-text-emphasis);
 }

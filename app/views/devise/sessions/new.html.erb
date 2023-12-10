@@ -1,11 +1,11 @@
-<div class="row d-flex align-items-end justify-content-center my-5">
+<div class="row d-flex align-items-end justify-content-between my-5">
   
   
-  <div class="col-md-6 mb-5 d-flex flex-column align-items-center">
+  <div class="col-md-5 col-xxxl-4 mb-5 d-flex flex-column align-items-center">
     <h1 style="font-size: 3rem; line-height: 1.2; font-weight: bold; color: #05406a; margin-bottom: 0.5em;">Your students, <br> one tap away</h1>
 
     <div>
-      <div class="d-flex ms-4 ms-sm-0 mt-5">
+      <div class="d-flex ms-4 ms-sm-0 mt-3">
         <div>
           <div class="fs-3"><i class="fa-regular fa-paper-plane" style="color: #05406a;"></i></div>
         </div>
@@ -45,7 +45,7 @@
 
   <div class="col-md-6 flex-column align-items-center justify-content-center">
     
-      <div class="h2 text-left mb-3 text-sm-center fw-medium" style="color: #05406a;" >Have an account?</div>
+      <div class="h2 text-left mb-3 text-sm-center fw-medium" style="color: #05406a;">Have an account?</div>
 
       <%= form_with(model: resource, as: resource_name, url: session_path(resource_name), html: { class: 'form-horizontal' }) do |f| %>
         <div class="d-flex align-items-start justify-content-center flex-wrap">
@@ -79,4 +79,5 @@
     <img src="<%= asset_path('landing.png') %>" alt="Image featuring education and learning-inspired elements." style="max-width: 100%; height: auto;">
 
   </div>
+
 </div>
