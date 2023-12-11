@@ -2,6 +2,9 @@ require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
 
+  # Set mailer preview route
+  config.action_mailer.preview_path = "#{Rails.root}/test/mailers/previews"
+  
   # Set ActiveRecord timezone
   config.time_zone = "UTC"
 

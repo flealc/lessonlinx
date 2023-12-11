@@ -1,31 +1,67 @@
-<h1 class="h1 my-0 pb-0 ps-sm-2 ">Your teaching schedule for today</div>
-  <hr class="my-2"></h1>
-<h4><%= Date.today.strftime("%a, %b %e, %Y") %></h6>
+<div class="container">
 
-<p>Hello, <%= @user.first_name %>! Here is everything you need to rock those lessons today.</p>
-<p>Happy teaching!</p>
+  <div class= "col-md-8 offset-1">
+  </div>
 
-<hr>
+  <div class="h3 my-0 pb-0 ps-sm-2 mt-3 fw-medium" style="color: #05406a;">Your teaching schedule for today</div>
+  <hr class="mt-2">
+  <div class=" h-100 text-left pb-5 ps-sm-2">
+    <p class="h6 mb-3 " style="color: #05406a;"><strong>Hello, <%= @user.first_name %>!</strong> </p>
+    <p class="h6 mb-3"> Here is everything you need to rock those lessons today. <br>
+       Happy teaching!</p>
 
-<% @user.todays_lessons.each do |lesson| %>
+    <div class="row">
 
-  <h5>
-    <%= lesson.student.full_name %>
-    <%= lesson.starts_at.in_time_zone(@user.timezone).strftime("%l:%M %P") %>
-    (<%= lesson.duration %> min.)
-  </h5>
+      <div class="h5"><%= Date.today.strftime("%a, %b %e, %Y") %></div>
+      <div class="col-9 col-sm-8 mt-1">
 
-  <h6>
+        <% @user.todays_lessons.each do |lesson| %>
 
-    Previous Lesson (<%= lesson.previous_lesson.starts_at.in_time_zone(@user.timezone).strftime("%a, %b%e, %Y") %>)
-  </h6>
-  
-  <% if lesson.previous_lesson.lesson_notes.present?%>
-    
-  <p><%= lesson.previous_lesson.lesson_notes %></p>
-  <% else %>
-  <p> This lesson doesn't have any notes. </p>
-    
-  <% end %>
+          <div class="card mb-3">
+            <div class="card-header pb-0">
 
-<% end %>
+              <div class="row align-items-center">
+
+                <div class="col-10 col-sm-8 col-md-auto d-flex align-items-center">
+                  <div class="text-nowrap card-title">
+                    <%= lesson.student.full_name %>
+                  </div>
+                </div>
+
+                <div class="col-10 col-sm-8 col-md-auto d-flex justify-content-start align-items-center mt-2 mt-sm-0">
+                  <div class="card-subtitle mb-1">
+                    <%= lesson.starts_at.strftime("%I:%M%P") %>
+                    <%= lesson.duration %> min. 
+                  </div>
+
+                  <% if lesson.canceled? %>
+                    <span class="badge rounded-pill text-bg-warning px-2 ms-4 mb-2">canceled</span>
+                  <% end %>
+
+                  <% if lesson.taught? %>
+                    <span class="badge rounded-pill text-bg-info px-2 ms-4 mb-2">taught</span>
+                  <% end %>
+
+                </div>
+              </div>
+            </div>
+            <div class="card-body" data-students-index-target="contactCardBody">
+
+              <h6>
+                Previous Lesson (<%= lesson.previous_lesson.starts_at.in_time_zone(@user.timezone).strftime("%a, %b%e, %Y") %>)
+              </h6>
+
+              <% if lesson.previous_lesson.lesson_notes.present?%>
+                <p><%= lesson.previous_lesson.lesson_notes %></p>
+              <% else %>
+                <p> This lesson doesn't have any notes. </p>
+              <% end %>
+
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>
