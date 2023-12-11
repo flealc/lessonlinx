@@ -57,7 +57,14 @@ class User < ApplicationRecord
         e.dtstart = Icalendar::Values::DateTime.new(lesson.starts_at, "tzid" => "UTC")
         e.dtend = Icalendar::Values::DateTime.new(lesson.ends_at, "tzid" => "UTC")
         e.summary = lesson.canceled? ? "#{lesson.student.full_name} [CANCELED]" : lesson.student.full_name
-        e.description = lesson.student.last_lesson.present? ? lesson.student.last_lesson.lesson_notes : "No previous lesson notes for this student"
+        e.description = lesson.student.last_lesson.present? ? ActionController::Base.helpers.strip_tags(lesson.student.last_lesson.lesson_notes.to_s) : "No previous lesson notes for this student"
+        
+        if lesson.student.preferred_communication_method.present?
+          
+          e.description << "#{lesson.student.default_contact.full_name} #{lesson.student.preferred_communication_method == "phone" ? "#{lesson.student.preferred_contact_info}" : "#{lesson.student.preferred_contact_info}" }"
+          
+        end
+
       end
     end
 
