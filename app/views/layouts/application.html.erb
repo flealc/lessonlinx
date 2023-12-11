@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
+  <!---
   <title>LessonLinx</title>
+  -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
@@ -9,6 +11,8 @@
 
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_importmap_tags %>
+
+  <%= display_meta_tags(default_meta_tags) %>
 
   <!-- Default Favicon -->
   <%= favicon_link_tag 'favicon.ico' %>
@@ -19,7 +23,8 @@
   <!-- Favicon for dark mode -->
   <%= tag 'link', rel: 'icon', href: asset_path('favicon_dark_mode.ico'), type: 'image/x-icon', media: '(prefers-color-scheme: dark)' %>
 
-  <body> 
+
+  <body>
 
     <%= render partial: 'shared/navbar' %>
 
