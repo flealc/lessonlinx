@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <title>LessonLinx</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
@@ -19,7 +19,7 @@
   <!-- Favicon for dark mode -->
   <%= tag 'link', rel: 'icon', href: asset_path('favicon_dark_mode.ico'), type: 'image/x-icon', media: '(prefers-color-scheme: dark)' %>
 
-  <body>
+  <body> 
 
     <%= render partial: 'shared/navbar' %>
 
@@ -30,7 +30,7 @@
           <%= render partial: 'shared/flash', locals: { message: notice, role: "primary" }  %>
         <% end %>
         <% if alert.present? %>
-          <%= render partial: 'shared/flash', locals: { message: alert, role: "danger" } %>
+          <%= render partial: 'shared/flash', locals: { message: alert, role: "warning" } %>
         <% end %>
       </div>
 

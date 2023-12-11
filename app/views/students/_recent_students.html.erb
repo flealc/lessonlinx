@@ -1,8 +1,8 @@
-<div class="h5 ms-3 mb-0">Recent students</div>
+<div class="h5 ms-3 mb-2">Recent students</div>
 
 <% if current_user.taught_lessons.any? %>
   <% recent_students = current_user.taught_lessons.includes(:student).map(&:student).uniq { |student| student.id }.first(10) %>
-  <div class="list-group list-group-flush pb-2 fw-normal small pe-4 pe-sm-0">
+  <div class="list-group list-group-flush fw-normal small me-4 me-sm-0 rounded-3">
 
     <% recent_students.each do |student| %>
 
@@ -11,24 +11,24 @@
         <% preferred = student&.preferred_communication_method %>
         <% if preferred.present? %>
 
-          <%= link_to preferred == "phone" ? "sms:#{student.preferred_contact_info}" : "mailto:#{student.preferred_contact_info}", class: "stretched-link", style: "color: black;" do %>
+          <%= link_to preferred == "phone" ? "sms:#{student.preferred_contact_info}" : "mailto:#{student.preferred_contact_info}", class: "stretched-link", style: "color: black; text-decoration:none;" do %>
             <% if preferred == "phone" %>
-              <i class="fa-solid fa-comment-sms"></i>
+              <i class="fa-solid fa-comment-sms" style="color: #05406a;"></i>
             <% else %>
-              <i class="fa-solid fa-envelope"></i>
+              <i class="fa-solid fa-envelope" style="color: #05406a;"></i>
             <% end %>
 
             <%= student.full_name %>
           <% end%>
         <% else %>
-          <%= link_to student.full_name, student_path(student), class: "stretched-link", style: "color: black;" %>
+          <%= link_to student.full_name, student_path(student), class: "stretched-link", style: "color: black; text-decoration:none;" %>
         <% end %>
       </div>
     <% end %>
   </div>
 
 <% else %>
-  <div class="bg-body-tertiary h-50 d-flex justify-content-center align-items-center rounded-3">
+  <div class="bg-body-tertiary h-50 d-flex justify-content-center align-items-center placeholder-custom rounded-3">
     <div class="text-center text-secondary text-wrap mx-3">No students to display.</div>
   </div>
 <% end %>

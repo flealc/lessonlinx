@@ -12,13 +12,14 @@
  * images in galleries will be squished by the max-width: 33%; rule.
 */
 
-.trix-editor {
+trix-editor {
   border: 1px solid #bbb;
   border-radius: 3px;
   margin: 0;
   padding: 0.4em 0.6em;
   min-height: 5em;
   outline: none;
+  background-color: #fafbff;
 }
 
 trix-toolbar * {
@@ -71,7 +72,7 @@ trix-toolbar .trix-button {
   border: none;
   border-bottom: 1px solid #ddd;
   border-radius: 0;
-  background: transparent;
+  background: #fafbff;
 }
 trix-toolbar .trix-button:not(:first-child) {
   border-left: 1px solid #ccc;

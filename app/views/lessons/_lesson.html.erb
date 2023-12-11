@@ -1,23 +1,32 @@
 <div id="<%= dom_id lesson %>" data-controller="card">
 
   <div class="card mt-3">
-    <div class="card-header pb-1" data-action="click->card#expandCard" data-card-target="cardTitleBar">
+    <div class="card-header pb-0" data-action="click->card#expandCard" data-card-target="cardTitleBar">
       <div class="row align-items-center">
         
         <div class="col-10 col-sm-8 col-md-auto d-flex align-items-center">
-          <div class="text-nowrap", style="width: 140px;">
+          <div class="text-nowrap card-title", style="width: 140px;">
             <%= lesson.starts_at.strftime("%a, %-d %b, %Y") %>
           </div>
         </div>
         
-        <div class="col-10 col-sm-8 col-md-auto d-flex justify-content-start mt-2 mt-sm-0">
-          <div class="text-body-secondary">
+        <div class="col-10 col-sm-8 col-md-auto d-flex justify-content-start align-items-center mt-2 mt-sm-0">
+          <div class="card-subtitle mb-1">
             <%= lesson.starts_at.strftime("%I:%M%P") %>
           </div>
+
+          <% if lesson.canceled? %>
+            <span class="badge rounded-pill text-bg-warning px-2 ms-4 mb-2">canceled</span>
+          <% end %>
+          
+          <% if lesson.taught? %>
+            <span class="badge rounded-pill text-bg-info px-2 ms-4 mb-2">taught</span>
+          <% end %>
+          
         </div>
 
         <div class="col-2 col-sm-4 col-md-auto ms-auto">
-          <i class="fa-solid fa-angle-down" data-card-target="expandCardArrow"></i>
+          <i class="fa-solid fa-angle-down" data-card-target="expandCardArrow" style="color: #fafbff;"></i>
         </div>
       </div>
     </div>

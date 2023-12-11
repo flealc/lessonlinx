@@ -2,12 +2,12 @@
 
 <% if current_user.past_lessons.where(status: :scheduled).any? %>
 
-  <div class="list-group list-group-flush pb-2 fw-normal small pe-4 pe-sm-0">
+  <div class="list-group list-group-flush rounded-3 fw-normal small me-4 me-sm-0">
     <% current_user.past_lessons.scheduled.first(5).each do |lesson| %>
       <div class="list-group-item list-group-item-action">
         <%= lesson.student.full_name %>
         <div>
-          <%= link_to "Log", edit_student_lesson_path(lesson.student, lesson, lesson: { status: "taught" }), class: "stretched-link", style: "color: black;" %>
+          <%= link_to "Log", edit_student_lesson_path(lesson.student, lesson, lesson: { status: "taught" }), class: "stretched-link" %>
           <%= lesson.starts_at.strftime("%b %d, %-l:%M %p") %>
         </div>
       </div>
@@ -15,7 +15,7 @@
   </div>
 
 <% else %>
-  <div class="bg-body-tertiary h-100 d-flex justify-content-center align-items-center rounded-3">
+  <div class="bg-body-tertiary h-100 d-flex justify-content-center align-items-center placeholder-custom rounded-3">
     <div class="text-center text-secondary text-wrap mx-3">No lessons to log.</div>
   </div>
 <% end %>

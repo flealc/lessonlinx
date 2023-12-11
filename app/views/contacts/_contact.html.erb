@@ -1,16 +1,16 @@
 <div id="<%= dom_id contact %>" data-controller="card">
   <div class="card">
-    <div class="card-header pb-1" data-action="click->card#expandCard" data-card-target="cardTitleBar">
-      <h6 class="card-title d-flex justify-content-between">
+    <div class="card-header pb-0" data-action="click->card#expandCard" data-card-target="cardTitleBar">
+      <div class="card-title d-flex justify-content-between">
         <span>
           <%= contact.full_name %>
           <% if contact.default? == true %>
-            <i class="fa-solid fa-square-check"></i>
+            <i class="fa-solid fa-square-check p-0"></i>
           <% end %>
         </span>
         <i class="fa-solid fa-angle-down" data-card-target="expandCardArrow"></i>
-      </h6>
-      <h6 class="card-subtitle mb-2 text-body-secondary">
+      </div>
+      <h6 class="card-subtitle mb-2">
         <%= contact.relationship %>
       </h6>
 

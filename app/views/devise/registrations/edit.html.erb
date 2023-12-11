@@ -11,7 +11,7 @@
   <% end %>
 
   <div class="form-group col-md-6 mb-2">
-    <%= f.label :email %>
+    <%= f.label :email, class:"mb-2" %>
     <%= f.email_field :email, autofocus: true, class: 'form-control', required: true %>
   </div>
 
@@ -20,17 +20,17 @@
   <% end %>
 
   <div class="form-group col-md-6 mb-2">
-    <%= f.label :password %>
+    <%= f.label :password, class:"mb-2" %>
     <%= f.password_field :password, class: 'form-control', autocomplete: 'new-password', placeholder: "Leave blank if you don't want to change it" %>
   </div>
 
   <div class="form-group col-md-6 mb-2">
-    <%= f.label :password_confirmation %>
+    <%= f.label :password_confirmation, class:"mb-2" %>
     <%= f.password_field :password_confirmation, class: 'form-control', autocomplete: 'new-password' %>
   </div>
 
   <div class="form-group col-md-6 mb-2">
-    <%= f.label :timezone %>
+    <%= f.label :timezone, class:"mb-2" %>
     <%= f.time_zone_select :timezone, ActiveSupport::TimeZone.all, { prompt: "Select your current timezone" }, { class: 'form-control' } %>
   </div>
 
@@ -60,11 +60,11 @@
       <div class="form-text mb-1">Please enter your current password to save any changes to your account</div>
       <%= f.password_field :current_password, class: 'form-control col-md-6', autocomplete: 'current-password', required: true, placeholder: "Enter current password" %>
     </div>
-    <%= f.submit "Update", class: "btn btn-outline-primary" %>
+    <%= f.submit "Update", class: "btn btn-primary" %>
     <%= link_to "Back", :back, class: "btn btn-outline-primary" %>
   </div>
 <% end %>
 
 <div class="h2 mt-3">Cancel account</div>
 
-<div> 🙁 Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure? All your information will be permanently deleted!" }, method: :delete, class: "btn btn-outline-danger my-2" %></div>
+<div> 🙁 Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure? All your information will be permanently deleted!" }, method: :delete, class: "btn btn-warning my-2" %></div>

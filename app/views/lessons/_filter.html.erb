@@ -9,9 +9,9 @@
         <%= f.check_box :past, as: :boolean %>
         <%= f.label :past, 'Past', class: "mx-1 form-text mt-0" %>
       </div>
-      <%= f.submit 'apply', class: "btn btn-link btn-sm ms-1 p-0", style: "color: black;" %>
+      <%= f.submit 'apply', class: "btn btn-link btn-sm ms-1 p-0"%>
 
-    <%= link_to "clear", current_page?(student_lessons_path(@student)) ? student_lessons_path(@student) : select_delete_student_lessons_path(@student), class: "btn btn-link btn-sm ms-1 p-0", style: "color: black;" %>
+    <%= link_to "clear", current_page?(student_lessons_path(@student)) ? student_lessons_path(@student) : select_delete_student_lessons_path(@student), class: "btn btn-link btn-sm ms-1 p-0" %>
     <% end %>
   
   
