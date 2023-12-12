@@ -51,7 +51,7 @@
 
       <div class="row px-sm-2">
         <% if @student.contacts.any? %>
-          <% @student.contacts.each do |contact| %>
+          <% @student.contacts.sort_by { |contact| contact.default? ? 0 : 1 }.each do |contact| %>
             <div class="col-12 col-md-6 col-lg-4 pb-2">
               <%= render contact %>
             </div>

@@ -4,10 +4,10 @@
 #
 #  id                             :uuid             not null, primary key
 #  address                        :text
+#  contact_notes                  :text
 #  email                          :string
 #  first_name                     :string
 #  last_name                      :string
-#  notes                          :text
 #  phone                          :string
 #  preferred_communication_method :string
 #  relationship                   :string

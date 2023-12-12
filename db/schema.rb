@@ -63,7 +63,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_04_183256) do
     t.text "address"
     t.string "relationship"
     t.string "preferred_communication_method"
-    t.text "notes"
+    t.text "contact_notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["student_id"], name: "index_contacts_on_student_id"
