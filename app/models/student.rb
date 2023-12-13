@@ -4,7 +4,7 @@
 #
 #  id                 :uuid             not null, primary key
 #  adult              :boolean          default(FALSE)
-#  age                :integer
+#  date_of_birth      :date
 #  first_name         :string           not null
 #  last_name          :string           not null
 #  lessons_count      :integer          default(0)
@@ -26,7 +26,6 @@
 #
 class Student < ApplicationRecord
   validates :first_name, presence: true
-  validates :age, numericality: { numeric_only: true, allow_nil: true }
   before_destroy :clear_default_contact
 
   belongs_to :teacher, class_name: "User", counter_cache: true
