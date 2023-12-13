@@ -6,8 +6,8 @@
     <% current_user.past_lessons.scheduled.first(5).each do |lesson| %>
       <div class="list-group-item list-group-item-action">
         <%= lesson.student.full_name %>
+        <%= link_to "Log", edit_student_lesson_path(lesson.student, lesson, lesson: { status: "taught" }), class: "stretched-link" %>
         <div>
-          <%= link_to "Log", edit_student_lesson_path(lesson.student, lesson, lesson: { status: "taught" }), class: "stretched-link" %>
           <%= lesson.starts_at.strftime("%b %d, %-l:%M %p") %>
         </div>
       </div>

@@ -53,10 +53,10 @@
           <div class="d-flex">
             <div class="form-group mb-1">
               <%= f.label :email, class: 'form-label' %>
-              <%= f.email_field :email, autofocus: true, class: 'form-control', required: true %>
+              <%= f.email_field :email, autofocus: true, class: 'form-control', required: true, tabindex: 1 %>
               <% if devise_mapping.rememberable? %>
                 <div class="form-check">
-                  <%= f.check_box :remember_me, class: 'form-check-input' %>
+                  <%= f.check_box :remember_me, class: 'form-check-input', tabindex: 3 %>
                   <%= f.label :remember_me, class: 'form-check-label' %>
                 </div>
               <% end %>
@@ -64,14 +64,14 @@
             <div>
               <div class="form-group mb-1 ms-2">
                 <%= f.label :password, class: 'form-label' %>
-                <%= f.password_field :password, class: 'form-control', autocomplete: 'new-password' %>
-    <%= link_to "Forgot your password?", new_password_path(resource_name), class: "h6 small mt-4 ms-1" %>
+                <%= f.password_field :password, class: 'form-control', autocomplete: 'new-password', tabindex: 2 %>
+                <%= link_to "Forgot your password?", new_password_path(resource_name), class: "h6 small mt-4 ms-1" %>
               </div>
             </div>
           </div>
 
           <div class="form-actions align-self-center ms-2">
-            <%= f.button "Log in", class: "btn btn-primary btn-block" %>
+            <%= f.button "Log in", class: "btn btn-primary btn-block", tabindex: 4 %>
           </div>
         </div>
       <% end %>
