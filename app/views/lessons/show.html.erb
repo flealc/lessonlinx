@@ -1,8 +1,0 @@
-<%= render @lesson %>
-
-<div>
-  <%= link_to "Edit this lesson", edit_student_lesson_path(@student, @lesson) %> |
-  <%= link_to "Back to lessons", student_lessons_path(@student) %>
-
-  <%= button_to "Destroy this lesson", student_lessons_path(@student, @lesson), method: :delete %>
-</div>
