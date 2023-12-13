@@ -2,31 +2,31 @@
 
 <% if contact.phone.present? %>
   <div class="d-flex align-items-center mb-2">
-    <i class="fa-solid fa-square-phone"></i>
+    <i class="fa-solid fa-square-phone" aria-label="Phone">></i>
     <p class="card-text ms-2 mb-0 fs-6"><%= contact.phone %></p>
     <% if contact.preferred_communication_method == "phone" %>
-      <i class="fa-solid fa-star fa-2xs ms-2" style="color: #fb8042;"></i>
+      <i class="fa-solid fa-star fa-2xs ms-2" style="color: #fb8042;" aria-label="Preferred communication method"></i>
     <% end %>
   </div>
 <% end %>
 <% if contact.email.present? %>
   <div class="d-flex align-items-center mb-2">
-    <i class="fa-solid fa-square-envelope"></i>
+    <i class="fa-solid fa-square-envelope" aria-label="Email"></i>
     <p class="card-text ms-2 mb-0 fs-6"><%= contact.email %></p>
     <% if contact.preferred_communication_method == "email" %>
-      <i class="fa-solid fa-star fa-2xs ms-2" style="color: #fb8042;"></i>
+      <i class="fa-solid fa-star fa-2xs ms-2" style="color: #fb8042;" aria-label="Preferred communication method"></i>
     <% end %>
   </div>
 <% end %>
 <% if contact.address.present? %>
   <div class="d-flex align-items-center mb-2">
-    <i class="fa-solid fa-location-dot"></i>
+    <i class="fa-solid fa-location-dot" aria-label="Address"></i>
     <p class="card-text ms-2 mb-0 fs-6"><%= contact.address %></p>
   </div>
 <% end %>
-<% if contact.notes.present? %>
+<% if contact.contact_notes.present? %>
   <div class="d-flex align-items-center mb-2">
-    <i class="fa-solid fa-book-open"></i>
-    <p class="card-text ms-2 mb-0 fs-6"><%= contact.notes %></p>
+    <i class="fa-solid fa-book-open" aria-label="Contact notes"></i>
+    <p class="card-text ms-2 mb-0 fs-6"><%= contact.contact_notes %></p>
   </div>
 <% end %>

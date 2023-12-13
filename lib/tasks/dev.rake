@@ -47,14 +47,14 @@ task({ :sample_data => :environment }) do
   users.each do |user|
     n = user.first_name == "Alice" ? 10 : 5
     n.times do
-    age_range = (4..65).to_a.sample
+      dob = Faker::Date.birthday(min_age: 4, max_age: 65)
       s = Student.create!(                
         first_name: Faker::Name.first_name,   
         last_name: Faker::Name.last_name,
         teacher_id: user.id,
         student_notes: Faker::Lorem.paragraph(sentence_count: 3),
-        age: age_range,
-        adult: age_range > 17 ? true : false
+        date_of_birth: dob, 
+        adult: (Date.current - dob) > 17 ? true : false
       )
     end
   end
@@ -87,7 +87,7 @@ task({ :sample_data => :environment }) do
         last_name: student.last_name,
         address: Faker::Address.full_address,
         email: "#{student.first_name.downcase}@example.com" ,
-        notes: Faker::Lorem.paragraph(sentence_count: 2..3),
+        contact_notes: Faker::Lorem.paragraph(sentence_count: 2..3),
         phone: Faker::PhoneNumber.cell_phone,
         preferred_communication_method: %w[ phone email ].sample,
         relationship: "self"
@@ -102,7 +102,7 @@ task({ :sample_data => :environment }) do
         email: "#{name.downcase}@example.com" ,
         first_name: name,
         last_name: Faker::Name.last_name,
-        notes: Faker::Lorem.paragraph(sentence_count: 2..3),
+        contact_notes: Faker::Lorem.paragraph(sentence_count: 2..3),
         phone: Faker::PhoneNumber.cell_phone,
         relationship: relationship,
         preferred_communication_method: %w[ phone email ].sample,

@@ -10,8 +10,8 @@
 User.destroy_all
 
 User.create(
-  email: "fidel@lessonlinx.pro",
-  password: "memememe",
+  email: "fidelxleal@gmail.com",
+  password: SecureRandom.hex(10),
   first_name: "Fidel",
   last_name: "Leal",
   timezone: "Central Time (US & Canada)",

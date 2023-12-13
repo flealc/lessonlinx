@@ -1,54 +1,49 @@
-# Rails Template
+# LessonLinx
 
-This is a base Ruby on Rails repository configured for learning with Codespaces (and Gitpod).
+Keeping track of student info, lesson notes, and scheduling can be challenging for an independent instructor, especially as the number of students increases. There is currently a need for a unified solution — a tool that enables users to easily manage lesson notes, organize contact details, gain insights into each student's progress, and subscribe to a teaching calendar, all while securely storing data in a single and accessible location.
 
-- Ruby version: `3.2.1`
-- Rails version: `7.0.4.3`
+Designed with independent instructors and tutors in mind, **LessonLinx** allows users to manage students' contact information and lesson schedules to facilitate the organization of their teaching activities.
+
+## Key Features
+
+**LessonLinx** users can:
+
+- Register for an account to enter and manage their teaching information.
+- Access a dashboard that provides an overview of the lessons scheduled for the current week, along with notes from previous lessons.
+- Create, edit, and delete student information and contact details to maintain accurate and up-to-date records.
+- Create, edit, and delete lessons to manage their teaching schedule effectively, including batch-scheduling and deleting lessons to efficiently manage recurring appointments and accommodate semester-based programs.
+- Subscribe to a teaching calendar on their personal device, featuring calendar events that include notes from the previous lessons and contact information for each specific appointment.
+- Sign up to receive a daily email digest of their agenda on days when lessons are scheduled, so they can stay organized and prepared.
 
 
-We've added additional Ruby gems and other software that aren't automatically available in a new Rails app.
+## Getting Started
 
-### Additional gems:
+### Dependencies
 
-- [`appdev_support`](https://github.com/firstdraft/appdev_support)
-- [`annotate`](https://github.com/ctran/annotate_models)
-- [`awesome_print`](https://github.com/awesome-print/awesome_print)
-- [`better_errors`](https://github.com/BetterErrors/better_errors)
-- [`binding_of_caller`](https://github.com/banister/binding_of_caller)
-- [`dotenv-rails`](https://github.com/bkeepers/dotenv)
-- [`draft_generators`](https://github.com/firstdraft/draft_generators/)
-- [`draft_matchers`](https://github.com/jelaniwoods/draft_matchers/)
-- [`devise`](https://github.com/heartcombo/devise)
-- [`faker`](https://github.com/faker-ruby/faker)
-- [`grade_runner`](https://github.com/firstdraft/grade_runner/)
-- [`htmlbeautifier`](https://github.com/threedaymonk/htmlbeautifier/)
-- [`http`](https://github.com/httprb/http)
-- [`pry_rails`](https://github.com/pry/pry-rails)
-- [`rails_db`](https://github.com/igorkasyanchuk/rails_db)
-- [`rails-erd`](https://github.com/voormedia/rails-erd)
-- [`rspec-html-matchers`](https://github.com/kucaahbe/rspec-html-matchers)
-- [`rspec-rails`](https://github.com/rspec/rspec-rails)
-- [`rufo`](https://github.com/ruby-formatter/rufo)
-- [`specs_to_readme`](https://github.com/firstdraft/specs_to_readme)
-- [`table_print`](https://github.com/arches/table_print)
-- [`web_git`](https://github.com/firstdraft/web_git)
-- [`webmock`](https://github.com/bblimke/webmock)
+LessonLinx uses a PostgreSQL database. Instructions for installing and running PostgreSQL locally are available [here](https://www.prisma.io/dataguide/postgresql/setting-up-a-local-postgresql-database).
 
-### Additional software:
-- OS Ubuntu 20.04.5 LTS
-- Chromedriver
-- Fly.io's `flyctl`
-- Google Chrome (headless browser)
-- Graphviz
-- Heroku 
-- Node JS 18
-- NPM 8.19.3
-- Parity
-- Postgresql 12
-- Redis
-- Yarn
+LessonLinx also relies on GoodJob and Postmart for email delivery and job scheduling, and Devise and Pundit for user authentication and authorization.
 
-### VS Code extensions:
-- aliariff.vscode-erb-beautify
-- mbessey.vscode-rufo
-- vortizhe.simple-ruby-erb
+
+
+### Installing
+
+1. Clone the main branch of this repository into your local development environment: `git clone git@github.com:fidel-techprep/lessonlinx.git`
+2. Create a database: `rake db:create`
+3. Run the database migrations: `rake db:migrate`
+4. (Optional) Add sample data: `rake sample_data`. The script sets up a series of test users, including `alice@example.com`, with password `password`.
+5. You can use the rails console (`rails c`) to manually give admin privileges to a user (i.e. `user.admin = true`, and then `user.save!`).
+
+### Executing program
+
+You can start the development server by running `rails s`.
+
+## Authors
+
+Fidel Leal
+[fidelxleal@gmail.com](mailto:fidelxleal@gmail.com)
+
+
+## Acknowledgments
+
+Special thanks to [Ian Heraty](@heratyian) and the amazing team at Discovery Partners Institute for their guidance and support.

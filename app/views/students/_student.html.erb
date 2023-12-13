@@ -19,17 +19,19 @@
 
   <dl class="ps-sm-2">
 
-    <% if student.age.present? %>
-      <dt class="fw-light"><small>Age</small></dt>
+    <% if student.date_of_birth.present? %>
+      <% age = Date.current.year - student.date_of_birth.year - (student.date_of_birth.to_date.change(year: Date.current.year) > Date.current ? 1 : 0) %>
+      <dt class="fw-light small">DOB</dt>
       <dd>
-        <%= student.age %>
+        <%= student.date_of_birth.strftime("%b %e, %Y") %>
+        <small><%= "(age #{age})" %></small>
         <% if student.adult? %>
-          <span class="badge rounded-pill text-bg-warning px-2">adult</span>
+          <span class="badge rounded-pill text-bg-warning px-2 ms-2">adult</span>
         <% end %>
       </dd>
     <% end %>
 
-    <dt class="fw-light"><small>Notes</small></dt>
+    <dt class="fw-light small">Notes</dt>
     <dd>
       <% if student.student_notes.present? %>
         <%= student.student_notes %>
@@ -43,15 +45,15 @@
   <%= turbo_frame_tag "student-contacts" do %>
     <div class="mt-2">
       <div class="d-flex align-items-end justify-content-between">
-        
-      <div class="h6 mt-1 ps-sm-2">Contacts</div>
+
+        <div class="h6 mt-1 ps-sm-2">Contacts</div>
         <div class="mb-1 me-sm-2"><%= link_to "new contact", new_contact_path(student: @student.id), data: { turbo_frame: "_top"}, class:"h6 ms-3" %></div>
       </div>
       <hr class="mt-0">
 
       <div class="row px-sm-2">
         <% if @student.contacts.any? %>
-          <% @student.contacts.each do |contact| %>
+          <% @student.contacts.sort_by { |contact| contact.default? ? 0 : 1 }.each do |contact| %>
             <div class="col-12 col-md-6 col-lg-4 pb-2">
               <%= render contact %>
             </div>

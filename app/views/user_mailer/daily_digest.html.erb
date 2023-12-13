@@ -48,7 +48,7 @@
             <div class="card-body" data-students-index-target="contactCardBody">
 
               <h6>
-                Previous Lesson (<%= lesson.previous_lesson.starts_at.in_time_zone(@user.timezone).strftime("%a, %b%e, %Y") %>)
+                Previous Lesson (<%= lesson.previous_lesson.starts_at.in_time_zone(@user.timezone).strftime("%a, %b %e, %Y") %>)
               </h6>
 
               <% if lesson.previous_lesson.lesson_notes.present?%>
