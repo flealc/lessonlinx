@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_13_225139) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_13_230705) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pgcrypto"
@@ -162,7 +162,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_13_225139) do
   create_table "students", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "first_name", null: false
     t.string "last_name", null: false
-    t.integer "age"
     t.boolean "adult", default: false
     t.uuid "teacher_id", null: false
     t.integer "lessons_count", default: 0
@@ -170,6 +169,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_13_225139) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "default_contact_id"
+    t.date "date_of_birth"
     t.index ["default_contact_id"], name: "index_students_on_default_contact_id"
     t.index ["teacher_id"], name: "index_students_on_teacher_id"
   end
