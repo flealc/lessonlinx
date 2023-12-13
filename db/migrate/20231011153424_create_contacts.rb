@@ -9,7 +9,7 @@ class CreateContacts < ActiveRecord::Migration[7.0]
       t.text :address
       t.string :relationship
       t.string :preferred_communication_method
-      t.text :contact_notes
+      t.text :notes
 
       t.timestamps
     end

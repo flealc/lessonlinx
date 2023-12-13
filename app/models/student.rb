@@ -4,7 +4,7 @@
 #
 #  id                 :uuid             not null, primary key
 #  adult              :boolean          default(FALSE)
-#  date_of_birth      :date
+#  age                :integer
 #  first_name         :string           not null
 #  last_name          :string           not null
 #  lessons_count      :integer          default(0)

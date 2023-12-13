@@ -10,7 +10,7 @@ Rails.application.configure do
   config.active_job.queue_adapter = :good_job
   
   # define default url for devise
-  config.action_mailer.default_url_options = { host: "lessonlinx.pro" }
+  config.action_mailer.default_url_options = { host: "www.lessonlinx.pro" }
 
   # force ssl
   config.force_ssl = true
