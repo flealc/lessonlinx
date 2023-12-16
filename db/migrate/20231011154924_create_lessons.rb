@@ -7,8 +7,6 @@ class CreateLessons < ActiveRecord::Migration[7.0]
       t.datetime :ends_at, null: false
       t.integer :duration, null: false
       t.string :status, null: false, default: "scheduled"
-  
-
       t.timestamps
     end
   end
