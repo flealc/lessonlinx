@@ -4,14 +4,14 @@
     <%= search_form_for @q, url: current_page?(student_lessons_path(@student)) ? student_lessons_path(@student) : select_delete_student_lessons_path(@student), class: "d-flex" do |f| %>
       <div class="d-flex align-items-center">
         <%= f.check_box :future, as: :boolean  %>
-        <%= f.label :future, 'Future', class: "mx-1 form-text mt-0" %>
+        <%= f.label :future, t(".future"), class: "mx-1 form-text mt-0" %>
       
         <%= f.check_box :past, as: :boolean %>
-        <%= f.label :past, 'Past', class: "mx-1 form-text mt-0" %>
+        <%= f.label :past, t(".past"), class: "mx-1 form-text mt-0" %>
       </div>
-      <%= f.submit 'apply', class: "btn btn-link btn-sm ms-1 p-0"%>
+      <%= f.submit t(".apply"), class: "btn btn-link btn-sm ms-1 p-0"%>
 
-    <%= link_to "clear", current_page?(student_lessons_path(@student)) ? student_lessons_path(@student) : select_delete_student_lessons_path(@student), class: "btn btn-link btn-sm ms-1 p-0" %>
+    <%= link_to t(".clear"), current_page?(student_lessons_path(@student)) ? student_lessons_path(@student) : select_delete_student_lessons_path(@student), class: "btn btn-link btn-sm ms-1 p-0" %>
     <% end %>
   
   

@@ -1,5 +1,5 @@
 <div data-controller="side-bar" data-side-bar-show-value="<%= image_path('show-sidebar.svg') %>" data-side-bar-hide-value="<%= image_path('hide-sidebar.svg') %>" >
-  <div class="h1 my-0 pb-0 ps-sm-2 ">Dashboard</div>
+  <div class="h1 my-0 pb-0 ps-sm-2 "><%= t(".title") %></div>
   <hr class="my-2">
   
 
@@ -16,8 +16,8 @@
     <turbo-frame id="recent_lessons_frame", src="<%= recent_lessons_student_path(week_lessons.first) if week_lessons.present? && current_user.students.exists? && current_user.students.first.lessons.exists? %>", class="align-items-center justify-content-center" >
 
       <div class="bg-body-tertiary h-100 text-center py-5 px-5 placeholder-custom rounded-3">
-        <div class="h5">Welcome!</div>
-        This page will populate with helpful information as you begin to <%= link_to "add students", students_path, data: { turbo_frame: "_top" }, class: "h6" %> and schedule lessons.
+        <div class="h5"><%= t(".placeholder_title") %></div>
+        <%= t(".placeholder_main", link: link_to(t('.add_students'), students_path, data: { turbo_frame: '_top' }, class: 'h6').html_safe ).html_safe %>
       </div>
 
     </turbo-frame>

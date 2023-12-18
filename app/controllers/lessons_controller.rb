@@ -111,7 +111,7 @@ class LessonsController < ApplicationController
 
     ActiveRecord::Base.transaction do
       (from_date..to_date).each do |date|
-        if weekdays.include?(date.strftime("%A"))
+        if weekdays.include?(date.strftime("%A").downcase)
           lesson_starts_at = Time.zone.parse("#{date} #{bulk_params[:starts_at]}")
           lesson = @student.lessons.build(
             starts_at: lesson_starts_at,

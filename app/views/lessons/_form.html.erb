@@ -24,7 +24,7 @@
 
   <div class="col-md-2 mb-2">
     <%= form.label :status, style: "display: block", class: "form-label" %>
-    <%= form.select :status, Lesson.statuses.keys.map { |s| [s.titleize, s]}, {prompt: "Select a status"}, style: "display: block", class: "form-select" %>
+    <%= form.select :status, t("activerecord.enums.lesson.status").map { |key, enum| [enum.titleize, key]}, {prompt: "Select a status"}, style: "display: block", class: "form-select" %>
   </div>
 
   <div class="mb-2"> 

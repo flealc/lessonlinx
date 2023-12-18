@@ -1,0 +1,164 @@
+es:
+  dashboard: "Panel de control"
+  students_dash: "Estudiantes"
+  lessons_dash: "Lecciones"
+  my_account: "Mi cuenta"
+  edit_account: "Opciones de cuenta"
+  sign_out: "Cerrar sesión"
+  toggle_nav: "Expandir navegación"
+  toggle_icon: "Ocultar panel"
+  canceled: "cancelada"
+  taught: "completada"
+  scheduled: "programada"
+  lesson_notes_placeholder: "Esta lección no contiene notas."
+  log_lesson_now: "Añadir notas"
+  edit: "editar"
+  delete: "eliminar"
+  new: "nuevo"
+  date:
+    day_names: [domingo, lunes, martes, miércoles, jueves, viernes, sábado]
+    abbr_day_names: [dom, lun, mar, mié, jue, vie, sáb]
+    month_names: [nil, enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre]
+    abbr_month_names: [nil, ene, feb, mar, abr, may, jun, jul, ago, sep, oct, nov, dic]
+  time:
+    formats:
+      custom: "%a, %-d de %b de %Y"
+  users:
+    dashboard:
+      title: "Panel de Control"
+      placeholder_title: "Bienvenido!"
+      add_students: "añadiendo estudiantes"
+      placeholder_main: "Esta página mostrará información útil a medida que vayas %{link} y creando lecciones."
+    lessons_to_log:
+      title: "Lecciones sin notas"
+      log: "Añadir"
+      placeholder: "No hay lecciones sin notas."
+    recent_students: 
+      title: "Estudiantes recientes"
+      placeholder: "No hay estudiantes para mostrar."
+  students:
+    recent_lessons:
+      upcoming_title: "Próxima lección"
+      previous_title: "Últimas lecciones"
+    highlighted_lesson:
+      log_lesson: "Añadir notas"
+      cancel_lesson: "Cancelar lección"
+    student:
+      confirmation: "Atención! Los contactos asociados con este estudiante también serán eliminados!"
+      details: "Detalles"
+      dob: "Fecha de nacimiento"
+      age: "(%{age} años)"
+      adult_pill: "adulto"
+      notes: "Notas"
+      placeholder: "No hay notas para este estudiante."
+      contacts: "Contactos"
+      new_contact: "nuevo contacto"
+      contacts_placeholder: "No hay contactos asociados con este estudiante."
+    index:
+      placeholder: "La información sobre tus estudiantes se mostrará aquí."
+      title: "Estudiantes"
+    show:
+      title: "Estudiantes"
+  lessons:
+    bulk_form:
+      student: "Estudiante"
+      starts_at: "Hora"
+      duration: "Duración"
+      weekdays: "Días de la semana"
+      from: "Desde"
+      to: "Hasta"
+      days:
+        monday: "Lunes"
+        tuesday: "Martes"
+        wednesday: "Miércoles"
+        thursday: "Jueves"
+        friday: "Viernes"
+        saturday: "Sábado"
+        sunday: "Domingo"
+    filter:
+        future: "Futuras"
+        past: "Pasadas"
+        apply: "aplicar"
+        clear: "eliminar"
+    index:
+      title: "Lecciones"
+      batch_create: "crear múltiples"
+      batch_delete: "eliminar múltiples"
+      new: "nueva"
+      last_lesson: "Última lección"
+      all_lessons: "Todas las lecciones"
+      placeholder: "No hay lecciones para este estudiante."
+    select_delete:
+      delete_selected: "eliminar seleccionadas"
+      confirm_message: "Deseas eliminar estas lecciones?"
+      select_all: "todas"
+      placeholder: "No hay lecciones programadas para este estudiante."
+  contacts:
+    contact_details: 
+      phone_aria: "Teléfono"
+      preferred_aria: "Método de comunicación preferido"
+      address_aria: "Dirección"
+      contact_notes_aria: "Notas del contacto"
+    contact:
+      default_aria: "Contacto preferido"
+      confirmation: "Deseas eliminar este contacto?"
+    form:
+      default: "Contacto preferido"
+      self: "Estudiante"
+      prompt: "Selecciona un método"
+
+
+
+  activerecord:
+    models:
+      user: "Usuario"
+      student: "Estudiante"
+    enums:
+      lesson:
+        status:
+          canceled: "cancelada"
+          taught: "completada"
+          scheduled: "programada"
+      contact:
+        preferred_communication_method:
+          phone: "teléfono"
+          email: "email"
+    attributes:
+      student:
+        first_name: "Nombre"
+        last_name: "Apellido(s)"
+        date_of_birth: "Fecha de nacimiento"
+        adult: "Adulto"
+        student_notes: "Notas del estudiante"
+      lesson:
+        student_id: "Estudiante"
+        starts_at: "Hora"
+        duration: "Duración"
+        status: "Estado"
+        lesson_notes: "Notas de la lección"
+        prompt: "Seleccione un estado"
+      contact:
+        firtst_name: "Nombre"
+        last_name: "Apellido(s)"
+        phone: "Teléfono"
+        email: "Email"
+        address: "Dirección"
+        relationship: "Relación"
+        preferred_communication_method: "Método de comunicación preferido"
+        contact_notes: "Notas del contacto"
+
+
+
+  helpers:
+    submit:
+      student:
+        create: "Crear estudiante"
+        update: "Guardar estudiante"
+      lesson:
+        create: "Crear lección"
+        bulk_create: "Crear lecciones"
+        save: "Guardar"
+      contact:
+        create: "Crear contacto"
+        update: "Guardar contacto"
+      

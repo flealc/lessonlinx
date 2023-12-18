@@ -2,41 +2,41 @@
   <div class="d-flex align-items-end pb-2 justify-content-between">
     <div class="d-flex">
       <div class="pe-2 ps-sm-2" data-action="click->side-bar#toggleFullPage">
-        <img src="<%= image_path('hide-sidebar.svg') %>" alt="Toggle Icon" data-side-bar-target="toggleIcon" style="width: 16px; height: auto;" class="mb-1 sidebar-icon">
+        <img src="<%= image_path('hide-sidebar.svg') %>" alt="<%= t('toggle_icon') %>" data-side-bar-target="toggleIcon" style="width: 16px; height: auto;" class="mb-1 sidebar-icon">
       </div>
       <div class="h5 mb-0 pb-0 me-3 text-nowrap"><%= student.full_name %></div>
     </div>
 
     <div class="me-sm-2 justify-content-end ">
-      <%= link_to "edit", edit_student_path(@student), data: { turbo_frame: "_top" }, class:"h6 me-3" %>
-      <%= link_to "delete", student_path(@student),  data: { "turbo-method": :delete, turbo_frame: "_top", turbo_confirm: "Are you sure? Contacts for this student will be deleted as well!" }, class:"h6" %>
+      <%= link_to t("edit"), edit_student_path(@student), data: { turbo_frame: "_top" }, class:"h6 me-3" %>
+      <%= link_to t("delete"), student_path(@student),  data: { "turbo-method": :delete, turbo_frame: "_top", turbo_confirm: t(".confirmation") }, class:"h6" %>
     </div>
 
   </div>
 
-  <div class="h6 mt-1 ps-sm-2">Details</div>
+  <div class="h6 mt-1 ps-sm-2"><%= t(".details") %></div>
   <hr class="mt-0">
 
   <dl class="ps-sm-2">
 
     <% if student.date_of_birth.present? %>
       <% age = Date.current.year - student.date_of_birth.year - (student.date_of_birth.to_date.change(year: Date.current.year) > Date.current ? 1 : 0) %>
-      <dt class="fw-light small">DOB</dt>
+      <dt class="fw-light small"><%= t(".dob") %></dt>
       <dd>
         <%= student.date_of_birth.strftime("%b %e, %Y") %>
-        <small><%= "(age #{age})" %></small>
+        <small><%= t(".age", age: age) %></small>
         <% if student.adult? %>
-          <span class="badge rounded-pill text-bg-warning px-2 ms-2">adult</span>
+          <span class="badge rounded-pill text-bg-warning px-2 ms-2"><%= t(".adult_pill") %></span>
         <% end %>
       </dd>
     <% end %>
 
-    <dt class="fw-light small">Notes</dt>
+    <dt class="fw-light small"><%= t(".notes") %></dt>
     <dd>
       <% if student.student_notes.present? %>
         <%= student.student_notes %>
       <% else %>
-        <div class="h6 pt-4 pb-4">This student does not have any notes yet.</div>
+        <div class="h6 pt-4 pb-4"><%= t(".placeholder") %></div>
       <% end %>
     </dd>
 
@@ -46,8 +46,8 @@
     <div class="mt-2">
       <div class="d-flex align-items-end justify-content-between">
 
-        <div class="h6 mt-1 ps-sm-2">Contacts</div>
-        <div class="mb-1 me-sm-2"><%= link_to "new contact", new_contact_path(student: @student.id), data: { turbo_frame: "_top"}, class:"h6 ms-3" %></div>
+        <div class="h6 mt-1 ps-sm-2"><%= t(".contacts") %></div>
+        <div class="mb-1 me-sm-2"><%= link_to t(".new_contact"), new_contact_path(student: @student.id), data: { turbo_frame: "_top"}, class:"h6 ms-3" %></div>
       </div>
       <hr class="mt-0">
 
@@ -60,8 +60,7 @@
           <% end %>
 
         <% else %>
-          <div class="h6 pt-2">This student does not have any contacts yet.
-            <div>
+          <div class="h6 pt-2"><%= t(".contacts_placeholder") %><div>
             <% end %>
           </div>
         </div>

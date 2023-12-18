@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+
+  before_action :set_locale
   around_action :set_timezone, if: :current_user
   include Pundit::Authorization
 
@@ -19,6 +21,18 @@ class ApplicationController < ActionController::Base
 
   def set_timezone(&block) 
     Time.use_zone(current_user.timezone, &block) 
+  end
+
+  def set_locale
+    if user_signed_in?
+      I18n.locale = current_user.language || I18n.default_locale
+    else
+      I18n.locale = params[:lang] || locale_from_header || I18n.default_locale
+    end
+  end
+
+  def locale_from_header
+    request.env.fetch('HTTP_ACCEPT_LANGUAGE', '').scan(/[a-z]{2}/).first
   end
 
 end

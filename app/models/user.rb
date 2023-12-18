@@ -8,6 +8,7 @@
 #  email                  :citext           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  first_name             :string           not null
+#  language               :string
 #  last_name              :string           not null
 #  lessons_count          :integer          default(0)
 #  remember_created_at    :datetime

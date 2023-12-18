@@ -34,6 +34,11 @@
     <%= f.time_zone_select :timezone, ActiveSupport::TimeZone.all, { prompt: "Select your current timezone" }, { class: 'form-control' } %>
   </div>
 
+  <div class="form-group col-md-6 mb-2">
+    <%= f.label :language, class:"mb-2" %>
+    <%= f.select :language, I18n.available_locales.map { |l| [l.upcase, l.to_s] }, { prompt: "Select your preferred language" }, { class: 'form-control' } %>
+  </div>
+
   <div data-controller="digest-signup" data-digest-signup-signedup-value="<%= current_user.daily_digest_at != nil %>" data-digest-signup-link-value="https://lessonlinx.pro/subscribe/<%= current_user.id %>">
     <div class="input-group mt-3">
     <span class="input-group-text">Copy calendar subscription link</span>

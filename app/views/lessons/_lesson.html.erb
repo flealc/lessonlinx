@@ -6,7 +6,7 @@
         
         <div class="col-10 col-sm-8 col-md-auto d-flex align-items-center">
           <div class="text-nowrap card-title", style="width: 140px;">
-            <%= lesson.starts_at.strftime("%a, %-d %b, %Y") %>
+            <%= l(lesson.starts_at, format: :custom) %>
           </div>
         </div>
         
@@ -16,11 +16,11 @@
           </div>
 
           <% if lesson.canceled? %>
-            <span class="badge rounded-pill text-bg-warning px-2 ms-4 mb-2">canceled</span>
+            <span class="badge rounded-pill text-bg-warning px-2 ms-4 mb-2"><%= t("canceled") %></span>
           <% end %>
           
           <% if lesson.taught? %>
-            <span class="badge rounded-pill text-bg-info px-2 ms-4 mb-2">taught</span>
+            <span class="badge rounded-pill text-bg-info px-2 ms-4 mb-2"><%= t("taught") %></span>
           <% end %>
           
         </div>
@@ -37,7 +37,7 @@
 
       <% else %>
 
-      <p class="text-body-secondary mb-0">This lesson does not have any notes. <%= link_to "Log lesson now", edit_student_lesson_path(lesson.student, lesson), data: {turbo_frame: "_top"}, class: "h6" %></p>
+      <p class="text-body-secondary mb-0"><%= t("lesson_notes_placeholder") %> <%= link_to t("log_lesson_now"), edit_student_lesson_path(lesson.student, lesson), data: {turbo_frame: "_top"}, class: "h6" %></p>
 
       <% end %>
       <div class="d-flex justify-content-end mt-1">

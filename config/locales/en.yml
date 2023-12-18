@@ -1,55 +1,159 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t "hello"
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   "true": "foo"
-#
-# To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
-
 en:
-  hints:
-    randomness: This test deals with randomness. If you think your code is correct but the test failed anyway, you might have just gotten unlucky; try running the test a couple more times.
-    copy_must_match: Make sure that the text exactly matches the target, including capitalization.
-    button_type: If you're not being sent anywhere when you click submit and you have an attribute `type="button"` on your `<button>` element, try removing it or changing it to `type="submit"`. Also, ensure that the `<button>` is within the `<form></form>`.
-    label_for_input: Make sure that you have a `for=""` attribute on each `<label>` and that it matches the `id=""` attribute on the corresponding `<input>`; otherwise our test won't know which input goes with which label (and neither would screen readers, etc).
-    names_for_inputs: |
-                      Give each `<input>` in your form a unique `name=""` attribute.
+  dashboard: "Dashboard"
+  students_dash: "Students"
+  lessons_dash: "Lessons"
+  my_account: "My account"
+  edit_account: "Edit account"
+  sign_out: "Sign out"
+  toggle_nav: "Toggle navigation"
+  toggle_icon: "Toggle sidebar"
+  canceled: "canceled"
+  taught: "taught"
+  scheduled: "scheduled"
+  lesson_notes_placeholder: "This lesson does not have any notes."
+  log_lesson_now: "Log lesson now"
+  edit: "edit"
+  delete: "delete"
+  new: "new"
+  time:
+    formats:
+      custom: "%a, %-d %b, %Y"
+  users:
+    dashboard: 
+      title: "Dashboard"
+      placeholder_title: "Welcome!"
+      add_students: "add students"
+      placeholder_main: "This page will populate with helpful information as you begin to %{link} and schedule lessons."
+    lessons_to_log:
+      title: "Lessons to log"
+      log: "Log"
+      placeholder: "No lessons to log."
+    recent_students: 
+      title: "Recent students"
+      placeholder: "No students to display."
+  students:
+    recent_lessons:
+      upcoming_title: "Upcoming lesson"
+      previous_title: "Previous lessons"
+    highlighted_lesson:
+      log_lesson: "Log lesson"
+      cancel_lesson: "Cancel lesson"
+    student:
+      confirmation: "Are you sure? Contacts for this student will be deleted as well!"
+      details: "Details"
+      dob: "DOB"
+      age: "(age %{age})"
+      adult_pill: "adult"
+      notes: "Notes"
+      placeholder: "This student does not have any notes yet."
+      contacts: "Contacts"
+      new_contact: "new contact"
+      contacts_placeholder: "This student does not have any contacts yet."
+    index:
+      placeholder: "Your students' information will be displayed here."
+      title: "Students"
+    show: 
+      title: "Students"
+  lessons:
+    bulk_form:
+      student: "Student"
+      starts_at: "Starts at"
+      duration: "Duration"
+      weekdays: "Weekdays"
+      from: "From"
+      to: "To"
+      days:
+        monday: "Monday"
+        tuesday: "Tuesday"
+        wednesday: "Wednesday"
+        thursday: "Thursday"
+        friday: "Friday"
+        saturday: "Saturday"
+        sunday: "Sunday"
+    filter:
+      future: "Future"
+      past: "Past"
+      apply: "apply"
+      clear: "clear"
+    index:
+      title: "Lessons"
+      batch_create: "batch create"
+      batch_delete: "batch delete"
+      new: "new"
+      last_lesson: "Last lesson"
+      all_lessons: "All lessons"
+      placeholder: "No lessons scheduled."
+    select_delete:
+      delete_selected: "delete selected"
+      confirm_message: "Are you sure?"
+      select_all: "Select all"
+      placeholder: "There are no lessons scheduled for this student."
+  contacts:
+    contact_details: 
+      phone_aria: "Phone"
+      preferred_aria: "Preferred communication method"
+      address_aria: "Address"
+      contact_notes_aria: "Contact notes"
+    contact:
+      default_aria: "Default contact"
+      confirmation: "Are you sure?"
+    form:
+      default: "Default contact"
+      self: "Self"
+      prompt: "Select a method"
+  
+      
 
-                      `name=""` is the crucial, functional attribute of an `<input>` that determines what the user's input gets labeled as in the query string, and therefore what key it gets stored under in the `params` hash, and therefore how you will access it in your next RCAV.
+  activerecord:
+    models:
+      user: "User"
+      student: "Student"
+    enums:
+      lesson:
+        status:
+          canceled: "canceled"
+          taught: "taught"
+          scheduled: "scheduled"
+      contact:
+        preferred_communication_method:
+          phone: "phone"
+          email: "email"
+    attributes:
+      student:
+        first_name: "First name"
+        last_name: "Last name"
+        date_of_birth: "Date of birth"
+        adult: "Adult"
+      lesson:
+        student_id: "Student"
+        starts_at: "Starts at"
+        duration: "Duration"
+        status: "Status"
+        lesson_notes: "Lesson notes"
+        prompt: "Select a status"
+      contact:
+        firtst_name: "First name"
+        last_name: "Last name"
+        phone: "Phone"
+        email: "Email"
+        address: "Address"
+        relationship: "Relationship"
+        preferred_communication_method: "Preferred communication method"
+        contact_notes: "Contact notes"
+      
 
-                      `placeholder=""`, etc, are nice attributes to use on an `<input>` in order to be user-friendly; but `name=""` is the essential one that you _must_ include.
-    number_to_currency: Rails has a handy helper method called [`number_to_currency()`](https://apidock.com/rails/ActionView/Helpers/NumberHelper/number_to_currency) that is available within `.html.erb` files.
-    number_to_percentage: Rails has a handy helper method called [`number_to_percentage()`](https://apidock.com/rails/ActionView/Helpers/NumberHelper/number_to_percentage) that is available within `.html.erb` files.
-    params_are_strings: Raw values from the `params` hash are all `String`s, so you may have to do some conversions using methods like [`.to_i`](https://apidock.com/ruby/String/to_i) or [`.to_f`](https://apidock.com/ruby/String/to_f) or [`Date.parse()`](https://apidock.com/ruby/Date/parse/class) before you perform any computations.
-    round: Ruby `Float`s have a [`.round()` method](https://apidock.com/ruby/Float/round) that you can use anywhere.
-    value_attribute: Use the `value=""` attribute to pre-populate an `<input>`.
-    embed_vs_interpolate: Remember, ERB tags `<%= %>` are only for use within `.html.erb` embedded Ruby HTML view templates. If you're trying to put together a Ruby string (like when you were trying to compose an API URL in Meteorologist), just use `+` or `#{}`.
-    redirect_vs_render: |
-                        The argument to the `render()` method is **a filename** of a `.html.erb` template file from within our `app/views` folder that we want to use to format the instance variables that we've defined within _this action_.
 
-                        The argument to the `redirect_to()` method is **a URL** that we want to send the user to which will trigger _a completely different action_.
 
-                        Don't provide the `redirect_to()` method with a filename as an argument, or the `render()` method with a URL as an argument.
+  helpers:
+    submit:
+      student:
+        create: "Create student"
+        update: "Update student"
+      lesson:
+        create: "Create lesson"
+        bulk_create: "Create lessons"
+      contact:
+        create: "Create contact"
+        update: "Update contact"
+        
+  

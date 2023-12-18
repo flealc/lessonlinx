@@ -2,7 +2,7 @@
   <div class="container-fluid align-items-center">
     <a class="navbar-brand" href="/"><%= image_tag 'logo.png', alt: 'LessonLinx', style: "filter: invert(99%) sepia(5%) saturate(0%) hue-rotate(165deg) brightness(117%) contrast(100%); height: 2rem; width: auto;", class: "pe-2 mb-1" %>LessonLinx</a>
     <% unless current_page?(new_user_session_path) || current_page?(new_user_registration_path) %>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="<%= t('toggle_nav') %>">
       <span class="navbar-toggler-icon"></span>
     </button>
     <% end %>
@@ -11,24 +11,24 @@
       <% if user_signed_in? %>
         <ul class="navbar-nav mb-2 mb-lg-0 d-flex">
           <li class="nav-item">
-            <%= link_to dashboard_path, class: "nav-link", aria_label: "Dashboard" do %>
+            <%= link_to dashboard_path, class: "nav-link", aria_label: t("dashboard") do %>
               <i class="fa-solid fa-gauge" aria-hidden="true"></i>
-              Dashboard
+              <%= t('dashboard') %>
             <% end %>
           </li>
           <li class="nav-item">
-            <%= link_to students_path, class: "nav-link", aria_label: "Students" do %>
+            <%= link_to students_path, class: "nav-link", aria_label: t("students_dash") do %>
               <i class="fa-solid fa-people-group" aria-hidden="true"></i>
-              Students
+              <%= t('students_dash') %>
             <% end %>
           </li>
 
           <% if current_user.students.present?%>
             
           <li class="nav-item">
-            <%= link_to student_lessons_path(current_user.students.first), class: "nav-link", aria_label: "Lessons"  do %>
+            <%= link_to student_lessons_path(current_user.students.first), class: "nav-link", aria_label: t("lessons_dash")  do %>
               <i class="fa-regular fa-calendar-days" aria-hidden="true"></i>
-              Lessons
+              <%= t('lessons_dash') %>
             <% end %>
           </li>
 
@@ -36,13 +36,13 @@
         </ul>
 
         <div class="navbar-nav dropdown ms-lg-auto bg-primary" style="min-width: initial; width: fit-content;">
-          <a class="nav-link dropdown-toggle"  href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="My account">
+          <a class="nav-link dropdown-toggle"  href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="<%= t("my_account") %>">
             <i class="fa-solid fa-user" aria-hidden="true"></i>
-            My account
+            <%= t('my_account') %>
           </a>
           <ul class="dropdown-menu bg-primary ms-sm-3 me-sm-3 ps-2">
-            <li><%= link_to "Edit account", edit_user_registration_path, class: "nav-link", aria_label: "Edit account" %></li>
-            <li><%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-link", aria_label: "Sign out" %></li>
+            <li><%= link_to t('edit_account'), edit_user_registration_path, class: "nav-link", aria_label: t("edit_account") %></li>
+            <li><%= link_to t('sign_out'), destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-link", aria_label: t("sign_out") %></li>
           </ul>
         </div>
       <% end %>

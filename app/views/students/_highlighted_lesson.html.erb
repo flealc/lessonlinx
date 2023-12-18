@@ -8,7 +8,7 @@
 
         <div class="col-10 col-sm-8 col-md-auto d-flex align-items-center">
           <div class="text-nowrap card-title", style="width: 140px;">
-            <%= lesson.starts_at.strftime("%a, %-d %b, %Y") %>
+           <%= l(lesson.starts_at, format: :custom) %>
           </div>
         </div>
 
@@ -18,11 +18,11 @@
           </div>
 
           <% if lesson.canceled? %>
-            <span class="badge rounded-pill text-bg-warning px-2 ms-4 mb-2">canceled</span>
+            <span class="badge rounded-pill text-bg-warning px-2 ms-4 mb-2"><%= t("canceled") %></span>
           <% end %>
 
           <% if lesson.taught? %>
-            <span class="badge rounded-pill text-bg-info px-2 ms-4 mb-2">taught</span>
+            <span class="badge rounded-pill text-bg-info px-2 ms-4 mb-2"><%= t("taught") %></span>
           <% end %>
 
         </div>
@@ -33,8 +33,8 @@
       <% if current_page?(recent_lessons_student_path(student)) %>
 
         <div class="d-flex justify-content-around">
-          <%= link_to "Log lesson", edit_student_lesson_path(student.id, lesson), data: { turbo: false }, method: :get, class: "h6" %>
-          <%= link_to "Cancel lesson", edit_student_lesson_path(student_id: student.id, id: lesson, status: "canceled"), data: { turbo: false }, method: :get, class: "h6"%>
+          <%= link_to t(".log_lesson"), edit_student_lesson_path(student.id, lesson), data: { turbo: false }, method: :get, class: "h6" %>
+          <%= link_to t(".cancel_lesson"), edit_student_lesson_path(student_id: student.id, id: lesson, status: "canceled"), data: { turbo: false }, method: :get, class: "h6"%>
         </div>
 
       <% end %>
@@ -47,12 +47,12 @@
 
         <% else %>
 
-          <p class="text-body-secondary mb-0">This lesson does not have any notes. <%= link_to "Log lesson now", edit_student_lesson_path(student, lesson), data: {turbo_frame: "_top"}, class: "h6" %></p>
+          <p class="text-body-secondary mb-0"><%= t("lesson_notes_placeholder") %> <%= link_to t("log_lesson_now"), edit_student_lesson_path(student, lesson), data: {turbo_frame: "_top"}, class: "h6" %></p>
 
         <% end %>
         <div class="d-flex justify-content-end mt-1">
-          <%=link_to "edit", edit_student_lesson_path(student, lesson), data: { turbo_frame: "student-details" }, class: "h6 me-3" %>
-          <%=link_to "delete", student_lesson_path(student, lesson), data: { "turbo-method": :delete, turbo_confirm: "Are you sure?" }, class: "h6 me-3" %>
+          <%=link_to t("edit"), edit_student_lesson_path(student, lesson), data: { turbo_frame: "student-details" }, class: "h6 me-3" %>
+          <%=link_to t("delete"), student_lesson_path(student, lesson), data: { "turbo-method": :delete, turbo_confirm: "Are you sure?" }, class: "h6 me-3" %>
         </div>
 
       <% end %>

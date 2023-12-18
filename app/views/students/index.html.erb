@@ -1,8 +1,8 @@
 <div data-controller="side-bar" data-side-bar-show-value="<%= image_path('show-sidebar.svg') %>" data-side-bar-hide-value="<%= image_path('hide-sidebar.svg') %>" >
-  <div class="d-flex align-items-end">
-    <div class="h1 mb-0 pb-0 ps-sm-2 col-5 col-sm-2">Students</div>
-    <div class="mb-1 col-7 col-sm-10 ps-sm-3">
-      <%= link_to "new", new_student_path, data: { turbo_frame: "_top" }, class:"h6 ps-sm-2" %>
+  <div class="d-flex align-items-end justify-content-between">
+    <div class="h1 mb-0 pb-0 ps-sm-2 col-5 col-sm-2"><%= t(".title") %></div>
+    <div class="mb-1 me-sm-2 ps-4">
+      <%= link_to t("new"), new_student_path, data: { turbo_frame: "_top" }, class:"h6 ps-sm-2" %>
     </div>
   </div>
   <hr class="my-2">
@@ -16,7 +16,7 @@
       } %>
 
   <div class="col-9 col-sm-10 mt-1 px-0" data-side-bar-target="contentArea">
-      <div class="bg-body-tertiary h-100 text-center py-5 px-5 text-wrap mx-3 placeholder-custom rounded-3">Your students' information will be displayed here.
+      <div class="bg-body-tertiary h-100 text-center py-5 px-5 text-wrap mx-3 placeholder-custom rounded-3"><%= t(".placeholder") %>
       </div>
   </div>
 
