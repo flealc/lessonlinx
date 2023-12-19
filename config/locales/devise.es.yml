@@ -31,7 +31,7 @@ es:
       failure: "No pudimos autentificar tu cuenta de %{kind} por la siguiente razón: \"%{reason}\"."
       success: "Te autentificaste correctamente con tu cuenta de %{kind}."
     passwords:
-      no_token: "No puedes acceder a esta página sin venir desde el email de reinicio de contraseña. Si vienes desde ahí, por favor asegúrate de usar la url completa que aparece."
+      no_token: "No puedes acceder a esta página sin venir desde el email de reinicio de contraseña. Si vienes desde allí, por favor asegúrate de usar la url correcta."
       send_instructions: "Recibirás un email con instrucciones para reiniciar tu contraseña en unos minutos."
       send_paranoid_instructions: "Si tu email existe en el sistema, recibirás un email con instrucciones para reiniciar tu contraseña en unos minutos."
       updated: "Tu contraseña fue modificada correctamente. Has iniciado sesión."

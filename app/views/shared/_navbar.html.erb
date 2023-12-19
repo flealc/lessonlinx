@@ -1,11 +1,12 @@
 <nav class="navbar navbar-expand-lg bg-primary fw-normal mb-2 py-1 d-flex flex-align-center" data-bs-theme="dark">
-  <div class="container-fluid align-items-center">
-    <a class="navbar-brand" href="/"><%= image_tag 'logo.png', alt: 'LessonLinx', style: "filter: invert(99%) sepia(5%) saturate(0%) hue-rotate(165deg) brightness(117%) contrast(100%); height: 2rem; width: auto;", class: "pe-2 mb-1" %>LessonLinx</a>
-    <% unless current_page?(new_user_session_path) || current_page?(new_user_registration_path) %>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="<%= t('toggle_nav') %>">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <div class="container-fluid align-items-center justify-content-between">
+    <a class="navbar-brand" href=<%= user_signed_in? ? authenticated_root_path : (params[:lang] == "es" ? new_user_session_path(params: {lang: "es" }) : new_user_session_path) %>><%= image_tag 'logo.png', alt: 'LessonLinx', style: "filter: invert(99%) sepia(5%) saturate(0%) hue-rotate(165deg) brightness(117%) contrast(100%); height: 2rem; width: auto;", class: "pe-2 mb-1" %>LessonLinx</a>
+    <% unless !user_signed_in?%>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="<%= t('toggle_nav') %>">
+        <span class="navbar-toggler-icon"></span>
+      </button>
     <% end %>
+   
     <div class="collapse navbar-collapse d-flex-wrap pb-1" id="navbarSupportedContent">
 
       <% if user_signed_in? %>
@@ -24,29 +25,40 @@
           </li>
 
           <% if current_user.students.present?%>
-            
-          <li class="nav-item">
-            <%= link_to student_lessons_path(current_user.students.first), class: "nav-link", aria_label: t("lessons_dash")  do %>
-              <i class="fa-regular fa-calendar-days" aria-hidden="true"></i>
-              <%= t('lessons_dash') %>
-            <% end %>
-          </li>
+
+            <li class="nav-item">
+              <%= link_to student_lessons_path(current_user.students.first), class: "nav-link", aria_label: t("lessons_dash")  do %>
+                <i class="fa-regular fa-calendar-days" aria-hidden="true"></i>
+                <%= t('lessons_dash') %>
+              <% end %>
+            </li>
 
           <% end %>
         </ul>
 
-        <div class="navbar-nav dropdown ms-lg-auto bg-primary" style="min-width: initial; width: fit-content;">
+        <div class="navbar-nav dropdown ms-lg-auto bg-primary" style="width: fit-content;">
           <a class="nav-link dropdown-toggle"  href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="<%= t("my_account") %>">
             <i class="fa-solid fa-user" aria-hidden="true"></i>
             <%= t('my_account') %>
           </a>
-          <ul class="dropdown-menu bg-primary ms-sm-3 me-sm-3 ps-2">
-            <li><%= link_to t('edit_account'), edit_user_registration_path, class: "nav-link", aria_label: t("edit_account") %></li>
-            <li><%= link_to t('sign_out'), destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-link", aria_label: t("sign_out") %></li>
+          <ul class="dropdown-menu dropdown-menu-end bg-primary ms-sm-3 me-sm-3 ps-2">
+            <li><%= link_to t('edit_account'), edit_user_registration_path, class: "nav-link pe-3 text-nowrap", aria_label: t("edit_account") %></li>
+            <li><%= link_to t('sign_out'), destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-link pe-3", aria_label: t("sign_out") %></li>
           </ul>
         </div>
       <% end %>
 
     </div>
+    <% unless user_signed_in? || !current_page?(new_user_session_path) %>
+      <div class="dropdown ms-lg-auto bg-primary me-2" style="position: relative; width: fit-content important!;">
+        <a class="nav-link dropdown-toggle pb-1" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="<%= t("my_account") %>" style="color: #fff;">
+          <%= I18n.locale.upcase %>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-start dropdown-menu-sm-end bg-primary ms-sm-3 me-sm-3 ps-2">
+          <li><%= link_to "EN", new_user_session_path, class: "nav-link pe-2", aria_label: "EN" %></li>
+          <li><%= link_to "ES", new_user_session_path(params: {lang: "es"}), class: "nav-link pe-2", aria_label: "ES" %></li>
+        </ul>
+      </div>
+    <% end %>
   </div>
 </nav>

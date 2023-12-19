@@ -1,4 +1,15 @@
 es:
+  slogan_html: "Tus lecciones, <br> siempre a tu alcance"
+  highlight_one: "No más agendas extraviadas"
+  highlight_two: "Sincroniza tu éxito"
+  highlight_three: "Manténte al tanto de tu agenda"
+  content_one_html: "Un espacio único y seguro <br> para todas tus notas de clase."
+  content_two_html: "Tu calendario de clases <br> al día en todos tus dispositivos."
+  content_three_html: "Mensajes diarios que te <br> ayudan a organizar tu día."
+  no_account_html: "No tienes cuenta? <br> Pues te regalamos una!"
+  limited_time: "(por un tiempo limitado 🙃)"
+  i_want_one_now: "Quiero mi cuenta ahora!"
+  have_an_account: "Tienes una cuenta?"
   dashboard: "Panel de control"
   students_dash: "Estudiantes"
   lessons_dash: "Lecciones"
@@ -11,6 +22,8 @@ es:
   taught: "completada"
   scheduled: "programada"
   lesson_notes_placeholder: "Esta lección no contiene notas."
+  sidebar_placeholder_students: "No hay estudiantes para mostrar."
+  sidebar_placeholder_lessons: "No hay lecciones esta semana!"
   log_lesson_now: "Añadir notas"
   edit: "editar"
   delete: "eliminar"
@@ -22,7 +35,7 @@ es:
     abbr_month_names: [nil, ene, feb, mar, abr, may, jun, jul, ago, sep, oct, nov, dic]
   time:
     formats:
-      custom: "%a, %-d de %b de %Y"
+      custom: "%a, %-d %b, %Y"
   users:
     dashboard:
       title: "Panel de Control"
@@ -98,6 +111,7 @@ es:
       phone_aria: "Teléfono"
       preferred_aria: "Método de comunicación preferido"
       address_aria: "Dirección"
+      prompt: "Selecciona un método"
       contact_notes_aria: "Notas del contacto"
     contact:
       default_aria: "Contacto preferido"
@@ -105,9 +119,57 @@ es:
     form:
       default: "Contacto preferido"
       self: "Estudiante"
-      prompt: "Selecciona un método"
+  devise:
+    sessions:
+      new:
+        forgot_your_password: "Olvidaste tu contraseña?"
+        sign_in: "Entrar"
+        alt: "Imagen inspirada en elementos educativos."
+    registrations:
+      edit:
+        your_account: "Tu cuenta"
+        placeholder: "Deja este campo en blanco si no quieres cambiarla"
+        prompt_zone: "Selecciona tu zona horaria"   
+        prompt_language: "Selecciona tu idioma"
+        calendar_link: "Copiar enlace a tu calendario"
+        daily_digest: "Suscríbete al boletín diario"
+        deliver_at: "Entregar a las"
+        authorize: "Autoriza tus cambios" 
+        enter_password: "Por favor, introduce tu contraseña para guardar los cambios en tu cuenta"
+        placeholder_current: "Introduce tu contraseña actual"
+        cancel_account: "Cancelar tu cuenta" 
+        unhappy: "🙁 No estás satisfecho(a)?"
+        update: "Guardar cambios"
+        back: "Regresar"
+        cancel: "Cancelar mi cuenta"
+      new:
+        sign_up: "Regístrate"
+    shared:
+      links:
+        back: "Regresar a la página de inicio"
+    passwords:
+      new:
+        forgot: "Olvidaste tu contraseña?"
+        send_instructions: "Recibir instrucciones en mi dirección de email"
+      edit:
+        title: "Cambia tu contraseña"
+        new_password: "Nueva contraseña"
+        hint: "%{min} caracteres como mínimo"
+        confirm: "Confirma tu nueva contraseña"
+        change: "Cambiar mi contraseña"
+
+    mailer:
+      reset_password_instructions:
+        action: "Cambiar mi contraseña"
+        greeting: "Hola %{recipient}!"
+        instruction: "Alguien ha solicitado un enlace para cambiar tu contraseña. Puedes efectuar el cambio siguiendo el siguiente enlace."
+        instruction_2: "Si no solicitaste cambiar tu contraseña, por favor ignora este mensaje."
+        instruction_3: "Tu contraseña no cambiará hasta que no sigas el enlace y establezcas una nueva."
+        subject: "Instrucciones para el cambio de contraseña"
 
 
+
+    
 
   activerecord:
     models:
@@ -146,6 +208,19 @@ es:
         relationship: "Relación"
         preferred_communication_method: "Método de comunicación preferido"
         contact_notes: "Notas del contacto"
+      user:
+        email: Email
+        password: "Contraseña"
+        password_confirmation: "Confirmar contraseña"
+        remember_created_at: Remember created at
+        remember_me: "Recuérdame"
+        timezone: "Zona horaria"
+        language: "Idioma"
+        first_name: "Nombre"
+        last_name: "Apellido(s)"
+  
+        
+
 
 
 
@@ -157,8 +232,9 @@ es:
       lesson:
         create: "Crear lección"
         bulk_create: "Crear lecciones"
-        save: "Guardar"
+        update: "Guardar lección"
       contact:
         create: "Crear contacto"
         update: "Guardar contacto"
+    
       

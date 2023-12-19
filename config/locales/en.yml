@@ -1,4 +1,15 @@
 en:
+  slogan_html: "Your students, <br> one tap away"
+  highlight_one: "Ditch the cluttered notepad"
+  highlight_two: "Synchronize your success"
+  highlight_three: "Stay informed with daily digests"
+  content_one_html: "Keep all your lesson notes in <br> one secure place."
+  content_two_html: "Keep your teaching calendar  <br> up-to-date across all your devices."
+  content_three_html: "Email digests give you a concise <br> snapshot of your upcoming lessons."
+  no_account_html: "No account? <br> We're giving those out for free!"
+  limited_time: "(for a limited time only 🙃)"
+  i_want_one_now: "I want one now!"
+  have_an_account: "Have an account?"
   dashboard: "Dashboard"
   students_dash: "Students"
   lessons_dash: "Lessons"
@@ -11,6 +22,8 @@ en:
   taught: "taught"
   scheduled: "scheduled"
   lesson_notes_placeholder: "This lesson does not have any notes."
+  sidebar_placeholder_students: "No students to display."
+  sidebar_placeholder_lessons: "No lessons this week!"
   log_lesson_now: "Log lesson now"
   edit: "edit"
   delete: "delete"
@@ -101,6 +114,54 @@ en:
       default: "Default contact"
       self: "Self"
       prompt: "Select a method"
+  devise:
+    sessions:
+      new:
+        forgot_your_password: "Forgot your password?"
+        sign_in: "Log in"
+        alt: "Image featuring education and learning-inspired elements."
+    registrations:
+      edit:
+        your_account: "Your account"
+        placeholder: "Leave blank if you don't want to change it"
+        prompt_zone: "Select your current timezone"   
+        prompt_language: "Select your language"
+        calendar_link: "Copy calendar subscription link"
+        daily_digest: "Sign up for daily digest"
+        deliver_at: "Deliver at"
+        authorize: "Authorize your changes" 
+        enter_password: "Please enter your current password to save any changes to your account"
+        placeholder_current: "Enter current password"
+        cancel_account: "Cancel account"
+        unhappy: "🙁 Unhappy?"
+        update: "Update"
+        back: "Back"
+        cancel: "Cancel my account"
+      new:
+        sign_up: "Sign up"
+    shared:
+      links:
+        back: "Back to log in"
+    passwords:
+      new:
+        forgot: "Forgot your password?"
+        send_instructions: "Send me reset password instructions"
+      edit:
+        title: "Change your password"
+        new_password: "New password"
+        hint: "%{min} characters minimum"
+        confirm: "Confirm your new password"
+        change: "Change my password"
+
+    mailer:
+      reset_password_instructions:
+        action: "Change my password"
+        greeting: "Hello %{recipient}!"
+        instruction: "Someone has requested a link to change your password. You can do this through the link below."
+        instruction_2: "If you didn't request this, please ignore this email."
+        instruction_3: "Your password won't change until you access the link above and create a new one."
+        subject: "Reset password instructions"
+    
   
       
 
@@ -140,8 +201,8 @@ en:
         relationship: "Relationship"
         preferred_communication_method: "Preferred communication method"
         contact_notes: "Contact notes"
-      
-
+  
+        
 
 
   helpers:
@@ -152,6 +213,7 @@ en:
       lesson:
         create: "Create lesson"
         bulk_create: "Create lessons"
+        update: "Update lesson"
       contact:
         create: "Create contact"
         update: "Update contact"

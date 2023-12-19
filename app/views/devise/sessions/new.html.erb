@@ -2,7 +2,7 @@
   
   
   <div class="col-md-5 col-xxxl-4 mb-5 d-flex flex-column align-items-center">
-    <h1 style="font-size: 3rem; line-height: 1.2; font-weight: bold; color: #05406a; margin-bottom: 0.5em;">Your students, <br> one tap away</h1>
+    <h1 style="font-size: 3rem; line-height: 1.2; font-weight: bold; color: #05406a; margin-bottom: 0.5em; text-align: center;"><%= sanitize(t("slogan_html")) %> </h1>
 
     <div>
       <div class="d-flex ms-4 ms-sm-0 mt-3">
@@ -10,8 +10,8 @@
           <div class="fs-3"><i class="fa-regular fa-paper-plane" style="color: #05406a;"></i></div>
         </div>
         <div class="w-auto ms-2">
-          <div class="h5 mt-2 fw-medium" style="color: #05406a;">Ditch the cluttered notepad</div>
-          <div style="color: #1c7cbf;">Keep all your lesson notes in <br> one secure place.</div>
+          <div class="h5 mt-2 fw-medium" style="color: #05406a;"><%= t("highlight_one") %></div>
+          <div style="color: #1c7cbf;"><%= sanitize(t("content_one_html")) %></div>
         </div>
       </div>
       <div class="d-flex ms-4 ms-sm-0 mt-4">
@@ -19,8 +19,8 @@
           <div class="fs-3"><i class="fa-regular fa-calendar-days" style="color: #05406a;"></i></div>
         </div>
         <div class="w-auto ms-2">
-          <div class="h5 mt-2 fw-medium" style="color: #05406a;">Synchronize your success</div>
-          <div style="color: #1c7cbf;">Keep your teaching calendar  <br> up-to-date across all your devices.</div>
+          <div class="h5 mt-2 fw-medium" style="color: #05406a;"><%= t("highlight_two") %></div>
+          <div style="color: #1c7cbf;"><%= sanitize(t("content_two_html")) %></div>
         </div>
       </div>
       <div class="d-flex ms-4 ms-sm-0 mt-4">
@@ -28,16 +28,16 @@
           <div class="fs-3"><i class="fa-regular fa-envelope-open" style="color: #05406a;"></i></div>
         </div>
         <div class="w-auto ms-2">
-          <div class="h5 mt-2 fw-medium" style="color: #05406a;">Stay informed with daily digests</div>
-          <div style="color: #1c7cbf;">Email digests give you a concise <br> snapshot of your upcoming lessons.</div>
+          <div class="h5 mt-2 fw-medium" style="color: #05406a;"><%= t("highlight_three") %></div>
+          <div style="color: #1c7cbf;"><%= sanitize(t("content_three_html")) %></div>
         </div>
       </div>
     </div>
 
-    <div class="h4 mt-5 mb-0 fw-medium" style="color: #05406a;">No account? <br> We're giving those out for free!</div>
-    <div style="color: #05406a;">(for a limited time only 🙃)</div>
+    <div class="h4 mt-5 mb-0 fw-medium" style="color: #05406a;"><%= sanitize(t("no_account_html")) %></div>
+    <div style="color: #05406a;"><%= t("limited_time") %></div>
     
-    <%= link_to "I want one now!", new_registration_path(resource_name), class: "btn btn-warning mt-4 align-self-center", style: "color: #fff; background-color: #fb8042;" %><br />
+    <%= link_to t("i_want_one_now"), I18n.locale == :es ? new_registration_path(resource_name, params: {lang: "es"}) : new_registration_path(resource_name), class: "btn btn-warning mt-4 align-self-center", style: "color: #fff; background-color: #fb8042;" %><br />
   </div>
 
  
@@ -45,7 +45,7 @@
 
   <div class="col-md-6 flex-column align-items-center justify-content-center">
     
-      <div class="h2 text-left mb-3 text-sm-center fw-medium" style="color: #05406a;">Have an account?</div>
+      <div class="h2 text-left mb-3 text-sm-center fw-medium" style="color: #05406a;"><%= t("have_an_account") %></div>
 
       <%= form_with(model: resource, as: resource_name, url: session_path(resource_name), html: { class: 'form-horizontal' }) do |f| %>
         <div class="d-flex align-items-start justify-content-center flex-wrap">
@@ -65,18 +65,18 @@
               <div class="form-group mb-1 ms-2">
                 <%= f.label :password, class: 'form-label' %>
                 <%= f.password_field :password, class: 'form-control', autocomplete: 'new-password', tabindex: 2 %>
-                <%= link_to "Forgot your password?", new_password_path(resource_name), class: "h6 small mt-4 ms-1" %>
+                <%= link_to t(".forgot_your_password"), I18n.locale == :es ? new_password_path(resource_name, params: {lang: "es"}) : new_password_path(resource_name), class: "h6 small mt-4 ms-1" %>
               </div>
             </div>
           </div>
 
           <div class="form-actions align-self-center ms-2">
-            <%= f.button "Log in", class: "btn btn-primary btn-block", tabindex: 4 %>
+            <%= f.button t(".sign_in"), class: "btn btn-primary btn-block", tabindex: 4 %>
           </div>
         </div>
       <% end %>
     
-    <img src="<%= image_url('landing.png') %>" alt="Image featuring education and learning-inspired elements." style="max-width: 100%; height: auto;">
+    <img src="<%= image_url('landing.png') %>" alt="<%= t('.alt') %>" style="max-width: 100%; height: auto;">
 
   </div>
 

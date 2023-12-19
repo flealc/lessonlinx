@@ -1,5 +1,5 @@
 <%- if controller_name != 'sessions' %>
-  <%= link_to "Back to log in", new_session_path(resource_name), class: "h6 mt-4" %><br />
+  <%= link_to t(".back"), I18n.locale == :es ? new_session_path(resource_name, params: {lang: "es"}) : new_session_path(resource_name), class: "h6 mt-4" %><br />
 <% end %>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' && controller_name != 'passwords' %>
@@ -7,7 +7,7 @@
 <% end %>
 
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-  <%= link_to "Forgot your password?", new_password_path(resource_name), class: "h6 mt-4" %><br />
+  <%= link_to "Forgot your password?", I18n.locale == :es ? new_password_path(resource_name, params: {lang: "es"}) : new_password_path(resource_name), class: "h6 mt-4" %><br />
 <% end %>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>

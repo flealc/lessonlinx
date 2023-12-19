@@ -20,7 +20,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
  # end
 
  # PUT /resource
-  def update
+ def update
+    if account_update_params[:language] != resource.language
+      new_locale = account_update_params["language"]
+      I18n.locale = new_locale
+    end
     super
   end
 
