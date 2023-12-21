@@ -33,6 +33,8 @@ es:
     abbr_day_names: [dom, lun, mar, mié, jue, vie, sáb]
     month_names: [nil, enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre]
     abbr_month_names: [nil, ene, feb, mar, abr, may, jun, jul, ago, sep, oct, nov, dic]
+    formats:
+      custom: "%a, %-d %b, %Y"
   time:
     formats:
       custom: "%a, %-d %b, %Y"
@@ -166,6 +168,13 @@ es:
         instruction_2: "Si no solicitaste cambiar tu contraseña, por favor ignora este mensaje."
         instruction_3: "Tu contraseña no cambiará hasta que no sigas el enlace y establezcas una nueva."
         subject: "Instrucciones para el cambio de contraseña"
+  user_mailer:
+    daily_digest:
+      subject: "Tu Boletín para el Día de Hoy"
+      title: "Tu horario para el día de hoy"
+      hello: "Hola, %{user}!"
+      body: "Aquí tienes toda la información que necesitarás para enseñar en el día de hoy."
+      happy: "Feliz día!"
 
 
 

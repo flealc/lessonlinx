@@ -28,9 +28,13 @@ en:
   edit: "edit"
   delete: "delete"
   new: "new"
+  date:
+    formats:
+      custom: "%a, %-d %b, %Y"
   time:
     formats:
       custom: "%a, %-d %b, %Y"
+      custom_no_day: "%I:%M%P"
   users:
     dashboard: 
       title: "Dashboard"
@@ -161,7 +165,13 @@ en:
         instruction_2: "If you didn't request this, please ignore this email."
         instruction_3: "Your password won't change until you access the link above and create a new one."
         subject: "Reset password instructions"
-    
+  user_mailer:
+    daily_digest:
+      subject: "Your Daily Teaching Digest"
+      title: "Your teaching schedule for today"
+      hello: "Hello, %{user}!"
+      body: "Here is everything you need to rock those lessons today."
+      happy: "Happy teaching!"
   
       
 
