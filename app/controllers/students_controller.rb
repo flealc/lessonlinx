@@ -17,8 +17,8 @@ class StudentsController < ApplicationController
   def new
     @student = Student.new
     @breadcrumbs = [
-      { content: "Students", href: students_path },
-      { content: "Add student", href: "#" },
+      { content: t("students_breadcrumb"), href: students_path },
+      { content: t("add_student"), href: "#" },
     ]
   end
 
@@ -26,7 +26,7 @@ class StudentsController < ApplicationController
   def edit
     @breadcrumbs = [
       { content: @student.full_name, href: student_path(@student) },
-      { content: "Edit student", href: "#" },
+      { content: t("edit_student"), href: "#" },
     ]
   end
 
@@ -34,14 +34,11 @@ class StudentsController < ApplicationController
   def create
     @student = Student.new(student_params)
     @student.teacher_id = current_user.id
-    @breadcrumbs = [
-      { content: "Students", href: students_path },
-      { content: "Add student", href: "#" },
-    ]
+    
 
     respond_to do |format|
       if @student.save
-        format.html { redirect_to student_url(@student), notice: "Student was successfully created." }
+        format.html { redirect_to student_url(@student), notice: t("student_created") }
         format.json { render :show, status: :created, location: @student }
       else
         format.html { redirect_to new_student_path, status: :unprocessable_entity, alert: "#{@student.errors.full_messages.to_sentence}" }
@@ -52,13 +49,10 @@ class StudentsController < ApplicationController
 
   # PATCH/PUT /students/1 or /students/1.json
   def update
-    @breadcrumbs = [
-      { content: "Students", href: students_path },
-      { content: "Add student", href: "#" },
-    ]
+    
     respond_to do |format|
       if @student.update(student_params)
-        format.html { redirect_to student_url(@student), notice: "Student was successfully updated." }
+        format.html { redirect_to student_url(@student), notice: t("student_updated") }
         format.json { render :show, status: :ok, location: @student }
       else
         format.html { redirect_to new_student_path, status: :unprocessable_entity, alert: "#{@student.errors.full_messages.to_sentence}" }
@@ -72,7 +66,7 @@ class StudentsController < ApplicationController
     @student.destroy
 
     respond_to do |format|
-      format.html { redirect_to students_url, notice: "Student was successfully destroyed." }
+      format.html { redirect_to students_url, notice: t("student_destroyed") }
       format.json { head :no_content }
     end
   end
@@ -101,7 +95,7 @@ class StudentsController < ApplicationController
     begin
       @student = Student.find(params[:id])
     rescue ActiveRecord::RecordNotFound
-      redirect_to students_path, alert: "The requested student record has already been deleted!" 
+      redirect_to students_path, alert: t("student_deleted") 
       return
     end
   end

@@ -21,7 +21,7 @@
     
       <div class="d-flex justify-content-end">
         <%= link_to t("edit"), edit_contact_path(contact), data: { turbo_frame: "_top" }, class: "h6 me-3" %>
-        <%= link_to t("delete"), contact_path(contact), data: { turbo_method: :delete, turbo_confirm: t(".confirmation") }, class: "h6" %>
+        <%= link_to t("delete"), contact_path(contact), data: { turbo_method: :delete, turbo_confirm: t(".confirmation"), turbo_frame: "_top"}, class: "h6" %>
       </div>
     </div>
 
