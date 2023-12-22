@@ -49,7 +49,7 @@
       <% end %>
 
     </div>
-    <% unless user_signed_in? || !current_page?(new_user_session_path) %>
+    <% if !user_signed_in? && (current_page?(new_user_session_path) || current_page?(unauthenticated_root_path)) %>
       <div class="dropdown ms-lg-auto bg-primary me-2" style="position: relative; width: fit-content important!;">
         <a class="nav-link dropdown-toggle pb-1" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="<%= t("my_account") %>" style="color: #fff;">
           <%= I18n.locale.upcase %>
