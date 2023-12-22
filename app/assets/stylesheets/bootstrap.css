@@ -319,6 +319,7 @@ a > .svg-inline--fa {
   border: var(--bs-card-border-width) solid var(--bs-card-border-color);
 }
 
+
 h6,
 .h6,
 h5,
@@ -3687,7 +3688,7 @@ fieldset:disabled .btn {
   position: absolute;
   z-index: var(--bs-dropdown-zindex);
   display: none;
-  min-width: var(--bs-dropdown-min-width);
+  min-width: fit-content;
   padding: var(--bs-dropdown-padding-y) var(--bs-dropdown-padding-x);
   margin: 0;
   font-size: var(--bs-dropdown-font-size);

@@ -4,10 +4,10 @@
 
   <div class="d-flex mb-2">
     <%= form.check_box :default, checked: contact.default? ? true : false %>
-     <%= label_tag "contact[default]", "Default contact", class: "form-label mb-0 ms-1 me-2" %>
+     <%= label_tag "contact[default]", t(".default"), class: "form-label mb-0 ms-1 me-2" %>
     
     <%= form.check_box :self, checked: contact.relationship == "self" ? true : false, data: { "create-contact-target": "selfCheckbox", action: "click->create-contact#toggleSelf"} %>
-    <%= label_tag "contact[self]", "Self", class: "form-label mb-0 ms-1 me-2" %>
+    <%= label_tag "contact[self]", t(".self"), class: "form-label mb-0 ms-1 me-2" %>
   </div>
 
 
@@ -44,7 +44,7 @@
 
   <div class="mb-2">
     <%= form.label :preferred_communication_method, style: "display: block", class: "form-label" %>
-    <div class="col-md-3"><%= form.select :preferred_communication_method, Contact.preferred_communication_methods.keys.map { |m| [m.titleize, m]}, {prompt: "Select a method"}, style: "display: block", class: "form-select" %></div>
+    <div class="col-md-3"><%= form.select :preferred_communication_method, t("activerecord.enums.contact.preferred_communication_method").map { |key, m| [m.titleize, key]}, {prompt: t(".prompt")}, style: "display: block", class: "form-select" %></div>
   </div>
 
   <div class="mb-2">

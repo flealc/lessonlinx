@@ -1,4 +1,4 @@
-<div class="h5 ms-3 mt-2">Lessons to log</div>
+<div class="h5 ms-3 mt-2"><%= t(".title") %></div>
 
 <% if current_user.past_lessons.where(status: :scheduled).any? %>
 
@@ -6,7 +6,7 @@
     <% current_user.past_lessons.scheduled.first(5).each do |lesson| %>
       <div class="list-group-item list-group-item-action">
         <%= lesson.student.full_name %>
-        <%= link_to "Log", edit_student_lesson_path(lesson.student, lesson, lesson: { status: "taught" }), class: "stretched-link" %>
+        <%= link_to t('.log'), edit_student_lesson_path(lesson.student, lesson, lesson: { status: "taught" }), class: "stretched-link" %>
         <div>
           <%= lesson.starts_at.strftime("%b %d, %-l:%M %p") %>
         </div>
@@ -16,6 +16,6 @@
 
 <% else %>
   <div class="bg-body-tertiary h-100 d-flex justify-content-center align-items-center placeholder-custom rounded-3">
-    <div class="text-center text-secondary text-wrap mx-3">No lessons to log.</div>
+    <div class="text-center text-secondary text-wrap mx-3"><%= t(".placeholder") %></div>
   </div>
 <% end %>

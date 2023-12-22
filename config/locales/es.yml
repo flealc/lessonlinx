@@ -1,0 +1,278 @@
+es:
+  slogan_html: "Tus lecciones, <br> siempre a tu alcance"
+  highlight_one: "No más agendas extraviadas"
+  highlight_two: "Sincroniza tu éxito"
+  highlight_three: "Manténte al tanto de tu agenda"
+  content_one_html: "Un espacio único y seguro <br> para todas tus notas de clase."
+  content_two_html: "Tu calendario de clases <br> al día en todos tus dispositivos."
+  content_three_html: "Mensajes diarios que te <br> ayudan a organizar tu día."
+  no_account_html: "No tienes cuenta? <br> Pues te regalamos una!"
+  limited_time: "(por un tiempo limitado 🙃)"
+  i_want_one_now: "Quiero mi cuenta ahora!"
+  have_an_account: "Tienes una cuenta?"
+  dashboard: "Panel de control"
+  students_dash: "Estudiantes"
+  lessons_dash: "Lecciones"
+  my_account: "Mi cuenta"
+  edit_account: "Opciones de cuenta"
+  sign_out: "Cerrar sesión"
+  toggle_nav: "Expandir navegación"
+  toggle_icon: "Ocultar panel"
+  canceled: "cancelada"
+  taught: "completada"
+  scheduled: "programada"
+  lesson_notes_placeholder: "Esta lección no contiene notas."
+  sidebar_placeholder_students: "No hay estudiantes para mostrar."
+  sidebar_placeholder_lessons: "No hay lecciones esta semana!"
+  log_lesson_now: "Añadir notas"
+  edit: "editar"
+  delete: "eliminar"
+  new: "nuevo"
+  not_authorized: "No tienes autorización para realizar esta acción."
+  add_contact: "Nuevo contacto"
+  contacts_breadcrumb: "Contactos / %{contact}"
+  contact_created: "El contacto fue creado exitosamente."
+  contact_updated: "El contacto fue modificado exitosamente."
+  contact_destroyed: "El contacto fue eliminado exitosamente."
+  create_lesson: "Crear lección"
+  create_lessons: "Crear lecciones"
+  edit_lesson: "Editar lección"
+  lesson_info: "Por favor, proporciona toda la información necesaria para la lección."
+  lessons_info: "Por favor, proporciona toda la información necesaria para las lecciones."
+  lesson_created: "La lección fue creada exitosamente."
+  lessons_created: "Las lecciones fueron creadas exitosamente."
+  lesson_updated: "La lección fue modificada exitosamente."
+  lesson_destroyed: "La lección fue eliminada exitosamente."
+  lessons_destroyed: "Las lecciones fueron eliminadas exitosamente."
+  lessons_error: "Ha ocurrido un error creando las lecciones."
+  lessons_delete_error: "Ha ocurrido un error eliminando las lecciones."
+  delete_lessons: "Eliminar lecciones"
+  select_lessons: "Por favor, selecciona lecciones para eliminar."
+  students_breadcrumb: "Estudiantes"
+  add_student: "Añadir estudiante"
+  edit_student: "Modificar estudiante"
+  student_created: "El(la) estudiante fue creado(a) exitosamente."
+  student_updated: "El(la) estudiante fue modificado(a) exitosamente."
+  student_destroyed: "El(la) estudiante fue eliminado(a) exitosamente."
+  student_deleted: "Este(a) estudiante ya ha sido eleminado(a)!"
+
+
+  date:
+    day_names: [domingo, lunes, martes, miércoles, jueves, viernes, sábado]
+    abbr_day_names: [dom, lun, mar, mié, jue, vie, sáb]
+    month_names: [nil, enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre]
+    abbr_month_names: [nil, ene, feb, mar, abr, may, jun, jul, ago, sep, oct, nov, dic]
+    formats:
+      custom: "%a, %-d %b, %Y"
+  time:
+    formats:
+      custom: "%a, %-d %b, %Y"
+  users:
+    dashboard:
+      title: "Panel de Control"
+      placeholder_title: "Bienvenido!"
+      add_students: "añadiendo estudiantes"
+      placeholder_main: "Esta página mostrará información útil a medida que vayas %{link} y creando lecciones."
+    lessons_to_log:
+      title: "Lecciones sin notas"
+      log: "Añadir"
+      placeholder: "No hay lecciones sin notas."
+    recent_students: 
+      title: "Estudiantes recientes"
+      placeholder: "No hay estudiantes para mostrar."
+  students:
+    recent_lessons:
+      upcoming_title: "Próxima lección"
+      previous_title: "Últimas lecciones"
+    highlighted_lesson:
+      log_lesson: "Añadir notas"
+      cancel_lesson: "Cancelar lección"
+    student:
+      confirmation: "Atención! Los contactos asociados con este estudiante también serán eliminados!"
+      details: "Detalles"
+      dob: "Fecha de nacimiento"
+      age: "(%{age} años)"
+      adult_pill: "adulto"
+      notes: "Notas"
+      placeholder: "No hay notas para este estudiante."
+      contacts: "Contactos"
+      new_contact: "nuevo contacto"
+      contacts_placeholder: "No hay contactos asociados con este estudiante."
+    index:
+      placeholder: "La información sobre tus estudiantes se mostrará aquí."
+      title: "Estudiantes"
+    show:
+      title: "Estudiantes"
+  lessons:
+    bulk_form:
+      student: "Estudiante"
+      starts_at: "Hora"
+      duration: "Duración"
+      weekdays: "Días de la semana"
+      from: "Desde"
+      to: "Hasta"
+      days:
+        monday: "Lunes"
+        tuesday: "Martes"
+        wednesday: "Miércoles"
+        thursday: "Jueves"
+        friday: "Viernes"
+        saturday: "Sábado"
+        sunday: "Domingo"
+    filter:
+        future: "Futuras"
+        past: "Pasadas"
+        apply: "aplicar"
+        clear: "eliminar"
+    index:
+      title: "Lecciones"
+      batch_create: "crear múltiples"
+      batch_delete: "eliminar múltiples"
+      new: "nueva"
+      last_lesson: "Última lección"
+      all_lessons: "Todas las lecciones"
+      placeholder: "No hay lecciones para este estudiante."
+    select_delete:
+      delete_selected: "eliminar seleccionadas"
+      confirm_message: "Deseas eliminar estas lecciones?"
+      select_all: "todas"
+      placeholder: "No hay lecciones programadas para este estudiante."
+  contacts:
+    contact_details: 
+      phone_aria: "Teléfono"
+      preferred_aria: "Método de comunicación preferido"
+      address_aria: "Dirección"
+      prompt: "Selecciona un método"
+      contact_notes_aria: "Notas del contacto"
+    contact:
+      default_aria: "Contacto preferido"
+      confirmation: "Deseas eliminar este contacto?"
+    form:
+      default: "Contacto preferido"
+      self: "Estudiante"
+  devise:
+    sessions:
+      new:
+        forgot_your_password: "Olvidaste tu contraseña?"
+        sign_in: "Entrar"
+        alt: "Imagen inspirada en elementos educativos."
+    registrations:
+      edit:
+        your_account: "Tu cuenta"
+        placeholder: "Deja este campo en blanco si no quieres cambiarla"
+        prompt_zone: "Selecciona tu zona horaria"   
+        prompt_language: "Selecciona tu idioma"
+        calendar_link: "Copiar enlace a tu calendario"
+        daily_digest: "Suscríbete al boletín diario"
+        deliver_at: "Entregar a las"
+        authorize: "Autoriza tus cambios" 
+        enter_password: "Por favor, introduce tu contraseña para guardar los cambios en tu cuenta"
+        placeholder_current: "Introduce tu contraseña actual"
+        cancel_account: "Cancelar tu cuenta" 
+        unhappy: "🙁 No estás satisfecho(a)?"
+        update: "Guardar cambios"
+        back: "Regresar"
+        cancel: "Cancelar mi cuenta"
+      new:
+        sign_up: "Regístrate"
+    shared:
+      links:
+        back: "Regresar a la página de inicio"
+    passwords:
+      new:
+        forgot: "Olvidaste tu contraseña?"
+        send_instructions: "Recibir instrucciones en mi dirección de email"
+      edit:
+        title: "Cambia tu contraseña"
+        new_password: "Nueva contraseña"
+        hint: "%{min} caracteres como mínimo"
+        confirm: "Confirma tu nueva contraseña"
+        change: "Cambiar mi contraseña"
+
+    mailer:
+      reset_password_instructions:
+        action: "Cambiar mi contraseña"
+        greeting: "Hola %{recipient}!"
+        instruction: "Alguien ha solicitado un enlace para cambiar tu contraseña. Puedes efectuar el cambio siguiendo el siguiente enlace."
+        instruction_2: "Si no solicitaste cambiar tu contraseña, por favor ignora este mensaje."
+        instruction_3: "Tu contraseña no cambiará hasta que no sigas el enlace y establezcas una nueva."
+        subject: "Instrucciones para el cambio de contraseña"
+  user_mailer:
+    daily_digest:
+      subject: "Tu Boletín para el Día de Hoy"
+      title: "Tu horario para el día de hoy"
+      hello: "Hola, %{user}!"
+      body: "Aquí tienes toda la información que necesitarás para enseñar en el día de hoy."
+      happy: "Feliz día!"
+
+
+
+    
+
+  activerecord:
+    models:
+      user: "Usuario"
+      student: "Estudiante"
+    enums:
+      lesson:
+        status:
+          canceled: "cancelada"
+          taught: "completada"
+          scheduled: "programada"
+      contact:
+        preferred_communication_method:
+          phone: "teléfono"
+          email: "email"
+    attributes:
+      student:
+        first_name: "Nombre"
+        last_name: "Apellido(s)"
+        date_of_birth: "Fecha de nacimiento"
+        adult: "Adulto"
+        student_notes: "Notas del estudiante"
+      lesson:
+        student_id: "Estudiante"
+        starts_at: "Hora"
+        duration: "Duración"
+        status: "Estado"
+        lesson_notes: "Notas de la lección"
+        prompt: "Seleccione un estado"
+      contact:
+        firtst_name: "Nombre"
+        last_name: "Apellido(s)"
+        phone: "Teléfono"
+        email: "Email"
+        address: "Dirección"
+        relationship: "Relación"
+        preferred_communication_method: "Método de comunicación preferido"
+        contact_notes: "Notas del contacto"
+      user:
+        email: Email
+        password: "Contraseña"
+        password_confirmation: "Confirmar contraseña"
+        remember_created_at: Remember created at
+        remember_me: "Recuérdame"
+        timezone: "Zona horaria"
+        language: "Idioma"
+        first_name: "Nombre"
+        last_name: "Apellido(s)"
+  
+        
+
+
+
+
+  helpers:
+    submit:
+      student:
+        create: "Crear estudiante"
+        update: "Guardar estudiante"
+      lesson:
+        create: "Crear lección"
+        bulk_create: "Crear lecciones"
+        update: "Guardar lección"
+      contact:
+        create: "Crear contacto"
+        update: "Guardar contacto"
+    
+      

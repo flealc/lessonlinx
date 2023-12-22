@@ -1,4 +1,4 @@
-<div class="h2">Your account</div>
+<div class="h2"><%= t(".your_account") %></div>
 
 <%= form_with(model: resource, as: resource_name, url: registration_path(resource_name), method: :put, local: true) do |f| %>
 
@@ -21,7 +21,7 @@
 
   <div class="form-group col-md-6 mb-2">
     <%= f.label :password, class:"mb-2" %>
-    <%= f.password_field :password, class: 'form-control', autocomplete: 'new-password', placeholder: "Leave blank if you don't want to change it" %>
+    <%= f.password_field :password, class: 'form-control', autocomplete: 'new-password', placeholder: t(".placeholder") %>
   </div>
 
   <div class="form-group col-md-6 mb-2">
@@ -31,22 +31,27 @@
 
   <div class="form-group col-md-6 mb-2">
     <%= f.label :timezone, class:"mb-2" %>
-    <%= f.time_zone_select :timezone, ActiveSupport::TimeZone.all, { prompt: "Select your current timezone" }, { class: 'form-control' } %>
+    <%= f.time_zone_select :timezone, ActiveSupport::TimeZone.all, { prompt: t(".prompt_zone")  }, { class: 'form-control' } %>
+  </div>
+
+  <div class="form-group col-md-6 mb-2">
+    <%= f.label :language, class:"mb-2" %>
+    <%= f.select :language, I18n.available_locales.map { |l| [l.upcase, l.to_s] }, { prompt: t(".prompt_language") }, { class: 'form-control' } %>
   </div>
 
   <div data-controller="digest-signup" data-digest-signup-signedup-value="<%= current_user.daily_digest_at != nil %>" data-digest-signup-link-value="https://lessonlinx.pro/subscribe/<%= current_user.id %>">
     <div class="input-group mt-3">
-    <span class="input-group-text">Copy calendar subscription link</span>
+    <span class="input-group-text"><%= t(".calendar_link") %></span>
     <button data-digest-signup-target="copyButton" class="btn btn-primary" type="button" data-action="click->digest-signup#copyLink"><i class="fa-regular fa-clipboard"></i></button>
     </div>
     <div class="form-check form-switch mt-4">
       <input class="form-check-input" type="checkbox" role="switch" id="dailyDigestSwitch" data-digest-signup-target="signupSwitch" data-action="click->digest-signup#toggleDigest" >
 
-      <label class="form-check-label" for="dailyDigestSwitch">Sign up for daily digest</label>
+      <label class="form-check-label" for="dailyDigestSwitch"><%= t(".daily_digest") %></label>
     </div>
     <div class="form-group mb-2 col-md-3" data-digest-signup-target="deliverAtGroup">
       <div class="d-flex align-items-center">
-        <%= f.label :daily_digest_at, "Deliver at", class: "w-50" %>
+        <%= f.label :daily_digest_at, t(".deliver_at"), class: "w-50" %>
         <%= f.time_field :daily_digest_at, class: 'form-control', required: false, html5: true, autocomplete: "Select a time", data: { digest_signup_target: "deliverAtField" } %>
       </div>
     </div>
@@ -56,15 +61,15 @@
   <div class="actions my-5">
 
     <div class="form-group col-md-6 mb-2">
-      <%= f.label :current_password, "Authorize your changes" %>
-      <div class="form-text mb-1">Please enter your current password to save any changes to your account</div>
-      <%= f.password_field :current_password, class: 'form-control col-md-6', autocomplete: 'current-password', required: true, placeholder: "Enter current password" %>
+      <%= f.label :current_password, t(".authorize") %>
+      <div class="form-text mb-1"><%= t(".enter_password") %></div>
+      <%= f.password_field :current_password, class: 'form-control col-md-6', autocomplete: 'current-password', required: true, placeholder: t(".placeholder_current") %>
     </div>
-    <%= f.submit "Update", class: "btn btn-primary" %>
-    <%= link_to "Back", :back, class: "btn btn-outline-primary" %>
+    <%= f.submit t(".update"), class: "btn btn-primary" %>
+    <%= link_to t(".back"), :back, class: "btn btn-outline-primary" %>
   </div>
 <% end %>
 
-<div class="h2 mt-3">Cancel account</div>
+<div class="h2 mt-3"><%= t(".cancel_account") %></div>
 
-<div> 🙁 Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure? All your information will be permanently deleted!" }, method: :delete, class: "btn btn-warning my-2" %></div>
+<div> <%= t(".unhappy") %> <%= button_to t(".cancel"), registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure? All your information will be permanently deleted!" }, method: :delete, class: "btn btn-warning my-2" %></div>

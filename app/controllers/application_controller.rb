@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  
+  before_action :set_locale
   around_action :set_timezone, if: :current_user
   include Pundit::Authorization
 
@@ -13,12 +15,34 @@ class ApplicationController < ActionController::Base
   private
 
   def user_not_authorized
-    flash[:alert] = "You are not authorized to perform this action."
-    redirect_back(fallback_location: root_path)
+    flash[:alert] = t("not_authorized")
+    redirect_back(fallback_location: authenticated_root_path)
   end
 
+  
   def set_timezone(&block) 
     Time.use_zone(current_user.timezone, &block) 
+  end
+  
+  def set_locale 
+    if user_signed_in?
+      I18n.locale = current_user.language || I18n.default_locale
+    else
+      I18n.locale = params[:lang] || locale_from_header || I18n.default_locale
+    end
+  end
+
+  
+  def locale_from_header
+    request.env.fetch('HTTP_ACCEPT_LANGUAGE', '').scan(/[a-z]{2}/).first
+  end
+  
+  def after_sign_out_path_for(resorce_or_scope)
+    if I18n.locale == :es
+      new_user_session_path(params: {lang: "es"})
+    else
+      new_user_session_path
+    end
   end
 
 end

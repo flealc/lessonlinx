@@ -2,10 +2,10 @@
 
 <% if contact.phone.present? %>
   <div class="d-flex align-items-center mb-2">
-    <i class="fa-solid fa-square-phone" aria-label="Phone">></i>
+    <i class="fa-solid fa-square-phone" aria-label="<%= t('.phone_aria') %>"></i>
     <p class="card-text ms-2 mb-0 fs-6"><%= contact.phone %></p>
     <% if contact.preferred_communication_method == "phone" %>
-      <i class="fa-solid fa-star fa-2xs ms-2" style="color: #fb8042;" aria-label="Preferred communication method"></i>
+      <i class="fa-solid fa-star fa-2xs ms-2" style="color: #fb8042;" aria-label="<%= t('.preferred_aria') %>"></i>
     <% end %>
   </div>
 <% end %>
@@ -14,19 +14,19 @@
     <i class="fa-solid fa-square-envelope" aria-label="Email"></i>
     <p class="card-text ms-2 mb-0 fs-6"><%= contact.email %></p>
     <% if contact.preferred_communication_method == "email" %>
-      <i class="fa-solid fa-star fa-2xs ms-2" style="color: #fb8042;" aria-label="Preferred communication method"></i>
+      <i class="fa-solid fa-star fa-2xs ms-2" style="color: #fb8042;" aria-label="<%= t('.preferred_aria') %>">></i>
     <% end %>
   </div>
 <% end %>
 <% if contact.address.present? %>
   <div class="d-flex align-items-center mb-2">
-    <i class="fa-solid fa-location-dot" aria-label="Address"></i>
+    <i class="fa-solid fa-location-dot" aria-label="<%= t('.address_aria') %>"></i>
     <p class="card-text ms-2 mb-0 fs-6"><%= contact.address %></p>
   </div>
 <% end %>
 <% if contact.contact_notes.present? %>
   <div class="d-flex align-items-center mb-2">
-    <i class="fa-solid fa-book-open" aria-label="Contact notes"></i>
+    <i class="fa-solid fa-book-open" aria-label="<%= t('.contact_notes_aria') %>"></i>
     <p class="card-text ms-2 mb-0 fs-6"><%= contact.contact_notes %></p>
   </div>
 <% end %>

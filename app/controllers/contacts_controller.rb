@@ -20,7 +20,7 @@ class ContactsController < ApplicationController
 
     @breadcrumbs = [
       { content: @contact.student.full_name, href: student_path(@contact.student) },
-      { content: "Add contact", href: "#" },
+      { content: t("add_contact"), href: "#" },
     ]
   end
   
@@ -28,7 +28,7 @@ class ContactsController < ApplicationController
   def edit
     @breadcrumbs = [
       { content: @contact.student.full_name, href: student_path(@contact.student) },
-      { content: "Contacts / #{@contact.full_name}", href: "#" },
+      { content: t("contacts_breadcrumb", contact: @contact.full_name), href: "#" },
     ]
   end
 
@@ -38,7 +38,7 @@ class ContactsController < ApplicationController
     respond_to do |format|
       if @contact.save
         check_contact_default
-        format.html { redirect_to student_url(@contact.student), notice: "Contact was successfully created." }
+        format.html { redirect_to student_url(@contact.student), notice: t("contact_created") }
         format.json { render :show, status: :created, location: @contact }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class ContactsController < ApplicationController
     respond_to do |format|
      check_contact_default
       if @contact.update(contact_params.except(:default))
-        format.html { redirect_to student_url(@contact.student), notice: "Contact was successfully updated." }
+        format.html { redirect_to student_url(@contact.student), notice: t("contact_updated") }
         format.json { render :show, status: :ok, location: @contact }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -67,11 +67,14 @@ class ContactsController < ApplicationController
     if @contact.default?
       @contact.student.update(default_contact_id: nil)
     end
-    @contact.destroy
-    
     respond_to do |format|
-      format.html { redirect_to student_url(@contact.student), notice: "Contact was successfully destroyed." }
-      format.json { head :no_content }
+      if @contact.destroy
+        format.html { redirect_to student_url(@contact.student), notice: t("contact_destroyed") }
+        format.json { head :no_content }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @contact.errors, status: :unprocessable_entity }
+      end
     end
   end
 

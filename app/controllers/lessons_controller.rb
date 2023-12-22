@@ -26,7 +26,7 @@ class LessonsController < ApplicationController
     @lesson = @student.lessons.new
     @breadcrumbs = [
       { content: @student.full_name, href: student_lessons_path(@student) },
-      { content: "Create lesson", href: "#" },
+      { content: t("create_lesson"), href: "#" },
     ]
   end
 
@@ -34,7 +34,7 @@ class LessonsController < ApplicationController
   def edit
     @breadcrumbs = [
       { content: @student.full_name, href: student_lessons_path(@student) },
-      { content: "Edit lesson", href: "#" },
+      { content: t("edit_lesson"), href: "#" },
     ]
     if params[:status] == "canceled"
       @lesson.status = "canceled"
@@ -44,7 +44,7 @@ class LessonsController < ApplicationController
   # POST /lessons or /lessons.json
   def create
     if params[:lesson][:starts_at].blank? || params[:lesson][:duration].blank?
-      flash[:alert] = "Please provide all necessary information for the lesson."
+      flash[:alert] = t("lesson_info")
       redirect_to new_student_lesson_url
       return
     end
@@ -52,7 +52,7 @@ class LessonsController < ApplicationController
 
     respond_to do |format|
       if @lesson.save
-        format.html { redirect_to student_lessons_url(@student), notice: "Lesson was successfully created." }
+        format.html { redirect_to student_lessons_url(@student), notice: t("lesson_created") }
         format.json { render :show, status: :created, location: @lesson }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -64,13 +64,13 @@ class LessonsController < ApplicationController
   # PATCH/PUT /lessons/1 or /lessons/1.json
   def update
     if params[:lesson][:starts_at].blank? || params[:lesson][:duration].blank? || !params[:lesson][:duration].to_i
-      flash[:alert] = "Please provide all necessary information for the lesson."
+      flash[:alert] = t("lesson_info")
       redirect_to edit_student_lesson_url
       return
     end
     respond_to do |format|
       if @lesson.update(build_datetimes(lesson_params))
-        format.html { redirect_to student_lessons_url(@student), notice: "Lesson was successfully updated." }
+        format.html { redirect_to student_lessons_url(@student), notice: t("lesson_updated") }
         format.json { render :show, status: :ok, location: @lesson }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -84,7 +84,7 @@ class LessonsController < ApplicationController
     @lesson.destroy
 
     respond_to do |format|
-      format.html { redirect_to student_lessons_url(@student), notice: "Lesson was successfully destroyed." }
+      format.html { redirect_to student_lessons_url(@student), notice: t("lesson_destroyed") }
       format.json { head :no_content }
     end
   end
@@ -92,13 +92,13 @@ class LessonsController < ApplicationController
   def bulk_new
     @breadcrumbs = [
       { content: @student.full_name, href: student_lessons_path(@student) },
-      { content: "Create lessons", href: "#" },
+      { content: t("create_lessons"), href: "#" },
     ]
   end
 
   def bulk_create
     if bulk_params[:starts_at].blank? || bulk_params[:weekdays].blank? || bulk_params[:duration].blank? || bulk_params[:from].blank? || bulk_params[:to].blank?
-      flash[:alert] = "Please provide all necessary information for the lessons."
+      flash[:alert] = t("lessons_info")
       redirect_to bulk_new_student_lessons_path
       return
     end
@@ -111,7 +111,7 @@ class LessonsController < ApplicationController
 
     ActiveRecord::Base.transaction do
       (from_date..to_date).each do |date|
-        if weekdays.include?(date.strftime("%A"))
+        if weekdays.include?(date.strftime("%A").downcase)
           lesson_starts_at = Time.zone.parse("#{date} #{bulk_params[:starts_at]}")
           lesson = @student.lessons.build(
             starts_at: lesson_starts_at,
@@ -130,9 +130,9 @@ class LessonsController < ApplicationController
       lessons_to_create.each(&:save!)
     end
 
-    redirect_to student_lessons_url(@student), notice: "Lessons were successfully created."
+    redirect_to student_lessons_url(@student), notice: t("lessons_created")
   rescue ActiveRecord::Rollback
-    redirect_to new_bulk_student_lessons_url(@student), alert: "There was an error creating the lessons."
+    redirect_to new_bulk_student_lessons_url(@student), alert: t("lessons_error")
   end
 
   def select_delete
@@ -142,7 +142,7 @@ class LessonsController < ApplicationController
 
     @breadcrumbs = [
       { content: @student.full_name, href: student_lessons_path(@student) },
-      { content: "Delete lessons", href: "#" },
+      { content: t("delete_lessons"), href: "#" },
     ]
   end
 
@@ -152,7 +152,7 @@ class LessonsController < ApplicationController
     lesson_ids = params[:lessons]
 
     if lesson_ids.blank?
-      redirect_back(fallback_location: student_lessons_path(@student), alert: "Please select lessons to delete.") 
+      redirect_back(fallback_location: student_lessons_path(@student), alert: t("select_lessons")) 
       return
     end
    
@@ -163,10 +163,10 @@ class LessonsController < ApplicationController
         ActiveRecord::Base.transaction do
           @lessons.each(&:destroy!)
         end
-        redirect_to student_lessons_url(@student), notice: "Lessons were successfully deleted."
+        redirect_to student_lessons_url(@student), notice: t("lessons_destroyed")
       rescue ActiveRecord::RecordNotDestroyed => e
         logger.error "Error deleting lessons: #{e.message}"
-        redirect_to select_delete_url(@student), alert: "There was an error deleting the lessons."
+        redirect_to select_delete_url(@student), alert: t("lessons_delete_error")
       end
   end
 

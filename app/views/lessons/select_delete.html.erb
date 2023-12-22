@@ -12,21 +12,21 @@
   <div class="col-9 col-sm-10" data-controller="students-index" data-side-bar-target="contentArea">
     <div class="d-flex">
       <div class="pe-2 ps-sm-2" data-action="click->side-bar#toggleFullPage">
-        <img src="<%= image_path('hide-sidebar.svg') %>" alt="Toggle Icon" data-side-bar-target="toggleIcon" style="width: 16px; height: auto;" class="mb-1 sidebar-icon">
+        <img src="<%= image_path('hide-sidebar.svg') %>" alt="<%= t('toggle_icon') %>" data-side-bar-target="toggleIcon" style="width: 16px; height: auto;" class="mb-1 sidebar-icon">
       </div>
       <div class="h5"><%= @student.full_name %></div>
     </div>
-    
+
     <% if @lessons.any? %>
 
       <div class="d-flex justify-content-between flex-wrap align-items-center ps-sm-2">
         <%= render partial: "lessons/filter" %>
 
         <div class="pe-4 d-flex align-items-center">
-        <%= submit_tag "delete selected", data: { turbo_confirm: "Are you sure?" }, class: "btn btn-link btn-sm ms-1 px-0 py-0 text-nowrap", form: "bulk-delete" %>
-          <%= label_tag "select_all", "Select all", class: "mx-1 mb-1 form-text" %>
+          <%= submit_tag t(".delete_selected"), data: { turbo_confirm: t(".confirm_message") }, class: "btn btn-link btn-sm ms-1 px-0 py-0 text-nowrap", form: "bulk-delete" %>
+          <%= label_tag "select_all", t(".select_all"), class: "mx-1 mb-1 form-text" %>
           <%= check_box_tag "select_all", "1", false, id: "select_all", data: { action: "change->students-index#selectAll" } %>
-         
+
         </div>
       </div>
       <%= form_with(url: bulk_delete_student_lessons_path(@student), id: "bulk-delete", method: :delete) do |form| %>
@@ -38,7 +38,7 @@
                 <div class="row align-items-center">
                   <div class="col-10 col-sm-8 col-md-auto d-flex align-items-center">
                     <div class="text-nowrap card-title">
-                      <%= lesson.starts_at.strftime("%a, %-d %b, %Y") %>
+                      <%= l(lesson.starts_at, format: :custom) %>
                     </div>
                   </div>
                   <div class="col-10 col-sm-8 col-md-auto d-flex justify-content-start mt-2 mt-sm-0">
@@ -59,8 +59,14 @@
     </div>
 
   <% else %>
+    <hr class="mt-0">
+    <h6> <%= t(".placeholder") %></h6>
+    <hr class="my-3">
+    <% if @student.lessons_count != 0 %>
 
-    <h6> There are no lessons scheduled for this student.</h6>
+      <div class="mb-0 ps-sm-2"><%= render partial: "lessons/filter" %> </div>
+    <% end %>
+
   <% end %>
 </div>
 

@@ -1,12 +1,12 @@
 <div data-controller="side-bar" data-side-bar-show-value="<%= image_path('show-sidebar.svg') %>" data-side-bar-hide-value="<%= image_path('hide-sidebar.svg') %>" >
 
   <div class="d-flex align-items-end justify-content-between">
-    <div class="h1 mb-0 pb-0 ms-sm-2"> Lessons </div>
+    <div class="h1 mb-0 pb-0 ms-sm-2"><%= t(".title") %> </div>
 
     <div class="mb-1 pe-sm-2 ps-4">
-      <%= link_to "new", new_student_lesson_path(@student), data: { turbo_frame: "lessons-student" }, class:"h6 me-3" %>
-      <%= link_to "batch create", bulk_new_student_lessons_path(@student), data: { turbo_frame: "lessons-student" }, class:"h6 me-3 text-nowrap" %>
-      <%= link_to "batch delete", select_delete_student_lessons_path(@student), data: { turbo_frame: "lessons-student" }, class:"h6 text-nowrap" if @lessons.any?%>
+      <%= link_to t(".new"), new_student_lesson_path(@student), data: { turbo_frame: "lessons-student" }, class:"h6 me-3" %>
+      <%= link_to t(".batch_create"), bulk_new_student_lessons_path(@student), data: { turbo_frame: "lessons-student" }, class:"h6 me-3 text-nowrap" %>
+      <%= link_to t(".batch_delete"), select_delete_student_lessons_path(@student), data: { turbo_frame: "lessons-student" }, class:"h6 text-nowrap" if @lessons.any?%>
     </div>
   </div>
   <hr class="my-2">
@@ -21,7 +21,7 @@
   <div class="col-9 col-sm-10 mt-1" data-controller="students-index" data-side-bar-target="contentArea">
     <div class="d-flex">
       <div class="pe-2 ps-sm-2" data-action="click->side-bar#toggleFullPage">
-        <img src="<%= image_path('hide-sidebar.svg') %>" alt="Toggle Icon" data-side-bar-target="toggleIcon" style="width: 16px; height: auto;" class="mb-1 sidebar-icon" >
+        <img src="<%= image_path('hide-sidebar.svg') %>" alt="<%= t('toggle_icon') %>" data-side-bar-target="toggleIcon" style="width: 16px; height: auto;" class="mb-1 sidebar-icon" >
       </div>
       <div class="h5"><%= @student.full_name %></div>
     </div>
@@ -30,13 +30,13 @@
     <% if @lessons.any? %>
 
       <% if @student.last_lesson.present? %>
-        <div class="h6 mt-1 ps-sm-2">Last lesson</div>
+        <div class="h6 mt-1 ps-sm-2"><%= t(".last_lesson") %></div>
         <hr class="mt-0">
         <%= render "students/highlighted_lesson", student: @student, lesson: @student.last_lesson %>
       <% end %>
 
       <div class="h6 mt-3 d-sm-flex align-items-center justify-content-between text-nowrap px-sm-2">
-        All lessons (<%= @lessons.count %>) 
+         <%= "#{t('.all_lessons')} (#{@lessons.count})" %> 
         <div class="mb-0 pe-1"><%= render partial: "lessons/filter" %></div>
       </div>
       <hr class="my-0">
@@ -47,11 +47,16 @@
       </div>
       <hr class="my-0">
     <% else %>
+    <% if @student.lessons_count != 0 %>
+    
+      <div class="mb-0 ps-sm-2"><%= render partial: "lessons/filter" %> </div>
+    <% end %>
     <hr class="my-2">
       <div class="d-flex justify-content-center align-items-center py-5">
-        <div class="h6 mb-0">No lessons scheduled.</div>
+        <div class="h6 mb-0"><%= t(".placeholder") %></div>
       </div>
     <hr class="my-2">
+    
       
 
     <% end %>

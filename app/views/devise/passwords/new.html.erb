@@ -1,8 +1,7 @@
-<div class="h2">Forgot your password?</div>
+<div class="h2"><%= t(".forgot") %></div>
 
-<%= form_with(model:resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+<%= form_with(model:resource, as: resource_name, url: request.params[:lang] == "es" ? password_path(resource_name, params: {lang: "es"}) : password_path(resource_name), html: { method: :post }) do |f| %>
   
-
   <div class="form-group col-md-4 mb-4">
     <%= f.label :email, class: "form-label" %>
     <%= f.email_field :email,
@@ -13,7 +12,7 @@
   </div>
 
   <div class="form-actions mb-4">
-    <%= f.submit "Send me reset password instructions", class: "btn btn-primary" %>
+    <%= f.submit t(".send_instructions"), class: "btn btn-primary" %>
   </div>
 <% end %>
 

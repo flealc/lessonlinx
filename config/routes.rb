@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   authenticate :user, ->(current_user) { current_user.admin? } do
-    mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-    mount GoodJob::Engine => '/good_job'
+    mount RailsAdmin::Engine => "/admin", as: "rails_admin"
+    mount GoodJob::Engine => "/good_job"
   end
 
   resources :contacts
@@ -20,9 +20,20 @@ Rails.application.routes.draw do
   end
   resources :calendars
 
-  devise_for :users, :controllers => { registrations: "users/registrations" }
+  devise_for :users, :controllers => { registrations: "users/registrations", passwords: "users/passwords" }
 
-  root "users#dashboard"
+  
+  devise_scope :user do
+    
+    unauthenticated :user do
+      root to: "devise/sessions#new", as: :unauthenticated_root
+    end
+    
+    authenticated :user do
+      root to: "users#dashboard", as: :authenticated_root
+    end
+    
+  end
 
   get "dashboard", to: "users#dashboard", as: "dashboard"
 

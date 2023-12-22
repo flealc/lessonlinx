@@ -5,7 +5,7 @@
         <span>
           <%= contact.full_name %>
           <% if contact.default? == true %>
-            <i class="fa-solid fa-square-check p-0" aria-label="Default contact"></i>
+            <i class="fa-solid fa-square-check p-0" aria-label="<%= t('.default_aria') %>"></i>
           <% end %>
         </span>
         <i class="fa-solid fa-angle-down" data-card-target="expandCardArrow"></i>
@@ -20,8 +20,8 @@
       
     
       <div class="d-flex justify-content-end">
-        <%= link_to "edit", edit_contact_path(contact), data: { turbo_frame: "_top" }, class: "h6 me-3" %>
-        <%= link_to "delete", contact_path(contact), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "h6" %>
+        <%= link_to t("edit"), edit_contact_path(contact), data: { turbo_frame: "_top" }, class: "h6 me-3" %>
+        <%= link_to t("delete"), contact_path(contact), data: { turbo_method: :delete, turbo_confirm: t(".confirmation"), turbo_frame: "_top"}, class: "h6" %>
       </div>
     </div>
 
