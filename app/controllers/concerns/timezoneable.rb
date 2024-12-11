@@ -1,6 +1,6 @@
 module Timezoneable
   extend ActiveSupport::Concern
-
+  # Nice job with this concern YOU POPPED OFF FRFR
   included do
 
     def build_datetimes(lesson_params)
